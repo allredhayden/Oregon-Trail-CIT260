@@ -1,28 +1,36 @@
 package byui.cit260.oregontrail.model;
 import java.io.Serializable;
 
-/**
- * 
- * @author Jeremy James
- */
-
 public class Game implements Serializable {
     
     private double totalTime;
     private boolean noPeople;
+    private Player player;
+    
+    // Default constructor.
+    public Game() {
+    }
+    
+    // Get & set player.
+    public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
-    public double getTotalTime() {
+	// Get & set totalTime.
+	public double getTotalTime() {
         return totalTime;
     }
-
     public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 
+    // Get & set noPeople.
     public boolean isNoPeople() {
         return noPeople;
     }
-
     public void setNoPeople(boolean noPeople) {
         this.noPeople = noPeople;
     }

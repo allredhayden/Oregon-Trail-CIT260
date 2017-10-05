@@ -1,18 +1,28 @@
 package byui.cit260.oregontrail.model;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
-
-/**
- * 
- * @author Jeremy James
- */
 
 public class Player implements Serializable{
     
     private String playerName;
     private double bestTime;
+    private ArrayList<Game> games = new ArrayList<Game>();
+    
+    // Default constructor.
+    public Player() {
+    }
+    
+    // Get & set "games" array list.
+    public ArrayList<Game> getGames() {
+		return games;
+	}
 
-    // Get & set playerName.    
+	public void setGames(ArrayList<Game> games) {
+		this.games = games;
+	}
+	
+	// Get & set playerName.    
     public String getPlayerName() {
         return playerName;
     }
@@ -30,8 +40,6 @@ public class Player implements Serializable{
         this.bestTime = bestTime;
     }
 
-    public Player() {
-    }
 
     @Override
     public int hashCode() {
