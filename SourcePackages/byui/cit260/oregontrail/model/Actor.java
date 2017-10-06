@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public enum Actor implements Serializable {
 	
-	Carpenter("David", "A carpenter with skilled hands, capable of building any number of objects with his surroundings.", newPoint(0,1), 6000, 100),
-	Farmer("Bill", "A simple farmer, capable of growing food in any area that is sufficient for healthy crop growth.", newPoint(1,1), 5000, 100),
-	Banker("Eddie", "A sophisticated banker that is good with numbers and has a sharp wit.", newPoint(1,2), 7000, 100);
+	Carpenter("David", "A carpenter with skilled hands, capable of building any number of objects with his surroundings.", new Point(0,1), 6000, 100),
+	Farmer("Bill", "A simple farmer, capable of growing food in any area that is sufficient for healthy crop growth.", new Point(1,1), 5000, 100),
+	Banker("Eddie", "A sophisticated banker that is good with numbers and has a sharp wit.", new Point(1,2), 7000, 100);
 	
 	private String name;
 	private String description;

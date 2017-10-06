@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 public class Player implements Serializable{
     
     private String playerName;

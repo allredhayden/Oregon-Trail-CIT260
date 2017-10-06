@@ -7,8 +7,8 @@ public class Game implements Serializable {
     private boolean noPeople;
     private Player player;
     
-    // Default constructor.
     public Game() {
+    	// Default constructor.
     }
     
     // Get & set player.
