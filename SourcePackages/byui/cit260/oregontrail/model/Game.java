@@ -1,71 +1,89 @@
 package byui.cit260.oregontrail.model;
-import java.io.Serializable;
 
-public class Game implements Serializable {
-    
-    private double totalTime;
-    private boolean noPeople;
-    private Player player;
-    
-    public Game() {
-    	// Default constructor.
-    }
-    
-    // Get & set player.
-    public Player getPlayer() {
+import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+public class Game implements Serializable
+{
+
+	private double totalTime;
+	private boolean noPeople;
+	private Player player;
+
+	public Game()
+	{
+		// Default constructor.
+	}
+
+	// Get & set player.
+	public Player getPlayer()
+	{
 		return player;
 	}
-	public void setPlayer(Player player) {
+
+	public void setPlayer(Player player)
+	{
 		this.player = player;
 	}
 
 	// Get & set totalTime.
-	public double getTotalTime() {
-        return totalTime;
-    }
-    public void setTotalTime(double totalTime) {
-        this.totalTime = totalTime;
-    }
+	public double getTotalTime()
+	{
+		return totalTime;
+	}
 
-    // Get & set noPeople.
-    public boolean isNoPeople() {
-        return noPeople;
-    }
-    public void setNoPeople(boolean noPeople) {
-        this.noPeople = noPeople;
-    }
+	public void setTotalTime(double totalTime)
+	{
+		this.totalTime = totalTime;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.totalTime) ^ (Double.doubleToLongBits(this.totalTime) >>> 32));
-        hash = 29 * hash + (this.noPeople ? 1 : 0);
-        return hash;
-    }
+	// Get & set noPeople.
+	public boolean isNoPeople()
+	{
+		return noPeople;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Game other = (Game) obj;
-        if (Double.doubleToLongBits(this.totalTime) != Double.doubleToLongBits(other.totalTime)) {
-            return false;
-        }
-        if (this.noPeople != other.noPeople) {
-            return false;
-        }
-        return true;
-    }
-    
-    @Override
-    public String toString() {
-        return "Game{" + "totalTime=" + totalTime + ", noPeople=" + noPeople + '}';
-    }   
+	public void setNoPeople(boolean noPeople)
+	{
+		this.noPeople = noPeople;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		hash = 29 * hash
+				+ (int) (Double.doubleToLongBits(this.totalTime) ^ (Double.doubleToLongBits(this.totalTime) >>> 32));
+		hash = 29 * hash + (this.noPeople ? 1 : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Game other = (Game) obj;
+		if (Double.doubleToLongBits(this.totalTime) != Double.doubleToLongBits(other.totalTime)) {
+			return false;
+		}
+		return this.noPeople == other.noPeople;
+	}
+
+	public String toString()
+	{
+		return ToStringBuilder.reflectionToString(this);
+	}
+
+	// @Override
+	// public String toString() {
+	// return "Game{" + "totalTime=" + totalTime + ", noPeople=" + noPeople + '}';
+	// }
 }

@@ -75,6 +75,4 @@ public class Player implements Serializable{
     public String toString() {
         return "Player{" + "playerName=" + playerName + ", bestTime=" + bestTime + '}';
     }
-    
-    
 }
