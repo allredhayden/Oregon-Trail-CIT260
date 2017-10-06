@@ -15,7 +15,6 @@ public class OregonTrail {
 		
 		System.out.println(playerOne.toString());
 		System.out.println(Actor.Banker.getName());
-		
 	}
 }
 
