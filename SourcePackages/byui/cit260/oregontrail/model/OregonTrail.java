@@ -13,7 +13,7 @@ public class OregonTrail {
 		String playerOneName = playerOne.getPlayerName();
 		double playerOneTime = playerOne.getBestTime();
 		
-		System.out.println(playerOne.toString());
+   	    System.out.println(playerOne.toString());
 		System.out.println(Actor.Banker.getName());
 	}
 }
