@@ -7,6 +7,7 @@ public class QuestionScene implements Serializable {
 	private boolean noToAnswer;
 	private boolean bonus;
 	
+	// Get & set noToAnswer.
 	public boolean getNoToAnswer() {
 		return noToAnswer;
 	}
@@ -14,14 +15,14 @@ public class QuestionScene implements Serializable {
 	public void setNoToAnswer() {
 		this.noToAnswer = noToAnswer;
 	}
-	
+
+	// Get & set bonus.
 	public boolean getBonus(boolean bonus) {
 		return bonus;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (bonus ? 1231 : 1237);
@@ -30,8 +31,7 @@ public class QuestionScene implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -44,13 +44,10 @@ public class QuestionScene implements Serializable {
 		if (noToAnswer != other.noToAnswer)
 			return false;
 		return true;
-	}
+		}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "QuestionScene [noToAnswer=" + noToAnswer + ", bonus=" + bonus + "]";
 	}
-	
-	
 }

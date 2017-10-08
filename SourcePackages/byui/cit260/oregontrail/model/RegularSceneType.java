@@ -8,6 +8,7 @@ public class RegularSceneType implements Serializable {
 	private boolean blocked;
 	private String symbol;
 	
+	// Get & set description.
 	public String getDescription() {
 		return description;
 	}
@@ -16,6 +17,7 @@ public class RegularSceneType implements Serializable {
 		this.description = description;
 	}
 	
+	// Get & set blocked.
 	public boolean getBlocked() {
 		return blocked;
 	}
@@ -24,6 +26,7 @@ public class RegularSceneType implements Serializable {
 		this.blocked = blocked;
 	}
 	
+	// Get & set symbol.
 	public String getSymbol() {
 		return symbol;
 	}
