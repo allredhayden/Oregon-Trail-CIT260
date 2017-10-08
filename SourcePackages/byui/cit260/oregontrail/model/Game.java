@@ -1,7 +1,6 @@
 package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Game implements Serializable
 {
@@ -77,13 +76,8 @@ public class Game implements Serializable
 		return this.noPeople == other.noPeople;
 	}
 
-	public String toString()
-	{
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	// @Override
-	// public String toString() {
-	// return "Game{" + "totalTime=" + totalTime + ", noPeople=" + noPeople + '}';
-	// }
+    @Override
+    public String toString() {
+        return "Game{" + "totalTime=" + totalTime + ", noPeople=" + noPeople + ", player=" + player + '}';
+    }
 }
