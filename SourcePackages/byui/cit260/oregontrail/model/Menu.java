@@ -64,5 +64,4 @@ public class Menu implements Serializable {
     public String toString() {
         return "Menu{" + "menuStatus=" + menuStatus + ", options=" + options + '}';
     }
-
 }
