@@ -17,7 +17,7 @@ public class HelpMenuView
                   + "\nE - Estimating the amount of resources"
                   + "\nH - Harvesting resources"
                   + "\nD - Deivering resources to warehouse"
-                  + "\nQ - Quit"
+                  + "\nZ - Quit"
                   + "\n-----------------------------------------";
     
     public HelpMenuView() {
@@ -81,8 +81,8 @@ public class HelpMenuView
         case "D":
             System.out.println("The way to deliver resources to a warehouse is: ______");
             break;
-        case "Q":
-            System.exit(0);
+        case "Z":
+            MainMenuView mainMenuView = new MainMenuView();
         default:
             System.out.println("\n*** Invalid selection *** Try again");
         }
