@@ -4,10 +4,6 @@ import byui.cit260.oregontrail.view.StartProgramView;
 
 public class StartProgram
 {   
-//    public StartProgam() {
-//        displayStartProgramView();
-//    }
-    
     public StartProgram()
     {
         displayStartProgramView();

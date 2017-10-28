@@ -7,12 +7,10 @@ import byui.cit260.oregontrail.model.OregonTrail;
 
 public class HelpMenuView
 {
-    private String helpMenu;
-    
-    public HelpMenuView() {
-        this.helpMenu = "\n"
+    private String helpMenu = 
+                    "\n"
                   + "\n-----------------------------------------"
-                  + "\n | Help Menu                            |"
+                  + "\n|              Help Menu                |"
                   + "\n-----------------------------------------"
                   + "\nG - What is the goal of the game?"
                   + "\nM - How to move"
@@ -21,6 +19,10 @@ public class HelpMenuView
                   + "\nD - Deivering resources to warehouse"
                   + "\nQ - Quit"
                   + "\n-----------------------------------------";
+    
+    public HelpMenuView() {
+        System.out.println(helpMenu);
+        displayHelpMenuView();
     }
     
     public void displayHelpMenuView() {
@@ -85,26 +87,5 @@ public class HelpMenuView
             System.out.println("\n*** Invalid selection *** Try again");
         }
         return false;
-    }
-    
-    private void startNewGame() {
-        // create a new game
-        GameControl.createNewGame(OregonTrail.getPlayer());
-        
-        // display the game menu
-        GameMenuView gameMenu = new GameMenuView();
-        gameMenu.displayMenu();
-    }
-    
-    private void startExistingGame() {
-        System.out.println("*** startExistingGame function called ***");
-    }
-    
-    private void saveGame() {
-        System.out.println("*** startExistingGame function called ***");
-    }
-    
-    private void displayHelpMenu() {
-        System.out.println("*** displayHelpMenu function called ***");
     }
 }

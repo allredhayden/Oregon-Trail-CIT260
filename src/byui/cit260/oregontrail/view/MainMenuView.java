@@ -10,12 +10,10 @@ import java.util.Scanner;
 
 public class MainMenuView
 {
-    private String menu;
-    
-    public MainMenuView() {
-        this.menu = "\n"
+    private String menu =
+            "\n"
                   + "\n-----------------------------------------"
-                  + "\n | Main Menu                            |"
+                  + "\n|              Main Menu                |"
                   + "\n-----------------------------------------"
                   + "\nN - Start new game"
                   + "\nG - Get and start saved game"
@@ -23,6 +21,10 @@ public class MainMenuView
                   + "\nS - Save game"
                   + "\nQ - Quit"
                   + "\n-----------------------------------------";
+    
+    public MainMenuView() {
+        System.out.println(menu);
+        displayMainMenuView();
     }
     
     public void displayMainMenuView() {
@@ -83,6 +85,7 @@ public class MainMenuView
         return false;
     }
     
+    // Stub functions
     private void startNewGame() {
         // create a new game
         GameControl.createNewGame(OregonTrail.getPlayer());
@@ -101,7 +104,7 @@ public class MainMenuView
     }
     
     private void displayHelpMenu() {
-        System.out.println("*** displayHelpMenu function called ***");
+        HelpMenuView help = new HelpMenuView();
     }
 //    private MainMenu menu = new MainMenu();
 //    SetupView setup = null;
