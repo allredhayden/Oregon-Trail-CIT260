@@ -1,27 +1,42 @@
 package byui.cit260.oregontrail.model;
+
 import java.awt.Point;
 import java.io.Serializable;
-
-public enum Actor implements Serializable {
-	
-	Carpenter("David", "A carpenter with skilled hands, capable of building any number of objects with his surroundings.", new Point(0,1), 6000, 100),
-	Farmer("Bill", "A simple farmer, capable of growing food in any area that is sufficient for healthy crop growth.", new Point(1,1), 5000, 100),
-	Banker("Eddie", "A sophisticated banker that is good with numbers and has a sharp wit.", new Point(1,2), 7000, 100);
-	
-	private String name;
+public class Actor implements Serializable {
+    
+    private String occupation;
+    private String name;
 	private String description;
 	private Point coordinates;
-	private double wealth;
+	private double money;
 	private double health;
 	
 	// Default constructor.
-	Actor (String name, String description, Point coordinates, double wealth, double health) {
+	public Actor (String occupation, String name, String description, Point coordinates, double money, double health) {
+		this.occupation = occupation;
 		this.name = name;
 		this.description = description;
 		this.coordinates = coordinates;
-		this.wealth = wealth;
+		this.money = money;
 		this.health = health;
 	}
+	
+	public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public boolean isCarpenter() {
+	    return "Carpenter".equals(name);
+	}
+	
+    public boolean isFarmer() {
+        return "Farmer".equals(name);
+    }
+    
+    public boolean isBanker() {
+        return "Banker".equals(name);
+    }
 
 	// Get methods.
 	public String getName() {
@@ -36,16 +51,82 @@ public enum Actor implements Serializable {
 		return coordinates;
 	}
 
-	public double getWealth() {
-		return wealth;
+	public double getMoney() {
+		return money;
 	}
 
 	public double getHealth() {
 		return health;
 	}
 	
+	
+	
 	@Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((coordinates == null) ? 0 : coordinates.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(health);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(money);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((occupation == null) ? 0 : occupation.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Actor other = (Actor) obj;
+        if (coordinates == null) {
+            if (other.coordinates != null)
+                return false;
+        } else if (!coordinates.equals(other.coordinates))
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (Double.doubleToLongBits(health) != Double.doubleToLongBits(other.health))
+            return false;
+        if (Double.doubleToLongBits(money) != Double.doubleToLongBits(other.money))
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (occupation == null) {
+            if (other.occupation != null)
+                return false;
+        } else if (!occupation.equals(other.occupation))
+            return false;
+        return true;
+    }
+
+    @Override
 	public String toString() {
-		return "Actor{" + "name=" + name + ", description=" + description + ", coordinates=" + coordinates + ", wealth=" + wealth + ", health=" + health + '}';
+		return "Actor{occupation=" + occupation + "name=" + name + ", description=" + description + ", coordinates=" + coordinates + ", money=" + money + ", health=" + health + '}';
 	}
+
+    public String getOccupation()
+    {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation)
+    {
+        this.occupation = occupation;
+    }
 }
