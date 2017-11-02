@@ -1,4 +1,4 @@
-package byui.cit260.oregontrail.model;
+package inferior.model.model_inactive;
 
 import java.io.Serializable;
 import java.util.Objects;
