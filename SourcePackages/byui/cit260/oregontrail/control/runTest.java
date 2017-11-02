@@ -9,7 +9,7 @@ package byui.cit260.oregontrail.control;
  *
  * @author Robert
  */
-public class RunTest {
+public class runTest {
     public static void main(String args[]) {
         
     ControlScoreTest test = new ControlScoreTest();

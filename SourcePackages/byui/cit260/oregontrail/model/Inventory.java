@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Inventory implements Serializable {
     private double weight;
     private int quantity;
-    private int capacity;
+    private int capacity = 200;
     private double money;
     private boolean inventoryStatus;
     
