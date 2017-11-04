@@ -3,6 +3,7 @@ package byui.cit260.oregontrail.control;
 import java.io.Serializable;
 
 import byui.cit260.oregontrail.model.*;
+import byui.cit260.oregontrail.view.*;
 
 public class GameControl implements Serializable
 {
