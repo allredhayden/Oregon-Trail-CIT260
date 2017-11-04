@@ -17,7 +17,7 @@ public class ManufactureControlTest {
     double item;
     double amount;
     double noPeople;
-    boolean inventoryItem;
+    double inventoryItem;
     
     
 
