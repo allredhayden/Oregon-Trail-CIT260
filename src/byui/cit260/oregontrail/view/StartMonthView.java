@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class StartMonthView {
     
-    private String menu =
+    private static String currentMonth = null;
+    private static String menu =
     
 "\n************** The Oregon Trail ***************"
 +"\n     Choose a month to begin your journey:    *"
@@ -23,26 +24,34 @@ public class StartMonthView {
 +"\n     6. When should I leave?                  *"
 +"\n     What is your choice?                     *"
 +"\n***********************************************";
-    
-   public StartMonthView() {
-        System.out.println(menu);
-        displayStartMonthView();
-    }
+
+//   Default constructor to be implemented later, when class
+//   is connected to rest of the program
+//   public StartMonthView() {
+//        System.out.println(menu);
+//        displayStartMonthView();
+//    }
    
-   public void displayStartMonthView() {
+   public static void main(String args[]) {
+       System.out.println(menu); // Displays menu / choices to user.
+       displayStartMonthView();  
+   }
+   
+   public static void displayStartMonthView() {
         boolean done = false;
         do {
-            // prompt for and get players name
-            String monthOption = this.getMonthOption();
+            // Call getMonthOption, assign returned variable to monthOption
+            String monthOption = getMonthOption();
             if (monthOption.toUpperCase().equals("Q"))
                 return;
             
-            // do the requested action and display the next view
-            done = this.doAction(monthOption);
-        } while (!done);
+            // Call doAction, pass month into parameters
+            done = doAction(monthOption);
+        } while (!done); // Continue asking for input until doAction is complete.
     }
     
-    private String getMonthOption() {
+    // Get input, tell user if input is invalid
+    private static String getMonthOption() {
         
         Scanner keyboard = new Scanner(System.in);
         String value = "";
@@ -65,27 +74,28 @@ public class StartMonthView {
         return value;
     }
     
-    private boolean doAction(String choice) {
+    // Handle various input options
+    private static boolean doAction(String choice) {
         choice = choice.toUpperCase();
         
         switch (choice) {
         case "1": // create and start a new game
-            this.selectMarch();
+            selectMonth("March");
             break;
         case "2":
-            this.selectApril();
+            selectMonth("April");
             break;
         case "3":
-            this.selectMay();
+            selectMonth("May");
             break;
         case "4":
-            this.selectJune();
+            selectMonth("June");
             break;
         case "5":
-            this.selectJuly();
+            selectMonth("July");
             break;
         case "6":
-            this.displayChoice();
+            displayChoice();
             break;
         default:
             System.out.println("\n*** Invalid selection *** Try again");
@@ -93,28 +103,23 @@ public class StartMonthView {
         return false;
     }
     
-    // Stub functions
-    private void selectMarch() {
-        GeneralStoreView displayGeneralStoreView = new GeneralStoreView;
-       
+    // Selects current month, goes to next view (GeneralStoreView)
+    private static void selectMonth(String month) {
+        currentMonth = month;
+        
+        System.out.println("You've selected " + month + " as your current month.");
+        /* Creates instance of GeneralStoreView
+         * which displays both next view & menu */
+        GeneralStoreView storeView = new GeneralStoreView();  
     }
     
-    private void selectApril() {
-        GeneralStoreView displayGeneralStoreView = new GeneralStoreView;
-    }
-    
-    private void selectMay() {
-        GeneralStoreView displayGeneralStoreView = new GeneralStoreView;
-    }
-    
-    private void selectJune() {
-        GeneralStoreView displayGeneralStoreView = new GeneralStoreView;
-    }
-    private void selectJuly() {
-        GeneralStoreView displayGeneralStoreView = new GeneralStoreView;
-    }
-    private void displayChoice() {
-        displayParagraph = new displayParagraphView();
+    // Displays advantages / disadvantages of each month
+    private static void displayChoice() {
+        System.out.println("If you choose March, you get this advantage."
+                + "\nIf you choose April, you get this advantage."
+                + "\nIf you choose May, you get this advantage."
+                + "\nIf you choose June, you get this advantage."
+                + "\nIf you choose July, you get this advantage.");
     }
     
     
