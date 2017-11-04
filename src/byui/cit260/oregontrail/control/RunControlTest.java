@@ -5,7 +5,14 @@
  */
 package byui.cit260.oregontrail.control;
 
+//<<<<<<< HEAD:SourcePackages/byui/cit260/oregontrail/control/runTest.java
+/**
+ *
+ * @author Robert
+ */
+//=======
 public class RunControlTest {
+//>>>>>>> ba997cf9e4a17b659f76897b6a3cf08740771e0c:src/byui/cit260/oregontrail/control/RunControlTest.java
     public static void main(String args[]) {
         
     ControlScoreTest test = new ControlScoreTest();
