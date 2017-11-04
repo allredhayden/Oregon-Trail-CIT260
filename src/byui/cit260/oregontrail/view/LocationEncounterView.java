@@ -8,18 +8,35 @@ package byui.cit260.oregontrail.view;
 import java.util.Scanner;
 
 public class LocationEncounterView {
+    
     // private static String city = getCity();
     private static String city = "Kearney";
    
     // private static String state = getState();
     private static String state = "Nebraska";
-    // private static String opponent = getOpponent();
+    
+    // private static String weather = getWeather();
+    private static String weather = "cool";
+    
+    // private static String health = getHealth();
+    private static String health = "good";
+    
+    // private static String pace = getPace();
+    private static String pace = "steady";
+    
+    // private static String date = getDate();
+    private static String currentDate = "April 7, 1848";
     
     private static String locationMenu = 
                 "\n"
               + "\n-----------------------------------------"
               + "\n|     Welcome to " + city + ", " + state + "     |"
+              + "\n      " + currentDate
               + "\n-----------------------------------------"
+              + "\n Weather: " + weather
+              + "\n Health: " + health
+              + "\n Pace: " + pace
+              + "\n"
               + "\nC - Continue on trail"
               + "\nS - Check supplies"            
               + "\nM - Look at map"
