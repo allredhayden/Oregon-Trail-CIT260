@@ -7,19 +7,36 @@ package byui.cit260.oregontrail.view;
 
 import java.util.Scanner;
 
-public class LocationEncounterView {
+public class LocationEncounterView extends View {
+    
     // private static String city = getCity();
     private static String city = "Kearney";
    
     // private static String state = getState();
     private static String state = "Nebraska";
-    // private static String opponent = getOpponent();
     
-    private static String locationMenu = 
-                "\n"
+    // private static String weather = getWeather();
+    private static String weather = "cool";
+    
+    // private static String health = getHealth();
+    private static String health = "good";
+    
+    // private static String pace = getPace();
+    private static String pace = "steady";
+    
+    // private static String date = getDate();
+    private static String currentDate = "April 7, 1848";
+            
+    public LocationEncounterView() {
+        super("\n"
               + "\n-----------------------------------------"
               + "\n|     Welcome to " + city + ", " + state + "     |"
+              + "\n      " + currentDate
               + "\n-----------------------------------------"
+              + "\n Weather: " + weather
+              + "\n Health: " + health
+              + "\n Pace: " + pace
+              + "\n"
               + "\nC - Continue on trail"
               + "\nS - Check supplies"            
               + "\nM - Look at map"
@@ -27,53 +44,11 @@ public class LocationEncounterView {
               + "\nR - Stop to rest"
               + "\nT - Attempt to trade"
               + "\nZ - Quit"
-              + "\n-----------------------------------------";
-        
-//    public AttackView() {
-//            displayAttackView();
-//    }
-
-    public static void main(String args[]) {
-        displayLocationEncounterView();
-//        String choice = getInput();
-//        doAction(choice);
+              + "\n-----------------------------------------");
+        super.display();
     }
     
-    private static void displayLocationEncounterView()
-    {
-        System.out.println(locationMenu);
-        boolean done = false;
-        do {
-            // prompt for and get players name
-            String choice = getInput();
-            if (choice.toUpperCase().equals("Q"))
-                return;
-            
-            // do the requested action and display the next view
-            done = doAction(choice);
-        } while (!done);
-    }
-
-    private static String getInput() {
-       Scanner keyboard = new Scanner(System.in);
-       String value = "";
-       boolean valid = false;
-       
-       do {
-          System.out.println("\nPlease choose one of the following options:");
-          value = keyboard.nextLine();
-          value = value.trim();
-
-          if (value.length() < 1) {
-             System.out.println("\nInvalid value: value can not be blank.");
-             continue;
-          }
-          break;
-       } while (!valid);
-       return value;
-    }
-
-    private static boolean doAction(String choice)
+    public boolean doAction(String choice)
     {
         choice = choice.toUpperCase();
 
@@ -105,22 +80,22 @@ public class LocationEncounterView {
         return false;
     }
     
-    private static void continueOnTrail() {
+    protected void continueOnTrail() {
         System.out.println("continueOnTrail successfully called.");
     }
-    private static void checkSupplies() {
+    protected void checkSupplies() {
         System.out.println("checkSupplies successfully called.");
     }
-    private static void lookAtMap() {
+    protected void lookAtMap() {
         System.out.println("lookAtMap successfully called.");
     }
-    private static void changePace() {
+    protected void changePace() {
         System.out.println("changePace successfully called.");
     }
-    private static void stopToRest() {
+    protected void stopToRest() {
         System.out.println("stopToRest successfully called.");
     }
-    private static void attemptToTrade() {
+    protected void attemptToTrade() {
         System.out.println("attemptToTrade successfully called.");
     }
 }

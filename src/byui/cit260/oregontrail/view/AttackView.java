@@ -4,15 +4,15 @@ import byui.cit260.oregontrail.control.*;
 import byui.cit260.oregontrail.model.*;
 import java.util.Scanner;
 
-public class AttackView
+public class AttackView extends View
 {
     // private static String item = getItem();
     private static String item = "default";
     // private static String opponent = getOpponent();
     private static String opponent = "default";
-    
-    private static String attackMenu = 
-                "\n"
+        
+    public AttackView() {
+        super("\n"
               + "\n-----------------------------------------"
               + "\n|              Attack                   |"
               + "\n-----------------------------------------"
@@ -21,25 +21,16 @@ public class AttackView
               + "\nP - Punch your opponent"
               + "\nK - Kick your opponent"
               + "\nZ - Quit"
-              + "\n-----------------------------------------";
-        
-//    public AttackView() {
-//            displayAttackView();
-//    }
-
-    public static void main(String args[]) {
-        displayAttackView();
-//        String choice = getInput();
-//        doAction(choice);
+              + "\n-----------------------------------------");
+        this.display();
     }
     
-    private static void displayAttackView()
-    {
-        System.out.println(attackMenu);
+    @Override
+    public void display() {
         boolean done = false;
         do {
             // prompt for and get players name
-            String choice = getInput();
+            String choice = this.getInput();
             if (choice.toUpperCase().equals("Q"))
                 return;
             
@@ -47,27 +38,13 @@ public class AttackView
             done = doAction(choice, item, opponent);
         } while (!done);
     }
-
-    private static String getInput() {
-       Scanner keyboard = new Scanner(System.in);
-       String value = "";
-       boolean valid = false;
-       
-       do {
-          System.out.println("\nPlease choose one of the following options:");
-          value = keyboard.nextLine();
-          value = value.trim();
-
-          if (value.length() < 1) {
-             System.out.println("\nInvalid value: value can not be blank.");
-             continue;
-          }
-          break;
-       } while (!valid);
-       return value;
+    
+    @Override
+    public boolean doAction(String value) {
+        return true;
     }
-
-    private static boolean doAction(String choice, String item, String opponent)
+    
+    public boolean doAction(String choice, String item, String opponent)
     {
         choice = choice.toUpperCase();
 

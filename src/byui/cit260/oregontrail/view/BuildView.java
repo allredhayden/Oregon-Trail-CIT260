@@ -4,12 +4,13 @@ import byui.cit260.oregontrail.control.*;
 import byui.cit260.oregontrail.model.*;
 import java.util.Scanner;
 
-public class BuildView {
+public class BuildView extends View {
     // private static int woodCount = getWoodCount();
     private static int woodCount = 20;
     
-    private static String buildMenu = 
-              "\n-----------------------------------------"
+        
+    public BuildView() {
+        super("\n-----------------------------------------"
               + "\n|              Build                    |"
               + "\n-----------------------------------------"
               + "\nC - Build a crate"
@@ -17,19 +18,13 @@ public class BuildView {
               + "\nW - Build a wheel"
               + "\nF - Build a fire"
               + "\nZ - Quit"
-              + "\n-----------------------------------------";
-        
-//    public BuildView() {
-//            displayBuildView();
-//    }
-
-    public static void main(String args[]) {
-        displayBuildView();
+              + "\n-----------------------------------------");
+        this.display();
     }
     
-    private static void displayBuildView()
+    @Override
+    public void display()
     {
-        System.out.println(buildMenu);
         boolean done = false;
         do {
             // prompt for and get players name
@@ -41,27 +36,13 @@ public class BuildView {
             done = doAction(choice, woodCount);
         } while (!done);
     }
-
-    private static String getInput() {
-       Scanner keyboard = new Scanner(System.in);
-       String value = "";
-       boolean valid = false;
-       
-       do {
-          System.out.println("\nPlease choose one of the listed options.");
-          value = keyboard.nextLine();
-          value = value.trim();
-
-          if (value.length() < 1) {
-             System.out.println("\nInvalid value: value can not be blank.");
-             continue;
-          }
-          break;
-       } while (!valid);
-       return value;
+    
+    @Override
+    public boolean doAction(String value) {
+        return true;
     }
-
-    private static boolean doAction(String choice, int woodCount)
+    
+    public boolean doAction(String choice, int woodCount)
     {
         choice = choice.toUpperCase();
         boolean success = false;
@@ -91,24 +72,24 @@ public class BuildView {
     }
     
     
-    private static void buildCrate(int woodCount) {
+    protected void buildCrate(int woodCount) {
         buildObject("Crate", woodCount);
         System.out.println("throwObject successfully called.");
     }
-    private static void buildWagon(int woodCount) {
+    protected void buildWagon(int woodCount) {
         buildObject("Wagon", woodCount);
         System.out.println("swingObject successfully called.");
     }
-    private static void buildWheel(int woodCount) {
+    protected void buildWheel(int woodCount) {
         buildObject("Wheel", woodCount);
         System.out.println("punchOpponent successfully called.");
     }
-    private static void buildFire(int woodCount) {
+    protected void buildFire(int woodCount) {
         buildObject("Fire", woodCount);
         System.out.println("kickOpponent successfully called.");
     }
     
-    private static void buildObject(String buildChoice, int numWood) {
+    protected void buildObject(String buildChoice, int numWood) {
         int requiredWood = 20;
         
         if (numWood >= requiredWood) {
@@ -129,6 +110,6 @@ public class BuildView {
             System.out.println("Not enough wood. You have " + woodCount + " wood left. "
                     + "You need " + requiredWood + " to construct a " + buildChoice + ".");
         }
-        displayBuildView();
+        this.display();
         }
     }

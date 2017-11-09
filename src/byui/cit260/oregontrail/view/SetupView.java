@@ -1,10 +1,12 @@
 package byui.cit260.oregontrail.view;
 
 import java.util.List;
+import java.util.Scanner;
+
 import byui.cit260.oregontrail.model.*;
 import byui.cit260.oregontrail.control.*;
 
-public class SetupView
+public class SetupView extends View
 {   
     Occupations playerOccupation = new Occupations();
     Months monthList = new Months();
@@ -17,10 +19,6 @@ public class SetupView
         requestMonth();
     }
 
-    
-    /* 
-     * Occupation request.
-     */
     private void requestOccupation() {
         displayOccupations();
         int occupation = StartProgramView.readAnswer();
@@ -45,12 +43,9 @@ public class SetupView
         }
     }
 
-    /*
-     * Name request.
-     */
     private void requestName() {
         // Prompt player to choose names of party members.
-        System.out.println("********** The Oregon Trail ********************");
+        System.out.println("\n********** The Oregon Trail ********************");
         System.out.println("Enter the names of those in your wagon party:");
         System.out.println("1.\n2.\n3.");
         enterName(1);
@@ -59,6 +54,7 @@ public class SetupView
         displayActors();
         // TODO - If number selected, prompt to change name.
     }
+    
     private void enterName(int nameNumber) {
         System.out.println(String.format("Enter name %d:",nameNumber));
         String name = InputReader.readString();
@@ -78,21 +74,42 @@ public class SetupView
          * to change the name of corresponding actor.
          */
     }
-    
-    /*
-     * Month request.
-     */
+
     public void requestMonth() {
-        System.out.println("Choose a month to begin your journey:");
-        System.out.println("********** The Oregon Trail ********************");
-        List<String> months = monthList.getMonths();
-        for (int i = 0; i < months.size(); i++) {
-            System.out.println(months.get(i));
-        }
-        System.out.println("*           What is your choice?           *");
-        System.out.println("********************************************");
+        StartMonthView months = new StartMonthView();
+        
+        Scanner keyboard = new Scanner(System.in);
+        
+        String value = keyboard.nextLine();
+        value.trim();
+        
+        months.setCurrentMonth(value);
+        System.out.println("The current month is: " + months.getCurrentMonth());
 //        String name = InputReader.readString();
 //        months.setCurrentMonth(name);
+    }
+    
+    private String getHelpMenuOption() {
+        
+        Scanner keyboard = new Scanner(System.in);
+        String value = "";
+        boolean valid = false;
+        
+        while (!valid) {
+            System.out.println("\nPlease enter a value: ");
+            
+        value = keyboard.nextLine();
+        value = value.trim();
+        
+        if (value.length() < 1) {
+            System.out.println("\nInvalid value: value can not be blank");
+            continue;
+            }
+        
+            break; // end the loop
+        }
+        
+        return value;
     }
 }
 

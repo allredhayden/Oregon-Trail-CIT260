@@ -7,44 +7,38 @@ package byui.cit260.oregontrail.control;
 
 import java.io.Serializable;
 import byui.cit260.oregontrail.model.*;
+
 /**
  *
  * @author Allen
  */
-public class ControlMoney implements Serializable {
-    /*Inventory playerInventory = new Inventory();
-    int capacity = playerInventory.getCapacity();
-    int numberItemsSold;
-    double currentAmount;
-    double itemCost;
-    double purchaseTotal;
-    double newAmount = (currentAmount - (numberItemsSold * itemCost));
+public class ControlMoney implements Serializable
+{
 
-    /**
-     *
-     * @param currentAmount
-     * @param itemCost
-     * @param purchaseTotal
-     * @param numberItemsSold
-     * @param newAmount
-     * @return
-     */
-    public double calcFundsInHand(double currentAmount, double itemCost, double purchaseTotal, int numberItemsSold, double newAmount){
-            int capacity = 200;
-            if (currentAmount < 0 || purchaseTotal > currentAmount){
-                System.out.println(" You don't have enough money, beat it!");
-                return 0;
-            }
-            if (numberItemsSold > capacity) {
-                System.out.println("You can't carry that much");
-                return 0;
-            }
-            if (numberItemsSold < 0) {
-                System.out.println("This is a store not a trading post!");
-                return 0;
-            }
-            else {
-                return(newAmount);
-        }       
-    }
+    public double calcFundsInHand(double currentAmount, int numberItemsSold, double itemCost, double purchaseTotal)
+    {
+        int capacity = 200;
+        double endBalance = (currentAmount - (numberItemsSold * itemCost));
+        
+        if (currentAmount < 0 || purchaseTotal > currentAmount) {
+            System.out.println("You don't have enough money, beat it!");
+            return endBalance;
         }
+        else if (numberItemsSold > capacity) {
+            System.out.println("You can't carry that much");
+            return endBalance;
+        }
+        else if (numberItemsSold < 0) {
+            System.out.println("This is a store not a trading post!");
+            return endBalance;
+        }
+        else if (endBalance < 0) {
+            System.out.println("You cannot have a negative ending balance.");
+            return endBalance;
+        }
+        else {
+            System.out.println("No errors!");
+            return endBalance;
+        }
+    }
+}

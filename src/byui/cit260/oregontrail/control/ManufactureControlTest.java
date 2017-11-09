@@ -12,28 +12,14 @@ import java.io.Serializable;
  * @author blairfurner
  */
 public class ManufactureControlTest {
-
-    double requiredResources;
-    double item;
-    double amount;
-    double noPeople;
-    boolean inventoryItem;
     
-    
-
-public double manufactureItem (double requiredResources,double item, double amount, double noPeople, double inventoryItem){
-           this.requiredResources = requiredResources;
-           this.item = item;
-           this.amount = amount;
-           this.noPeople = noPeople;
-           this.inventoryItem = inventoryItem;
-           
-        if (inventoryItem == result){
-               System.out.println("You have passed the test.");
-        }
-        else {
-        System.out.println("You have failed the test.");
-        }
-          
-}
+    public static void main(String args[]) {
+        ManufactureControl manuControl = new ManufactureControl();
+        int test1 = manuControl.acquireResources(1, 50);
+        int test2 = manuControl.acquireResources(10, -1);
+        int test3 = manuControl.acquireResources(-2, 50);
+        int test4 = manuControl.acquireResources(1, 2000);
+        int test5 = manuControl.acquireResources(20, 10);
+        int test6 = manuControl.acquireResources(8, 20);
+    }
 }

@@ -9,69 +9,30 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class GeneralStoreView {
+public class GeneralStoreView extends View {
     
     // Need to use getMoney() later.
     public static double money = 2000;
-    
-    private static String menu =
-    
-"\n**** The Oregon Trail - Matt's General Store****"
-+"\n     Choose an item to add to you order:       *"
-+"\n     1. Oxen                           $0      *"
-+"\n     2. Food                           $0      *"
-+"\n     3. Clothing                       $0      *"
-+"\n     4. Ammunition                     $0      *"
-+"\n     5. Spare Parts                    $0      *"
-+"\n     6. Quit                                   *"
-+"\n            Total Funds                $" + money + " *"
-+"\n What is you choice? (space bar to continue)   *"
-+"\n***********************************************";
-    
+        
    public GeneralStoreView() {
-        System.out.println(menu); // Displays menu / choices
-        displayGeneralStoreView();
+       super(
+               "\n**** The Oregon Trail - Matt's General Store****"
+                +"\n     Choose an item to add to you order:       *"
+                +"\n     1. Oxen                           $0      *"
+                +"\n     2. Food                           $0      *"
+                +"\n     3. Clothing                       $0      *"
+                +"\n     4. Ammunition                     $0      *"
+                +"\n     5. Spare Parts                    $0      *"
+                +"\n     6. Go to temporary menu                   *"            
+                +"\n     7. Quit                                   *"
+                +"\n            Total Funds                $" + money + " *"
+                +"\n What is you choice? (space bar to continue)   *"
+                +"\n***********************************************");
+        super.display();
     }
    
-   public static void displayGeneralStoreView() {
-        boolean done = false;
-        do {
-            // Call getAmountOption, assign returned value to AmountOption variable
-            String amountOption = getAmountOption();
-            if (amountOption.toUpperCase().equals("Q"))
-                return;
-            
-            // Call doAction, pass amountOption into parameters
-            done = doAction(amountOption);
-        } while (!done);
-    }
-    
-   // Read input, tell user if input is invalid
-    private static String getAmountOption() {
-        
-        Scanner keyboard = new Scanner(System.in);
-        String value = "";
-        boolean valid = false;
-        
-        while (!valid) {
-            System.out.println("\nPlease enter a value: ");
-            
-        value = keyboard.nextLine();
-        value = value.trim();
-        
-        if (value.length() < 1) {
-            System.out.println("\nInvalid value: value can not be blank");
-            continue;
-            }
-        
-            break; // end the loop
-        }
-        
-        return value;
-    }
-    
-    // Handle various input choices.
-    private static boolean doAction(String choice) {
+    @Override
+    public boolean doAction(String choice) {
         double price = 0;
         choice = choice.toUpperCase();
         
@@ -113,8 +74,12 @@ public class GeneralStoreView {
             money = money - price;
             System.out.println("You have " + money + " dollars left.");
             break;
-        case "6": // Quit, i.e. go to main menu.
+        case "6":
+            TempMenu temp = new TempMenu();
+            break;
+        case "7":
             MainMenuView mainMenuView = new MainMenuView();
+            break;            
         default:
             System.out.println("\n*** Invalid selection *** Try again");
             break;            
@@ -123,7 +88,7 @@ public class GeneralStoreView {
     }
     
     // Returns item price of specified item to caller.
-    private static double getItemPrice(String choice) {
+    protected double getItemPrice(String choice) {
         double itemCost = 0;
         
         if (choice == "oxen") {
@@ -143,19 +108,4 @@ public class GeneralStoreView {
         }
         return itemCost;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

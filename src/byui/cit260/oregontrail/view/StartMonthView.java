@@ -9,73 +9,36 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class StartMonthView {
+public class StartMonthView extends View {
     
     private static String currentMonth = null;
-    private static String menu =
-    
-"\n************** The Oregon Trail ***************"
-+"\n     Choose a month to begin your journey:    *"
-+"\n     1. March                                 *"
-+"\n     2. April                                 *"
-+"\n     3. May                                   *"
-+"\n     4. June                                  *"
-+"\n     5. July                                  *"
-+"\n     6. When should I leave?                  *"
-+"\n     What is your choice?                     *"
-+"\n***********************************************";
 
-//   Default constructor to be implemented later, when class
-//   is connected to rest of the program
-//   public StartMonthView() {
-//        System.out.println(menu);
-//        displayStartMonthView();
-//    }
-   
-   public static void main(String args[]) {
-       System.out.println(menu); // Displays menu / choices to user.
-       displayStartMonthView();  
-   }
-   
-   public static void displayStartMonthView() {
-        boolean done = false;
-        do {
-            // Call getMonthOption, assign returned variable to monthOption
-            String monthOption = getMonthOption();
-            if (monthOption.toUpperCase().equals("Q"))
-                return;
-            
-            // Call doAction, pass month into parameters
-            done = doAction(monthOption);
-        } while (!done); // Continue asking for input until doAction is complete.
+    public static String getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public static void setCurrentMonth(String currentMonth) {
+        StartMonthView.currentMonth = currentMonth;
     }
     
-    // Get input, tell user if input is invalid
-    private static String getMonthOption() {
-        
-        Scanner keyboard = new Scanner(System.in);
-        String value = "";
-        boolean valid = false;
-        
-        while (!valid) {
-            System.out.println("\nPlease enter a value: ");
-            
-        value = keyboard.nextLine();
-        value = value.trim();
-        
-        if (value.length() < 1) {
-            System.out.println("\nInvalid value: value can not be blank");
-            continue;
-            }
-        
-            break; // end the loop
-        }
-        
-        return value;
+   public StartMonthView() {
+       super(
+       "\n************** The Oregon Trail ***************"
+        +"\n     Choose a month to begin your journey:    *"
+        +"\n     1. March                                 *"
+        +"\n     2. April                                 *"
+        +"\n     3. May                                   *"
+        +"\n     4. June                                  *"
+        +"\n     5. July                                  *"
+        +"\n     6. When should I leave?                  *"
+        +"\n     What is your choice?                     *"
+        +"\n***********************************************");
+       super.display();
     }
     
+    @Override
     // Handle various input options
-    private static boolean doAction(String choice) {
+    public boolean doAction(String choice) {
         choice = choice.toUpperCase();
         
         switch (choice) {
@@ -104,7 +67,7 @@ public class StartMonthView {
     }
     
     // Selects current month, goes to next view (GeneralStoreView)
-    private static void selectMonth(String month) {
+    protected void selectMonth(String month) {
         currentMonth = month;
         
         System.out.println("You've selected " + month + " as your current month.");
@@ -114,24 +77,11 @@ public class StartMonthView {
     }
     
     // Displays advantages / disadvantages of each month
-    private static void displayChoice() {
+    protected void displayChoice() {
         System.out.println("If you choose March, you get this advantage."
                 + "\nIf you choose April, you get this advantage."
                 + "\nIf you choose May, you get this advantage."
                 + "\nIf you choose June, you get this advantage."
                 + "\nIf you choose July, you get this advantage.");
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    }  
 }

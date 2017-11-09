@@ -8,41 +8,25 @@ package byui.cit260.oregontrail.control;
 import java.io.Serializable;
 
 public class ManufactureControl implements Serializable {
-    double requiredResources;
-    double item;
-    double amount;
-    double noPeople;
-    boolean inventoryItem;
     
+    // We will use getStrikesLeft() in the future.
+    
+    public int acquireResources(int strikesLeft, int resourceAmount) {
+        
+        int barrelsHarvested = (strikesLeft * resourceAmount);
+        
+        if (resourceAmount < 0) {
+            System.out.println("You cannot have a negative number for amount.\n");
+        }
+        else if (strikesLeft < 0) {
+            System.out.println("Strikes can't be negative.\n");
+        }
+        else if (resourceAmount > 1000) {
+            System.out.println("Amount can't be above 1000.\n");
+        }
+        else {
+            System.out.println("Congratulations! You have harvested " + barrelsHarvested + " barrels of berries.\n");
+        }
+        return barrelsHarvested;
     }
-
-public double manufactureItem (double requiredResources,double item, double amount, double noPeople){
-           this.requiredResources = requiredResources;
-           this.item = item;
-           this.amount = amount;
-           this.noPeople = noPeople;
-           
-           
-        if (requiredResources < 0 || requiredResources > 1){
-                System.out.println ("The value of requiredResources must be 1, cheater.");
-                 return manufactureItem;
-}
-        if (noPeople < 0){
-                System.out.println ("You cannot have a negative number for people.");
-                 return manufactureItem;
-}
-          if (item < 0){
-                System.out.println ("You cannot have a negative number for items."); 
-                 return manufactureItem;
-          
-}
-
-        if (amount > 100){
-                System.out.println ("You can't have more than 100 of an amount")                 
-                 return manufactureItem;
-}
-        else{
-                 return manufactureItem;
-}
-
 }

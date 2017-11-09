@@ -5,12 +5,13 @@ import java.util.Scanner;
 import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.OregonTrail;
 
-public class HelpMenuView
+public class HelpMenuView extends View
 {
-    private String helpMenu = 
-                    "\n"
+    public HelpMenuView() {
+        super(
+                "\n"
                   + "\n-----------------------------------------"
-                  + "\n|              Help Menu                |"
+                  + "\n | Help Menu                            |"
                   + "\n-----------------------------------------"
                   + "\nG - What is the goal of the game?"
                   + "\nM - How to move"
@@ -18,56 +19,17 @@ public class HelpMenuView
                   + "\nH - Harvesting resources"
                   + "\nD - Deivering resources to warehouse"
                   + "\nZ - Quit"
-                  + "\n-----------------------------------------";
-    
-    public HelpMenuView() {
-        System.out.println(helpMenu);
-        displayHelpMenuView();
+                  + "\n-----------------------------------------");
+        super.display();
     }
     
-    public void displayHelpMenuView() {
-        boolean done = false;
-        do {
-            // prompt for and get players name
-            String menuOption = this.getHelpMenuOption();
-            if (menuOption.toUpperCase().equals("Q"))
-                return;
-            
-            // do the requested action and display the next view
-            done = this.doAction(menuOption);
-        } while (!done);
-    }
-    
-    private String getHelpMenuOption() {
-        
-        Scanner keyboard = new Scanner(System.in);
-        String value = "";
-        boolean valid = false;
-        
-        while (!valid) {
-            System.out.println("\nPlease enter a value: ");
-            
-        value = keyboard.nextLine();
-        value = value.trim();
-        
-        if (value.length() < 1) {
-            System.out.println("\nInvalid value: value can not be blank");
-            continue;
-            }
-        
-            break; // end the loop
-        }
-        
-        return value;
-    }
-    
-    // Finish this later.
-    private boolean doAction(String choice) {
+    @Override
+    public boolean doAction(String choice) {
         choice = choice.toUpperCase();
         
         switch (choice) {
         case "G":
-            System.out.print("The goal of the game is to make it to Oregon.");
+            System.out.print("\nThe goal of the game is to make it to Oregon.\n");
             break;
         case "M":
             System.out.println("To move, go to the map and select desired coordinates for your character.");
@@ -82,7 +44,9 @@ public class HelpMenuView
             System.out.println("The way to deliver resources to a warehouse is: ______");
             break;
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            System.out.println("Help menu has been called.");
+            MainMenuView menu = new MainMenuView();
+            break;
         default:
             System.out.println("\n*** Invalid selection *** Try again");
         }

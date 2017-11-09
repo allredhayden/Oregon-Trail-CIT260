@@ -2,8 +2,8 @@ package byui.cit260.oregontrail.control;
 
 import java.io.Serializable;
 
-import byui.cit260.oregontrail.model.*;
 import byui.cit260.oregontrail.view.*;
+import byui.cit260.oregontrail.model.*;
 
 public class GameControl implements Serializable
 {
@@ -23,6 +23,6 @@ public class GameControl implements Serializable
     }
     
     public static void createNewGame(Player player) {
-        System.out.println("\n*** createNewGame stub function called ***");
+        System.out.println("\nA new game has been created.\n");
     }
 }
