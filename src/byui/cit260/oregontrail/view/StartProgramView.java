@@ -8,7 +8,7 @@ import java.util.Scanner;
 import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.*;
 
-public class StartProgramView
+public class StartProgramView extends View
 {
     @SuppressWarnings("unused")
     MainMenuView mainMenu = null;
@@ -19,25 +19,12 @@ public class StartProgramView
         displayWelcome();
         displayBanner();
         
-//        Player playerOne = new Player();
-        String name = requestPlayerName(); // Read player name, assign to variable 'name'.
+        String name = requestPlayerName();
         doAction(name);
-       
-     
-        System.out.println("\nType 1 to begin. To exit, type anything else.");
-
-////         If '1', construct MainMenuView, which displays the Main Menu.
-//        int answer = readAnswer();
-//        
-//        if (answer == 1) { 
-//            mainMenu = new MainMenuView();
-//            }
-//        else {
-//            quit();
-//            }
     }
     
-    private boolean doAction(String playersName) {
+    @Override
+    public boolean doAction(String playersName) {
         if (playersName.length() < 2) {
             System.out.println("\nInvalid players name: "
                     + "The name must be greater than one character in length");
@@ -87,9 +74,6 @@ public class StartProgramView
     public static void promptMessage() {
         System.out.println("Please enter your name:");
     }
-//        System.out.println("Please enter your name:");
-//        String name = reader.readString();
-//        return name;
     
     public static void displayWelcome() {
         System.out.println("Welcome to the Oregon Trail.");
