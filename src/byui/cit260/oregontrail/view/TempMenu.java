@@ -20,7 +20,8 @@ public class TempMenu extends View
               + "\nB - Go to build menu"            
               + "\nR - Go to river encounter menu"
               + "\nT - Go to about authors menu"
-              + "\nL - Go to location enounter menu"             
+              + "\nL - Go to location enounter menu"
+              + "\nC - Go to loot menu"                
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         super.display();
@@ -46,7 +47,11 @@ public class TempMenu extends View
             AboutAuthorsView author = new AboutAuthorsView();
             break;
         case "L":
-            LocationEncounterView location = new LocationEncounterView();            
+            LocationEncounterView location = new LocationEncounterView();
+            break;
+        case "C":
+            LootView loot = new LootView();
+            break;
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
         default:
