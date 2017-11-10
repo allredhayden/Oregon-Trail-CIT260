@@ -13,6 +13,7 @@ public class LootView extends View {
     String item3 = creature.getCreatureItem3();
     String item4 = creature.getCreatureItem4();
     String item5 = creature.getCreatureItem5();
+    
     int capacity = inventory.getCapacity();
     int carried = inventory.getCurrentCarried();
     boolean pickedUp1 = false;

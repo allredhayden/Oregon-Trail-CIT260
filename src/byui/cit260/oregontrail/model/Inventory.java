@@ -110,6 +110,6 @@ public class Inventory implements Serializable {
     
     public void insertItem(String item) {
     System.out.println(item + " has been looted successfully.");
-    System.out.println("You are now carrying " + currentCarried + " items out of your maximum capacity of " + capacity + ".");
+    System.out.println("You are now carrying " + currentCarried + " items out of your maximum capacity of " + capacity + ".\n");
     }
 }
