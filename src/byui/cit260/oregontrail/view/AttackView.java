@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class AttackView extends View
 {
-    // private static String item = getItem();
-    private static String item = "default";
-    // private static String opponent = getOpponent();
-    private static String opponent = "default";
+    // protected String item = getItem();
+    protected String item = "Rock";
+    // protected String opponent = getOpponent();
+    protected String opponent = "default";
         
-    public AttackView() {
+    public AttackView(String enemy) {
         super("\n"
               + "\n-----------------------------------------"
               + "\n|              Attack                   |"
@@ -22,7 +22,8 @@ public class AttackView extends View
               + "\nK - Kick your opponent"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
-        this.display();
+        opponent = enemy;        
+        display();
     }
     
     @Override
@@ -30,7 +31,7 @@ public class AttackView extends View
         boolean done = false;
         do {
             // prompt for and get players name
-            String choice = this.getInput();
+            String choice = getInput();
             if (choice.toUpperCase().equals("Q"))
                 return;
             
@@ -71,15 +72,15 @@ public class AttackView extends View
     }
     
     private static void throwObject(String item, String opponent) {
-        System.out.println("throwObject successfully called.");
+        System.out.println(item + " has successfully been thrown at " + opponent + ".");
     }
     private static void swingObject(String item, String opponent) {
-        System.out.println("swingObject successfully called.");
+        System.out.println(item + " has successfully been swung at " + opponent + ".");
     }
     private static void punchOpponent(String opponent) {
-        System.out.println("punchOpponent successfully called.");
+        System.out.println(opponent + " has successfully been punched.");
     }
     private static void kickOpponent(String opponent) {
-        System.out.println("kickOpponent successfully called.");
+        System.out.println(opponent + " has successfully been kicked.");
     }
 }

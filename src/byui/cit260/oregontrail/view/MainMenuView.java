@@ -22,7 +22,7 @@ public class MainMenuView extends View {
                     + "\nT - Go to the temporary menu"            
                     + "\nQ - Quit"
                     + "\n-----------------------------------------");
-        super.display();
+        display();
     }
         
     @Override
@@ -31,19 +31,19 @@ public class MainMenuView extends View {
         
         switch (choice) {
         case "N": // create and start a new game
-            this.startNewGame();
+            startNewGame();
             break;
         case "G":
-            this.startExistingGame();
+            startExistingGame();
             break;
         case "H":
-            this.displayHelpMenu();
+            displayHelpMenu();
             break;
         case "T":
             TempMenu temp = new TempMenu();
             break;            
         case "S":
-            this.saveGame();
+            saveGame();
             break;
         default:
             System.out.println("\n*** Invalid selection *** Try again");

@@ -41,6 +41,7 @@ public class AboutAuthorsView extends View {
             break;
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
+            break;
         default:
             System.out.println("\n*** Invalid selection *** Try again");
         }
