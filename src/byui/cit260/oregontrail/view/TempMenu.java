@@ -21,7 +21,8 @@ public class TempMenu extends View
               + "\nR - Go to river encounter menu"
               + "\nT - Go to about authors menu"
               + "\nL - Go to location enounter menu"
-              + "\nC - Go to loot menu"                
+              + "\nC - Go to loot menu"   
+              + "\nX - Go to choose target menu"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         display();
@@ -52,6 +53,9 @@ public class TempMenu extends View
         case "C":
             LootView loot = new LootView();
             break;
+        case "X":
+            ChooseTargetView target = new ChooseTargetView();
+            break;            
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
         default:
