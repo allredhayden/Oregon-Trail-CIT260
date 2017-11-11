@@ -73,57 +73,57 @@ public class LootView extends View {
         
         if (carried <= capacity) {
             // Check if item 1 has been picked up.
-            if (item == item1 && pickedUp1 == false) {
+            if (item == item1 && !pickedUp1) {
                 inventory.insertItem(item);
                 carried++;
                 inventory.setCurrentCarried(carried);
                 setPickedUp1(true);
                 }
-            else if (item == item1 && pickedUp1 == true) {
+            else if (item == item1 && pickedUp1) {
                 System.out.println("You have already picked up this item.");
             }
             
             // Check if item 2 has been picked up.            
-            if (item == item2 && pickedUp2 == false) {
+            if (item == item2 && !pickedUp2) {
                 inventory.insertItem(item);
                 carried++;
                 inventory.setCurrentCarried(carried);
                 setPickedUp2(true);
                 }
-            else if (item == item2 && pickedUp2 == true) {
+            else if (item == item2 && pickedUp2) {
                 System.out.println("You have already picked up this item.");
             }
             
             // Check if item 3 has been picked up.
-            if (item == item3 && pickedUp3 == false) {
+            if (item == item3 && !pickedUp3) {
                 inventory.insertItem(item);
                 carried++;
                 inventory.setCurrentCarried(carried);
                 setPickedUp3(true);
                 }
-            else if (item == item3 && pickedUp3 == true) {
+            else if (item == item3 && pickedUp3) {
                 System.out.println("You have already picked up this item.");
             }
 
             // Check if item 4 has been picked up.            
-            if (item == item4 && pickedUp4 == false) {
+            if (item == item4 && !pickedUp4) {
                 inventory.insertItem(item);
                 carried++;
                 inventory.setCurrentCarried(carried);
                 setPickedUp4(true);
                 }
-            else if (item == item4 && pickedUp4 == true) {
+            else if (item == item4 && pickedUp4) {
                 System.out.println("You have already picked up this item.");
             }
 
             // Check if item 5 has been picked up.            
-            if (item == item5 && pickedUp5 == false) {
+            if (item == item5 && !pickedUp5) {
                 inventory.insertItem(item);
                 carried++;
                 inventory.setCurrentCarried(carried);
                 setPickedUp5(true);
                 }
-            else if (item == item5 && pickedUp5 == true) {
+            else if (item == item5 && pickedUp5) {
                 System.out.println("You have already picked up this item.");
             }
         }

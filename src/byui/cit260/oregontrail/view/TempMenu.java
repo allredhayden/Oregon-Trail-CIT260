@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class TempMenu extends View
 {
-    // private static String item = getItem();
-    private static String item = "default";
-    // private static String opponent = getOpponent();
-    private static String opponent = "default";
+    // protected String item = getItem();
+    protected String item = "default";
+    // protected String opponent = getOpponent();
+    protected String opponent = "Wolf";
         
     public TempMenu() {
         super("\n"
@@ -24,7 +24,7 @@ public class TempMenu extends View
               + "\nC - Go to loot menu"                
               + "\nZ - Quit"
               + "\n-----------------------------------------");
-        super.display();
+        display();
     }
     
     @Override
@@ -35,7 +35,7 @@ public class TempMenu extends View
         switch (choice)
         {
         case "A":
-            AttackView attack = new AttackView();
+            AttackView attack = new AttackView(opponent);
             break;
         case "B":
             BuildView build = new BuildView();
