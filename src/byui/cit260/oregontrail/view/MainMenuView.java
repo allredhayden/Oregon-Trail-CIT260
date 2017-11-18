@@ -51,24 +51,22 @@ public class MainMenuView extends View {
         return false;
     }
     
-    protected void startNewGame() {
+    private void startNewGame() {
         // create a new game
-        GameControl.createNewGame(OregonTrail.getPlayer());
-        
-        // display the game menu
-        GameMenuView gameMenu = new GameMenuView();
+        GameControl controlGame = new GameControl();
+        controlGame.createNewGame();
     }
     
     // Stub functions
-    protected void startExistingGame() {
+    private void startExistingGame() {
         System.out.println("*** startExistingGame function called ***");
     }
     
-    protected void saveGame() {
+    private void saveGame() {
         System.out.println("*** startExistingGame function called ***");
     }
     
-    protected void displayHelpMenu() {
+    private void displayHelpMenu() {
         HelpMenuView help = new HelpMenuView();
     }
 }

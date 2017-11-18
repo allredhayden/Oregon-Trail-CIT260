@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class MainMenu implements Serializable
 {
+    private static Game game;
     
     // Create list of menu options.
     private static List<String> menuOptions = new ArrayList<>();
@@ -17,5 +18,13 @@ public class MainMenu implements Serializable
     
     public List<String> getMenuOptions() {
         return menuOptions;
+    }
+    
+    public static Game getGame() {
+        return game;
+    }
+
+    public static void setGame(Game game) {
+        MainMenu.game = game;
     }
 }

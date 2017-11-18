@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inferior.model.model_inactive;
+package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
 
@@ -13,8 +13,14 @@ import java.io.Serializable;
  */
 public class InventoryItem implements Serializable {
     private String inventoryType;
-    private int quantityInStock;
+    private String inventoryName;
+    private int quantityInStock = 0;
     private int requiredAmount;
+    
+    public InventoryItem(String name, int quantity) {
+        inventoryName = name;
+        quantityInStock = quantity;
+    }
     
     // Get & set inventoryType.   
     public String getInventoryType() {

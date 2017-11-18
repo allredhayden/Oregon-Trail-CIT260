@@ -8,18 +8,15 @@ import byui.cit260.oregontrail.control.*;
 
 public class SetupView extends View
 {   
-    Occupations playerOccupation = new Occupations();
+    static Occupations playerOccupation = new Occupations();
     Months monthList = new Months();
 
     public SetupView() {
         // Create actors with default names.
-        Occupations.createActors("Dog", "Cat", "Pig");
-        requestOccupation();
-        requestName();
-        requestMonth();
+
     }
 
-    private void requestOccupation() {
+    public static void requestOccupation() {
         displayOccupations();
         int occupation = StartProgramView.readAnswer();
         if (occupation == 4) {
@@ -33,17 +30,17 @@ public class SetupView extends View
         }
     }
     
-    public void displayOccupations()
+    public static void displayOccupations()
     {
         List<String> menuOptions = Occupations.getOccupationPrompt();
         
-        System.out.println("Choose your occupation: ");
+        System.out.println("\nChoose your occupation: ");
         for (int i = 0; i < menuOptions.size(); i++) {
             System.out.println(menuOptions.get(i));
         }
     }
 
-    private void requestName() {
+    public static void requestName() {
         // Prompt player to choose names of party members.
         System.out.println("\n********** The Oregon Trail ********************");
         System.out.println("Enter the names of those in your wagon party:");
@@ -55,13 +52,13 @@ public class SetupView extends View
         // TODO - If number selected, prompt to change name.
     }
     
-    private void enterName(int nameNumber) {
+    private static void enterName(int nameNumber) {
         System.out.println(String.format("Enter name %d:",nameNumber));
         String name = InputReader.readString();
         Occupations.getActors().get(nameNumber-1).setName(name);
     }
     
-    public void displayActors() {
+    public static void displayActors() {
         for (Actor actor : Occupations.getActors()) {
             actor.getName();
         }
@@ -75,7 +72,7 @@ public class SetupView extends View
          */
     }
 
-    public void requestMonth() {
+    public static void requestMonth() {
         StartMonthView months = new StartMonthView();
         
         Scanner keyboard = new Scanner(System.in);

@@ -2,12 +2,18 @@ package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
 
-public class RegularSceneType implements Serializable {
+public class Scene implements Serializable {
+
+    @Override
+    public String toString() {
+        return "Scene{" + "description=" + description + ", blocked=" + blocked + ", symbol=" + symbol + ", question=" + question + '}';
+    }
 	
-	private String description;
-	private boolean blocked;
-	private String symbol;
-	
+	protected String description;
+	protected boolean blocked;
+	protected String symbol;
+	protected Question question;
+        
 	// Get & set description.
 	public String getDescription() {
 		return description;
@@ -22,7 +28,7 @@ public class RegularSceneType implements Serializable {
 		return blocked;
 	}
 	
-	public void SetBlocked(boolean blocked) {
+	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 	}
 	
@@ -34,6 +40,14 @@ public class RegularSceneType implements Serializable {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
+        
+        public Question getQuestion() {
+            return question;
+        }
+
+        public void setQuestion(Question question) {
+            this.question = question;
+        }
 
 
 	@Override
@@ -54,7 +68,7 @@ public class RegularSceneType implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RegularSceneType other = (RegularSceneType) obj;
+		Scene other = (Scene) obj;
 		if (blocked != other.blocked)
 			return false;
 		if (description == null) {
@@ -68,10 +82,5 @@ public class RegularSceneType implements Serializable {
 		} else if (!symbol.equals(other.symbol))
 			return false;
 		return true;
-		}
-	
-	@Override
-	public String toString() {
-		return "RegularSceneType [description=" + description + ", blocked=" + blocked + ", symbol=" + symbol + "]";
 		}
 }

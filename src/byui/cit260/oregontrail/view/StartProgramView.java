@@ -13,6 +13,7 @@ public class StartProgramView extends View
     @SuppressWarnings("unused")
     MainMenuView mainMenu = null;
     
+    protected static String playerName = null;
     static InputReader reader = new InputReader();
     
     public StartProgramView() {
@@ -24,24 +25,20 @@ public class StartProgramView extends View
     }
     
     @Override
-    public boolean doAction(String playersName) {
-        if (playersName.length() < 2) {
+    public boolean doAction(String name) {
+        if (name.length() < 2) {
             System.out.println("\nInvalid players name: "
                     + "The name must be greater than one character in length");
             return false;
         }
-        Player player = GameControl.createPlayer(playersName);  // Create player object.
-        if (player == null) {
-            System.out.println("\nError creating the player.");
-            return false;            
-        }
-        this.displayNextView(player);
+        playerName = name;
+        displayNextView();
         return true;
     }
     
-    private void displayNextView(Player player) {
+    private void displayNextView() {
         System.out.println("\n======================================"
-                          + "\n Welcome to the game " + player.getPlayerName()
+                          + "\n Welcome to the game " + playerName
                           + "\n We hope you have a lot of fun!"
                           + "\n======================================"
                           );
@@ -69,6 +66,10 @@ public class StartProgramView extends View
         }
         
         return value;
+    }
+    
+    public static String getPlayerName() {
+        return playerName;
     }
     
     public static void promptMessage() {

@@ -1,4 +1,4 @@
-package inferior.model.model_inactive;
+package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,12 +10,14 @@ public class Location implements Serializable {
     private int amountRemaining;
     private boolean visited;
     private String currentGeography;
-
+    private Scene scene;
     
-    public void displayCurrentGeography(String particularLocation) {
-        
+    public Location() {
+        // Default constructor.
     }
     
+    public void displayCurrentGeography(String particularLocation) {
+    }
     
     public int getRow() {
         return row;
@@ -55,6 +57,14 @@ public class Location implements Serializable {
 
     public void setCurrentGeography(String currentGeography) {
         this.currentGeography = currentGeography;
+    }
+    
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 
     @Override
@@ -97,14 +107,9 @@ public class Location implements Serializable {
         }
         return true;
     }
-
     
-
     @Override
     public String toString() {
-        return "Location{" + "row=" + row + ", column=" + column + ", amountRemaining=" + amountRemaining + ", visited=" + visited + ", currentGeography=" + currentGeography + '}';
-    }
-    
-    
-    
+        return "Location{" + "row=" + row + ", column=" + column + ", amountRemaining=" + amountRemaining + ", visited=" + visited + ", currentGeography=" + currentGeography + ", scene=" + scene + '}';
+    }    
 }

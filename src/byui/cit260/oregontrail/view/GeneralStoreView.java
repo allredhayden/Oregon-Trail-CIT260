@@ -23,9 +23,9 @@ public class GeneralStoreView extends View {
                 +"\n     3. Clothing                       $15     *"
                 +"\n     4. Ammunition                     $100    *"
                 +"\n     5. Spare Parts                    $80     *"
-                +"\n     6. Go to temporary menu                   *"            
+                +"\n     6. Done (Continue)                        *"            
                 +"\n     7. Quit                                   *"
-                +"\n            Total Funds                $" + money + " *"
+                +"\n               Total Funds      $" + money + " *"
                 +"\n What is you choice? (space bar to continue)   *"
                 +"\n***********************************************");
         super.display();
@@ -75,7 +75,7 @@ public class GeneralStoreView extends View {
             System.out.println("You have " + money + " dollars left.");
             break;
         case "6":
-            TempMenu temp = new TempMenu();
+            GameMenuView gameMenuView = new GameMenuView();
             break;
         case "7":
             MainMenuView mainMenuView = new MainMenuView();

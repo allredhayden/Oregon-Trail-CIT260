@@ -11,13 +11,17 @@ import java.util.Objects;
  *
  * @author Allen
  */
-public class Maps implements Serializable {
+public class Map implements Serializable {
     private String description;
     private int rowCount;
     private int columnCount;
     private int currentRow;
     private int currentColumn;
+    private static Location[][] locations; 
 
+    public Map() {
+    }
+    
     public String getDescription() {
         return description;
     }
@@ -58,6 +62,15 @@ public class Maps implements Serializable {
         this.currentColumn = currentColumn;
     }
 
+    public static Location[][] getLocations() {
+        return locations;
+    }
+
+    public void setLocations(Location[][] locations) {
+        System.out.println("\nNew location created for this game.");
+        this.locations = locations;
+    }   
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -80,7 +93,7 @@ public class Maps implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Maps other = (Maps) obj;
+        final Map other = (Map) obj;
         if (this.rowCount != other.rowCount) {
             return false;
         }

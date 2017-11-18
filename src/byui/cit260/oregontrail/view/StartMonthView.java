@@ -25,12 +25,19 @@ public class StartMonthView extends View {
        super(
        "\n************** The Oregon Trail ***************"
         +"\n     Choose a month to begin your journey:    *"
-        +"\n     1. March                                 *"
-        +"\n     2. April                                 *"
-        +"\n     3. May                                   *"
-        +"\n     4. June                                  *"
-        +"\n     5. July                                  *"
-        +"\n     6. When should I leave?                  *"
+        +"\n     1. January                               *"
+        +"\n     2. February                              *"
+        +"\n     3. March                                 *"
+        +"\n     4. April                                 *"
+        +"\n     5. May                                   *"
+        +"\n     6. June                                  *"
+        +"\n     7. July                                  *"
+        +"\n     8. August                                *"
+        +"\n     9. September                             *"
+        +"\n     10. October                              *"
+        +"\n     11. November                             *"
+        +"\n     12. December                             *"               
+        +"\n     13. When should I leave?                 *"
         +"\n     What is your choice?                     *"
         +"\n***********************************************");
        super.display();
@@ -43,21 +50,42 @@ public class StartMonthView extends View {
         
         switch (choice) {
         case "1": // create and start a new game
-            selectMonth("March");
+            selectMonth("January");
             break;
         case "2":
-            selectMonth("April");
+            selectMonth("February");
             break;
         case "3":
-            selectMonth("May");
+            selectMonth("March");
             break;
         case "4":
-            selectMonth("June");
+            selectMonth("April");
             break;
         case "5":
-            selectMonth("July");
+            selectMonth("May");
             break;
         case "6":
+            selectMonth("June");
+            break;
+        case "7":
+            selectMonth("July");
+            break;
+        case "8":
+            selectMonth("August");
+            break;
+        case "9":
+            selectMonth("September");
+            break;
+        case "10":
+            selectMonth("October");
+            break;
+        case "11":
+            selectMonth("November");
+            break;
+        case "12":
+            selectMonth("December");
+            break;            
+        case "13":
             displayChoice();
             break;
         default:
@@ -78,10 +106,18 @@ public class StartMonthView extends View {
     
     // Displays advantages / disadvantages of each month
     protected void displayChoice() {
-        System.out.println("If you choose March, you get this advantage."
-                + "\nIf you choose April, you get this advantage."
-                + "\nIf you choose May, you get this advantage."
-                + "\nIf you choose June, you get this advantage."
-                + "\nIf you choose July, you get this advantage.");
-    }  
+        System.out.println("\n"
+                + "If you choose January, you get this disadvantage."
+                + "\nIf you choose February, you get this disadvantage."
+                + "\nIf you choose March, you get this disadvantage."
+                + "\nIf you choose April, you get this disadvantage."
+                + "\nIf you choose May, you get this disadvantage."
+                + "\nIf you choose June, you get this disadvantage."
+                + "\nIf you choose July, you get this disadvantage."
+                + "\nIf you choose August, you get this disadvantage."
+                + "\nIf you choose September, you get this disadvantage."
+                + "\nIf you choose October, you get this disadvantage."
+                + "\nIf you choose November, you get this disadvantage."                
+                + "\nIf you choose December, you get this disadvantage.");
+    }
 }
