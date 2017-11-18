@@ -13,6 +13,7 @@ public class ControlScore implements Serializable {
     double totalTime;
     double totalScore;
     
+    
     public double calcTotalScore(double currentScore, double peopleLiving, double totalTime) {
         this.currentScore = currentScore;
         this.peopleLiving = peopleLiving;

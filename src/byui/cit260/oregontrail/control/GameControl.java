@@ -5,6 +5,8 @@ import java.io.Serializable;
 import byui.cit260.oregontrail.view.*;
 import byui.cit260.oregontrail.model.*;
 import java.awt.Point;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameControl implements Serializable
 {
@@ -15,6 +17,7 @@ public class GameControl implements Serializable
     private static Location[][] gameLocations;
     private static Scene[] gameScenes;
     private static Question[] gameQuestions;
+    private static Actor[] actors = new Actor[10];
     
     ControlMap mapControl = new ControlMap();
 
@@ -29,7 +32,7 @@ public class GameControl implements Serializable
         // Create player actors, request occupation & name.
         Occupations.createActors("Default1", "Default2", "Default3");
         SetupView.requestOccupation();
-        SetupView.requestName();
+        SetupView.requestName();      
 
         // Store actor array in Game class (model).
         game.setActors(Occupations.getActors());
@@ -37,7 +40,7 @@ public class GameControl implements Serializable
         // Create NPC actor array & item array, store in Game class (model).
         gameItems = createItems();
         game.setInventory(gameItems);
-        game.setNPCActors(createActors());   
+        game.setNPCActors(createActors());
         
         // Create new map and store in Game class (model).
         if (mapControl.createMap(10, 10, gameItems) == null) {
@@ -71,32 +74,46 @@ public class GameControl implements Serializable
     }
     
     public static Actor[] createActors() {
-        Actor[] actors = new Actor[10];
-        
+
         // String occupation, String name, String description, Point coordinates, double money, double health
-        Actor lehi = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100);
-        Actor sariah = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100);
-        Actor nephi = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100);
-        Actor jacob = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100);
-        Actor sam = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100);
-        Actor laman = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100);
-        Actor lemuel = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100);
-        Actor zoram = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100);
-        Actor angel = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100);
-        Actor lord = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100);
-        
-        lehi = actors[ActorType.Lehi.ordinal()];
-        sariah = actors[ActorType.Sariah.ordinal()];
-        nephi = actors[ActorType.Nephi.ordinal()];
-        jacob = actors[ActorType.Jacob.ordinal()];
-        sam = actors[ActorType.Sam.ordinal()];
-        laman = actors[ActorType.Laman.ordinal()];
-        lemuel = actors[ActorType.Lemuel.ordinal()];
-        zoram = actors[ActorType.Zoram.ordinal()];
-        angel = actors[ActorType.Angel.ordinal()];
-        lord = actors[ActorType.Lord.ordinal()];
+        actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100);
+        actors[ActorType.Sariah.ordinal()] = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100);
+        actors[ActorType.Nephi.ordinal()] = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100);
+        actors[ActorType.Jacob.ordinal()] = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100);
+        actors[ActorType.Sam.ordinal()] = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100);
+        actors[ActorType.Laman.ordinal()] = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100);
+        actors[ActorType.Lemuel.ordinal()] = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100);
+        actors[ActorType.Zoram.ordinal()] = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100);
+        actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100);
+        actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100);
         
         return actors;
+    }
+    
+    public static Actor[] getActors() {
+        return actors;
+    }
+    
+    public static void visitCalc() {
+        
+        SumVisitor sumVisitor = new SumVisitor();
+        MinVisitor minVisitor = new MinVisitor();
+        MaxVisitor maxVisitor = new MaxVisitor();
+            
+        for (Actor person : getActors()) {
+            sumVisitor.visitElement(person);
+            minVisitor.visitElement(person);
+            maxVisitor.visitElement(person);
+        }
+        System.err.println("\nSum: " + sumVisitor.getSum());
+        System.err.println("Min: " + minVisitor.getMin());
+        System.err.println("Max: " + maxVisitor.getMax());
+        
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GameControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static InventoryItem[] createItems() {

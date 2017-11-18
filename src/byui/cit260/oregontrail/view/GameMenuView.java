@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.view;
 
+import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.MainMenu;
 import byui.cit260.oregontrail.model.Game;
 import byui.cit260.oregontrail.model.Location;
@@ -28,7 +29,8 @@ public class GameMenuView extends View {
               + "\nP - Pack ship"
               + "\nJ - Launch ship"
               + "\nH - Help"
-              + "\nT - Go to temp menu"                
+              + "\nT - Go to temp menu"
+              + "\nX - Calculate min, max & sum of actor money"                
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         super.display();
@@ -88,7 +90,10 @@ public class GameMenuView extends View {
             break;
         case "T":
             TempMenu temp = new TempMenu();
-            break;            
+            break;
+        case "X":
+            GameControl.visitCalc();
+            break;
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
             break;
@@ -102,7 +107,7 @@ public class GameMenuView extends View {
         Game game = MainMenu.getGame();
         Location[][] location = Map.getLocations();
         
-        System.out.println("              Land of the Bountfiful               ");
+        System.out.println("              Land of the Bountiful               ");
         
         // Rows
         for (int i = 0; i < location.length + 1; i++) {

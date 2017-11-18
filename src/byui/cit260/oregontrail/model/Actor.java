@@ -129,4 +129,8 @@ public class Actor implements Serializable {
     {
         this.occupation = occupation;
     }
+    
+    public void accept(BaseVisitor v) {
+        v.visitElement(this);
+    }
 }
