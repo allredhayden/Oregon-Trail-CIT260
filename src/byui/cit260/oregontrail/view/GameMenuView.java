@@ -7,6 +7,7 @@ import byui.cit260.oregontrail.model.Location;
 import byui.cit260.oregontrail.model.Map;
 import byui.cit260.oregontrail.model.Scene;
 import byui.cit260.oregontrail.control.ControlYokes;
+import byui.cit260.oregontrail.control.DistanceControl;
 
 public class GameMenuView extends View {
     
@@ -32,7 +33,8 @@ public class GameMenuView extends View {
               + "\nH - Help"
               + "\nT - Go to temp menu"
               + "\nX - Calculate min, max & sum of actor money"
-              + "\n1 - Count yokes"                
+              + "\n1 - Count yokes"
+              + "\n2 - Calculate distance traveled"                
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         super.display();
@@ -98,6 +100,10 @@ public class GameMenuView extends View {
             break;
         case "1":
             ControlYokes yoke = new ControlYokes();
+            break;
+        case "2":
+            DistanceControl distance = new DistanceControl();
+            distance.distanceTraveled();
             break;            
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
