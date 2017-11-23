@@ -1,9 +1,5 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
-
 public class TempMenu extends View
 {
     // protected String item = getItem();
@@ -23,6 +19,7 @@ public class TempMenu extends View
               + "\nL - Go to location enounter menu"
               + "\nC - Go to loot menu"   
               + "\nX - Go to choose target menu"
+              + "\nY - Calculate current funds after specific purchase"       
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         display();
@@ -36,28 +33,31 @@ public class TempMenu extends View
         switch (choice)
         {
         case "A":
-            AttackView attack = new AttackView(opponent);
+            new AttackView(opponent);
             break;
         case "B":
-            BuildView build = new BuildView();
+            new BuildView();
             break;
         case "R":
-            RiverEncounterView river = new RiverEncounterView();
+            new RiverEncounterView();
             break;
         case "T":
-            AboutAuthorsView author = new AboutAuthorsView();
+            new AboutAuthorsView();
             break;
         case "L":
-            LocationEncounterView location = new LocationEncounterView();
+            new LocationEncounterView();
             break;
         case "C":
-            LootView loot = new LootView();
+            new LootView();
             break;
         case "X":
-            ChooseTargetView target = new ChooseTargetView();
-            break;            
+            new ChooseTargetView();
+            break;
+        case "Y":
+            new MoneyView();
+            break; 
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
         default:
             System.out.println("\n*** Invalid selection *** Try again");
         }

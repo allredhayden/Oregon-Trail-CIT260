@@ -94,6 +94,35 @@ public class StartMonthView extends View {
         return false;
     }
     
+    @Override
+    public String getInput() {
+        Scanner keyboard = new Scanner(System.in);
+        String value = "";
+        boolean valid = false;
+        
+        do {
+           System.out.println("\nPlease choose one of the menu options:");
+           value = keyboard.nextLine();
+           value = value.trim();
+
+           if (value.length() < 1) {
+              System.out.println("\nInvalid value: value can not be blank.");
+              continue;
+           }
+           try {
+               int i = Integer.parseInt(value);
+           }
+           catch (NumberFormatException nfe) {
+               System.out.println("\nYou must enter a number.");
+               }
+           catch (Throwable te) {
+               System.out.println(te.getMessage());
+               }
+           break;
+           } while (!valid);
+        return value;
+    }
+    
     // Selects current month, goes to next view (GeneralStoreView)
     protected void selectMonth(String month) {
         currentMonth = month;

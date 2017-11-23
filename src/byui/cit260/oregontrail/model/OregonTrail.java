@@ -9,8 +9,13 @@ public class OregonTrail implements Serializable
     private static Player player = null;
     
     // Main method.
-    public static void main(String args[]) {
-        StartProgram program = new StartProgram();
+    public static void main(String args[]) throws Throwable {
+        try {
+            StartProgram program = new StartProgram();
+        } catch (Throwable e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     // Getters & Setters

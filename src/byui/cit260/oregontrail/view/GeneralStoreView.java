@@ -1,20 +1,11 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.Months;
-import byui.cit260.oregontrail.model.OregonTrail;
-import byui.cit260.oregontrail.model.StartProgram;
-
-import java.util.List;
-import java.util.Scanner;
-
-
 public class GeneralStoreView extends View {
     
     // Need to use getMoney() later.
     public static double money = 2000;
-        
-   public GeneralStoreView() {
+
+public GeneralStoreView() {
        super(
                "\n**** The Oregon Trail - Matt's General Store****"
                 +"\n     Choose an item to add to you order:       *"
@@ -75,10 +66,10 @@ public class GeneralStoreView extends View {
             System.out.println("You have " + money + " dollars left.");
             break;
         case "6":
-            GameMenuView gameMenuView = new GameMenuView();
+            new GameMenuView();
             break;
         case "7":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
             break;            
         default:
             System.out.println("\n*** Invalid selection *** Try again");
@@ -107,5 +98,13 @@ public class GeneralStoreView extends View {
             itemCost = 80;
         }
         return itemCost;
+    }
+    
+    public static double getMoney() {
+        return money;
+    }
+
+    public static void setMoney(double money) {
+        GeneralStoreView.money = money;
     }
 }

@@ -66,7 +66,7 @@ public class BuildView extends View {
             MainMenuView mainMenuView = new MainMenuView();            
         }
         else {
-            System.out.println("Invalid option. Choose one of the listed options.");            
+            System.err.println("Invalid option. Choose one of the listed options.");            
         }
         return success;
     }
@@ -107,7 +107,7 @@ public class BuildView extends View {
             System.out.println("\nProject completed. You have now built a " + buildChoice);
             }
         else {
-            System.out.println("Not enough wood. You have " + woodCount + " wood left. "
+            System.err.println("Not enough wood. You have " + woodCount + " wood left. "
                     + "You need " + requiredWood + " to construct a " + buildChoice + ".");
         }
         this.display();

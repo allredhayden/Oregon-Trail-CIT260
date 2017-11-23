@@ -1,6 +1,6 @@
 package byui.cit260.oregontrail.view;
-
 import byui.cit260.oregontrail.control.*;
+import byui.cit260.oregontrail.exceptions.MapControlException;
 import byui.cit260.oregontrail.model.MainMenu;
 import byui.cit260.oregontrail.model.OregonTrail;
 import byui.cit260.oregontrail.model.StartProgram;
@@ -54,7 +54,12 @@ public class MainMenuView extends View {
     private void startNewGame() {
         // create a new game
         GameControl controlGame = new GameControl();
-        controlGame.createNewGame();
+        try {
+            controlGame.createNewGame();
+        }
+        catch (MapControlException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
     // Stub functions

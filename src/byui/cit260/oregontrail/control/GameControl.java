@@ -3,6 +3,7 @@ package byui.cit260.oregontrail.control;
 import java.io.Serializable;
 
 import byui.cit260.oregontrail.view.*;
+import byui.cit260.oregontrail.exceptions.MapControlException;
 import byui.cit260.oregontrail.model.*;
 import java.awt.Point;
 import java.util.logging.Level;
@@ -19,9 +20,9 @@ public class GameControl implements Serializable
     private static Question[] gameQuestions;
     private static Actor[] actors = new Actor[10];
     
-    ControlMap mapControl = new ControlMap();
+    MapControl mapControl = new MapControl();
 
-    public int createNewGame() {
+    public int createNewGame() throws MapControlException {
         
         // Create new game.
         game = new Game();
@@ -44,7 +45,7 @@ public class GameControl implements Serializable
         
         // Create new map and store in Game class (model).
         if (mapControl.createMap(10, 10, gameItems) == null) {
-            System.out.println("Failed to create new map.");
+            throw new MapControlException("Failed to create new map.");
         }
         else {
             game.setMap(map);             

@@ -36,7 +36,7 @@ public abstract class View implements ViewInterface {
        boolean valid = false;
        
        do {
-          System.out.println("\nPlease choose one of the following options:");
+          System.out.println("\nPlease choose one of the menu options:");
           value = keyboard.nextLine();
           value = value.trim();
 
