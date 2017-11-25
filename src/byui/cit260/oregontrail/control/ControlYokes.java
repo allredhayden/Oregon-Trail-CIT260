@@ -1,35 +1,53 @@
 package byui.cit260.oregontrail.control;
 
+import byui.cit260.oregontrail.exceptions.ControlYokesException;
+
 public class ControlYokes {
-    
-      int[] yoke = new int[10];
+
+    int[] yoke = new int[10];
+    private boolean valid = false;
 
     public ControlYokes() {
-        createYokes();
-        countYokes();
+    }
+
+    public void createYokes(int value, int position) throws ControlYokesException {
+        
+        if (value <= 0) {
+            valid = false;
+            throw new ControlYokesException("\nEach value has to be greater than zero.");
+        }
+        else {
+            valid = true;
+        }
+        
+        yoke[position] = value;
     }
     
     public void countYokes() {
-        int total = 0;
-        
+
+        int totalYokes = 0;
+
         for (int i = 0; i < yoke.length; i++) {
-            total = total + yoke[i];
+            totalYokes = totalYokes + yoke[i];
         }
-        
-        System.out.println("\nYou have a total of " + total + " Yokes");
+
+        System.out.println("\nYou have a total of " + totalYokes + " Yokes");
     }
     
-    public void createYokes() {
-      
-      yoke[0] = 1;
-      yoke[1] = 1;
-      yoke[2] = 1;
-      yoke[3] = 1;
-      yoke[4] = 1;
-      yoke[5] = 1;
-      yoke[6] = 1;
-      yoke[7] = 1;
-      yoke[8] = 1;
-      yoke[9] = 1;
+    public void displayYokes() {
+        
+        System.out.println("\nYokes list: \n");
+        
+        for (int i = 0; i < yoke.length; i++) {
+            System.out.println(yoke[i]);
+        }
     }
+    
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }    
 }

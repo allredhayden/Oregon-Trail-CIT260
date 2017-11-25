@@ -26,6 +26,13 @@ public class MoneyControl implements Serializable
     public MoneyControl() {
     }
 
+    /**
+     * 
+     * @param currentAmount
+     * @param numberItemsSold
+     * @param itemCost
+     * @return endBalance
+     */
     public double calcFundsInHand(double currentAmount, int numberItemsSold, double itemCost) {
         int capacity = 200;
         double endBalance = (currentAmount - (numberItemsSold * itemCost));

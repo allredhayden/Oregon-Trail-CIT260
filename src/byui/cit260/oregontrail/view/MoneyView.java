@@ -5,6 +5,19 @@ import byui.cit260.oregontrail.exceptions.MoneyControlException;
 
 import java.util.Scanner;
 
+/**
+ * <h2><font face="verdana">Prompts user to enter:</font></h2><br>
+ * <font color="green">
+ * <ul>
+ * <li>Current amount of money</li>
+ * <li>Number of items sold</li>
+ * <li>Cost per item of that type</li>
+ * </ul>
+ * </font>
+ * Calls {@link MoneyControl#calcFundsInHand(double, int, double)}
+ * <p>Displays total user funds and total cost of purchase.
+ * 
+ */
 public class MoneyView extends View {
     
     boolean score = false;
@@ -27,7 +40,7 @@ public class MoneyView extends View {
                 score = moneyControl.integrityTest(currentAmount);
             } 
             catch (MoneyControlException e) {
-                e.getMessage();
+                System.err.println(e.getMessage());
             }
             if (score == true) {
                 System.out.println("\nCongratulations. Not only do you actually have " + actualMoney + " silver, but you also get an extra 1000 silver for your honesty.");

@@ -1,5 +1,7 @@
 package byui.cit260.oregontrail.view;
 
+import byui.cit260.oregontrail.control.DistanceControl;
+
 public class TempMenu extends View
 {
     // protected String item = getItem();
@@ -19,7 +21,10 @@ public class TempMenu extends View
               + "\nL - Go to location enounter menu"
               + "\nC - Go to loot menu"   
               + "\nX - Go to choose target menu"
-              + "\nY - Calculate current funds after specific purchase"       
+              + "\nD - Populate distance array"
+              + "\nP - Populate yokes array"
+              + "\nM - Manufacture resources"              
+              + "\nY - Calculate current funds after specific purchase" 
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         display();
@@ -53,6 +58,15 @@ public class TempMenu extends View
         case "X":
             new ChooseTargetView();
             break;
+        case "D":
+            new DistanceView();
+            break;
+        case "P":
+            new YokesView();
+            break;
+        case "M":
+            new ManufactureView();
+            break;            
         case "Y":
             new MoneyView();
             break; 
