@@ -27,7 +27,7 @@ public class LootView extends View {
               + "\n-----------------------------------------"
               + "\n|              Loot                     |"
               + "\n-----------------------------------------");
-        System.out.println(
+        this.console.println(
                 "\n1 - Pick up " + item1 + ".               "
               + "\n2 - Pick up " + item2 + ".               "            
               + "\n3 - Pick up " + item3 + ".               "
@@ -64,7 +64,7 @@ public class LootView extends View {
             MainMenuView mainMenuView = new MainMenuView();
             break;
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
@@ -80,7 +80,7 @@ public class LootView extends View {
                 setPickedUp1(true);
                 }
             else if (item == item1 && pickedUp1) {
-                System.out.println("You have already picked up this item.");
+                ErrorView.display(this.getClass().getName(), "You have already picked up this item.");
             }
             
             // Check if item 2 has been picked up.            
@@ -91,7 +91,7 @@ public class LootView extends View {
                 setPickedUp2(true);
                 }
             else if (item == item2 && pickedUp2) {
-                System.out.println("You have already picked up this item.");
+                ErrorView.display(this.getClass().getName(), "You have already picked up this item.");                
             }
             
             // Check if item 3 has been picked up.
@@ -102,7 +102,7 @@ public class LootView extends View {
                 setPickedUp3(true);
                 }
             else if (item == item3 && pickedUp3) {
-                System.out.println("You have already picked up this item.");
+                ErrorView.display(this.getClass().getName(), "You have already picked up this item.");                
             }
 
             // Check if item 4 has been picked up.            
@@ -113,7 +113,7 @@ public class LootView extends View {
                 setPickedUp4(true);
                 }
             else if (item == item4 && pickedUp4) {
-                System.out.println("You have already picked up this item.");
+                ErrorView.display(this.getClass().getName(), "You have already picked up this item.");
             }
 
             // Check if item 5 has been picked up.            
@@ -124,12 +124,12 @@ public class LootView extends View {
                 setPickedUp5(true);
                 }
             else if (item == item5 && pickedUp5) {
-                System.out.println("You have already picked up this item.");
+                ErrorView.display(this.getClass().getName(), "You have already picked up this item.");
             }
         }
         // Else, if carried > capacity:
         else {
-            System.out.println("You cannot carry any more items.");
+            ErrorView.display(this.getClass().getName(), "You cannot carry any more items.");
         }
     }
     

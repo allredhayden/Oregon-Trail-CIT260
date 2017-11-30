@@ -1,50 +1,49 @@
 package byui.cit260.oregontrail.view;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
 import byui.cit260.oregontrail.model.*;
-import byui.cit260.oregontrail.control.*;
 
-public class SetupView extends View
+public class SetupView extends View implements Serializable
 {   
     static Occupations playerOccupation = new Occupations();
     Months monthList = new Months();
 
     public SetupView() {
-        // Create actors with default names.
 
     }
 
-    public static void requestOccupation() {
+    public String requestOccupation() {
         displayOccupations();
         int occupation = StartProgramView.readAnswer();
+        String actorChoice = playerOccupation.getActors().get(occupation-1).getOccupation();
+        
         if (occupation == 4) {
-            System.out.println("The banker starts with $1,600.\nThe carpenter starts with $800.\n"
+            this.console.println("The banker starts with $1,600.\nThe carpenter starts with $800.\n"
                     + "The farmer starts with $400.\n");
             requestOccupation();
         }
-        else {
-            String actorChoice = Occupations.getActors().get(occupation-1).getOccupation();
-            playerOccupation.setActorChoice(actorChoice);
-        }
+        return actorChoice;
     }
     
-    public static void displayOccupations()
+    public void displayOccupations()
     {
-        List<String> menuOptions = Occupations.getOccupationPrompt();
+        List<String> menuOptions = playerOccupation.getOccupationPrompt();
         
-        System.out.println("\nChoose your occupation: ");
+        this.console.println("\nChoose your occupation: ");
         for (int i = 0; i < menuOptions.size(); i++) {
-            System.out.println(menuOptions.get(i));
+            this.console.println(menuOptions.get(i));
         }
     }
 
-    public static void requestName() {
+    public void requestNames() {
         // Prompt player to choose names of party members.
-        System.out.println("\n********** The Oregon Trail ********************");
-        System.out.println("Enter the names of those in your wagon party:");
-        System.out.println("1.\n2.\n3.");
+        this.console.println("\n********** The Oregon Trail ********************");
+        this.console.println("Enter the names of those in your wagon party:");
+        this.console.println("1.\n2.\n3.");
         enterName(1);
         enterName(2);
         enterName(3);
@@ -52,14 +51,14 @@ public class SetupView extends View
         // TODO - If number selected, prompt to change name.
     }
     
-    private static void enterName(int nameNumber) {
-        System.out.println(String.format("Enter name %d:",nameNumber));
+    private void enterName(int nameNumber) {
+        this.console.println(String.format("Enter name %d:",nameNumber));
         String name = InputReader.readString();
-        Occupations.getActors().get(nameNumber-1).setName(name);
+        playerOccupation.getActors().get(nameNumber-1).setName(name);
     }
     
-    public static void displayActors() {
-        for (Actor actor : Occupations.getActors()) {
+    public void displayActors() {
+        for (Actor actor : playerOccupation.getActors()) {
             actor.getName();
         }
     }
@@ -72,34 +71,40 @@ public class SetupView extends View
          */
     }
 
-    public static void requestMonth() {
+    public void requestMonth() {
         StartMonthView months = new StartMonthView();
         
-        Scanner keyboard = new Scanner(System.in);
-        
-        String value = keyboard.nextLine();
+        String value = null;
+        try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         value.trim();
         
         months.setCurrentMonth(value);
-        System.out.println("The current month is: " + months.getCurrentMonth());
+        this.console.println("The current month is: " + months.getCurrentMonth());
 //        String name = InputReader.readString();
 //        months.setCurrentMonth(name);
     }
     
     private String getHelpMenuOption() {
         
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         
         while (!valid) {
-            System.out.println("\nPlease enter a value: ");
+            ErrorView.display(this.getClass().getName(), "\nPlease enter a value: ");
             
-        value = keyboard.nextLine();
+        try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         value = value.trim();
         
         if (value.length() < 1) {
-            System.out.println("\nInvalid value: value can not be blank");
+            ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank");
             continue;
             }
         
@@ -107,6 +112,10 @@ public class SetupView extends View
         }
         
         return value;
+    }
+    
+    public static Occupations getPlayerOccupation() {
+        return playerOccupation;
     }
 }
 

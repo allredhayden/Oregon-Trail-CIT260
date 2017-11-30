@@ -1,6 +1,9 @@
 package byui.cit260.oregontrail.view;
 
 import byui.cit260.oregontrail.control.DistanceControl;
+import byui.cit260.oregontrail.model.Game;
+import byui.cit260.oregontrail.model.OregonTrail;
+import byui.cit260.oregontrail.model.Player;
 
 public class TempMenu extends View
 {
@@ -24,7 +27,9 @@ public class TempMenu extends View
               + "\nD - Populate distance array"
               + "\nP - Populate yokes array"
               + "\nM - Manufacture resources"              
-              + "\nY - Calculate current funds after specific purchase" 
+              + "\nY - Calculate current funds after specific purchase"
+              + "\nS - Go back to general store"
+              + "\nG - Verify game session"              
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         display();
@@ -69,11 +74,25 @@ public class TempMenu extends View
             break;            
         case "Y":
             new MoneyView();
-            break; 
+            break;
+        case "S":
+            new GeneralStoreView();
+            break;
+        case "G":
+            Game game = OregonTrail.getCurrentGame();
+            Player player = game.getPlayer();
+            
+            String name = player.getPlayerName();
+            this.console.println("Welcome back " + name + ".");
+            
+            this.console.println("Your current occupation is: " + game.getPlayerOccupation());
+            
+            new GeneralStoreView();
+            break;            
         case "Z":
             new MainMenuView();
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }

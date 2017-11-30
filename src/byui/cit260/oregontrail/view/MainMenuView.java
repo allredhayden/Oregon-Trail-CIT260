@@ -46,7 +46,7 @@ public class MainMenuView extends View {
             saveGame();
             break;
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
@@ -55,20 +55,41 @@ public class MainMenuView extends View {
         // create a new game
         GameControl controlGame = new GameControl();
         try {
-            controlGame.createNewGame();
+            OregonTrail.setCurrentGame(controlGame.createNewGame());
         }
         catch (MapControlException e) {
-            System.out.println(e.getMessage());
+            ErrorView.display(this.getClass().getName(), e.getMessage());
         }
     }
     
     // Stub functions
     private void startExistingGame() {
-        System.out.println("*** startExistingGame function called ***");
+        this.console.println("\n\nEnter the file path for where your game is saved.");
+        
+        String filePath = this.getInput();
+        
+        try {
+            // Start saved game.
+            GameControl.getSavedGame(filePath);
+        }
+        catch (Exception ex) {
+            ErrorView.display("MainMenuView", ex.getMessage());
+        }
+        
+        // Display the game menu.
+        GameMenuView gameMenu = new GameMenuView();
     }
     
     private void saveGame() {
-        System.out.println("*** startExistingGame function called ***");
+        this.console.println("\n\nEnter the file path for file where the game is to be saved.");
+        String filePath = this.getInput();
+        
+        try {
+            // Save the game to the specified file.
+            GameControl.saveGame(OregonTrail.getCurrentGame(), filePath);
+        } catch (Exception ex) {
+            ErrorView.display("MainMenuView", ex.getMessage());
+        }
     }
     
     private void displayHelpMenu() {

@@ -18,7 +18,7 @@ public class ChooseTargetView extends View {
               + "\n-----------------------------------------"
               + "\n|                Choose Target                    |"
               + "\n-----------------------------------------");
-        System.out.println(
+        this.console.println(
                 "\n1 - Target " + enemy1 + ".               "
               + "\n2 - Target " + enemy2 + ".               "            
               + "\n3 - Target " + enemy3 + ".               "
@@ -38,29 +38,29 @@ public class ChooseTargetView extends View {
         switch (choice)
         {
         case "1":
-            System.out.print("\nBuffalo has been targeted.\n");
+            this.console.print("\nBuffalo has been targeted.\n");
             AttackView attack = new AttackView(enemy1);
             break;
         case "2":
-            System.out.println("\nRabbit has been targeted.\n");
+            this.console.println("\nRabbit has been targeted.\n");
             AttackView attack2 = new AttackView(enemy2);
             break;
         case "3":
-            System.out.println("\nBobcat has been targeted.\n");
+            this.console.println("\nBobcat has been targeted.\n");
             AttackView attack3 = new AttackView(enemy3);
             break;
         case "4":
-            System.out.println("\nElk has been targeted.\n");
+            this.console.println("\nElk has been targeted.\n");
             AttackView attack4 = new AttackView(enemy4);
             break;
         case "5":
-            System.out.println("\nBear has been targeted.\n");
+            this.console.println("\nBear has been targeted.\n");
             AttackView attack5 = new AttackView(enemy5);
             break;
         case "6":
             MainMenuView mainMenuView = new MainMenuView();
         default:
-            System.out.println("\n*** Invalid selection *** Try again\n");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again\n");
         }
         return false;
     }

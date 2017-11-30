@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import byui.cit260.oregontrail.control.DistanceControl;
@@ -18,7 +19,7 @@ public class DistanceView extends View {
         
         while (!distanceControl.isValid()) {
             if (!distanceControl.isValid()) {
-                System.err.println("\nEach value has to be greater than zero.");
+                ErrorView.display(this.getClass().getName(), "\nEach value has to be greater than zero.");
             }
             catchDexception();
         }
@@ -28,30 +29,33 @@ public class DistanceView extends View {
     }
     
     public double parseCatchDouble(String prompt) {
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         double i = 0;
         
         do {
-           System.out.println(prompt);
-           value = keyboard.nextLine();
+           this.console.println(prompt);
+           try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
            value = value.trim();
 
            if (value.length() < 1) {
-              System.err.println("\nInvalid value: value can not be blank.");
+              ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
               continue;
            }
            try {
                i = Double.parseDouble(value);
            }
            catch (NumberFormatException nfe) {
-               System.err.println("\nYou must enter a number.");
+               ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
                i = parseCatchDouble(prompt);
                }
            catch (Throwable te) {
                i = parseCatchDouble(prompt);
-               System.err.println(te.getMessage());
+               ErrorView.display(this.getClass().getName(), te.getMessage());
                }
            break;
            } while (!valid);
@@ -59,30 +63,33 @@ public class DistanceView extends View {
     }
     
     public int parseCatchInt(String prompt) {
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         int i = 0;
         
         do {
-           System.out.println(prompt);
-           value = keyboard.nextLine();
+           this.console.println(prompt);
+           try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
            value = value.trim();
 
            if (value.length() < 1) {
-              System.err.println("\nInvalid value: value can not be blank.");
+              ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
               continue;
            }
            try {
                i = Integer.parseInt(value);
            }
            catch (NumberFormatException nfe) {
-               System.err.println("\nYou must enter a number.");
+               ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
                i = parseCatchInt(prompt);
                }
            catch (Throwable te) {
                i = parseCatchInt(prompt);
-               System.out.println(te.getMessage());
+               ErrorView.display(this.getClass().getName(), te.getMessage());
                }
            break;
            } while (!valid);
@@ -114,7 +121,7 @@ public class DistanceView extends View {
                 }
         } 
         catch (DistanceControlException e) {
-            System.err.println(e.getMessage() + "\n");
+            ErrorView.display(this.getClass().getName(), e.getMessage() + "\n");
             requestContent();
         }     
     }

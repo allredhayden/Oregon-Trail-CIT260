@@ -1,12 +1,6 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.Months;
-import byui.cit260.oregontrail.model.OregonTrail;
-import byui.cit260.oregontrail.model.StartProgram;
-
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
 
 
 public class StartMonthView extends View {
@@ -89,34 +83,37 @@ public class StartMonthView extends View {
             displayChoice();
             break;
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
     
     @Override
     public String getInput() {
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         
         do {
-           System.out.println("\nPlease choose one of the menu options:");
-           value = keyboard.nextLine();
+           this.console.println("\nPlease choose one of the menu options:");
+           try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
            value = value.trim();
 
            if (value.length() < 1) {
-              System.out.println("\nInvalid value: value can not be blank.");
+              ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
               continue;
            }
            try {
                int i = Integer.parseInt(value);
            }
            catch (NumberFormatException nfe) {
-               System.out.println("\nYou must enter a number.");
+               ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
                }
            catch (Throwable te) {
-               System.out.println(te.getMessage());
+               ErrorView.display(this.getClass().getName(), te.getMessage());
                }
            break;
            } while (!valid);
@@ -127,15 +124,15 @@ public class StartMonthView extends View {
     protected void selectMonth(String month) {
         currentMonth = month;
         
-        System.out.println("You've selected " + month + " as your current month.");
+        this.console.println("You've selected " + month + " as your current month.");
         /* Creates instance of GeneralStoreView
          * which displays both next view & menu */
-        GeneralStoreView storeView = new GeneralStoreView();  
+        GeneralStoreView storeView = new GeneralStoreView();
     }
     
     // Displays advantages / disadvantages of each month
     protected void displayChoice() {
-        System.out.println("\n"
+        this.console.println("\n"
                 + "If you choose January, you get this disadvantage."
                 + "\nIf you choose February, you get this disadvantage."
                 + "\nIf you choose March, you get this disadvantage."

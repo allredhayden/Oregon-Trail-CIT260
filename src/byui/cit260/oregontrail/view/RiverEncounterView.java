@@ -37,20 +37,20 @@ public class RiverEncounterView extends View {
             MainMenuView menu = new MainMenuView();
         }
         else {
-            System.out.println("Invalid option. Choose one of the listed options.");
+            ErrorView.display(this.getClass().getName(), "Invalid option. Choose one of the listed options.");
         }
         return false;
     }
     
     protected void caulkWagon() {
-        System.out.println("caulkWagon function successfully called.");
+        this.console.println("caulkWagon function successfully called.");
     }
     
     protected void hireGuide() {
-        System.out.println("hireGuide function successfully called.");
+        this.console.println("hireGuide function successfully called.");
     }
     
     protected void useFerry() {
-        System.out.println("useFerry function successfully called.");
+        this.console.println("useFerry function successfully called.");
     }
 }

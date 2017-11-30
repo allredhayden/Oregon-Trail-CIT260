@@ -31,39 +31,39 @@ public GeneralStoreView() {
         case "1":
             // Request item price, assign to 'price' variable. Tell user item price.
             price = getItemPrice("oxen");
-            System.out.println("The cost of your item is " + price + ".");
+            this.console.println("The cost of your item is " + price + ".");
 
             // Subtract price from money. Tell user total money left after purchase.
             money = money - price;
-            System.out.println("You have " + money + " dollars left.");           
+            this.console.println("You have " + money + " dollars left.");           
             break;
         case "2":
             price = getItemPrice("food");
-            System.out.println("The cost of your item is " + price + ".");
+            this.console.println("The cost of your item is " + price + ".");
 
             money = money - price;
-            System.out.println("You have " + money + " dollars left.");
+            this.console.println("You have " + money + " dollars left.");
             break;            
         case "3":
             price = getItemPrice("clothing");
-            System.out.println("The cost of your item is " + price + ".");
+            this.console.println("The cost of your item is " + price + ".");
 
             money = money - price;
-            System.out.println("You have " + money + " dollars left.");
+            this.console.println("You have " + money + " dollars left.");
             break;            
         case "4":
             price = getItemPrice("ammunition");
-            System.out.println("The cost of your item is " + price + ".");      
+            this.console.println("The cost of your item is " + price + ".");      
 
             money = money - price;
-            System.out.println("You have " + money + " dollars left.");
+            this.console.println("You have " + money + " dollars left.");
             break;
         case "5":
             price = getItemPrice("spareparts");
-            System.out.println("The cost of your item is " + price + ".");      
+            this.console.println("The cost of your item is " + price + ".");      
 
             money = money - price;
-            System.out.println("You have " + money + " dollars left.");
+            this.console.println("You have " + money + " dollars left.");
             break;
         case "6":
             new GameMenuView();
@@ -72,7 +72,7 @@ public GeneralStoreView() {
             new MainMenuView();
             break;            
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
             break;            
         }
         return false;

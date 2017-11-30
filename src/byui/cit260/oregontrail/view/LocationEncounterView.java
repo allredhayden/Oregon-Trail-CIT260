@@ -75,27 +75,27 @@ public class LocationEncounterView extends View {
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
     
     protected void continueOnTrail() {
-        System.out.println("continueOnTrail successfully called.");
+        this.console.println("continueOnTrail successfully called.");
     }
     protected void checkSupplies() {
-        System.out.println("checkSupplies successfully called.");
+        this.console.println("checkSupplies successfully called.");
     }
     protected void lookAtMap() {
-        System.out.println("lookAtMap successfully called.");
+        this.console.println("lookAtMap successfully called.");
     }
     protected void changePace() {
-        System.out.println("changePace successfully called.");
+        this.console.println("changePace successfully called.");
     }
     protected void stopToRest() {
-        System.out.println("stopToRest successfully called.");
+        this.console.println("stopToRest successfully called.");
     }
     protected void attemptToTrade() {
-        System.out.println("attemptToTrade successfully called.");
+        this.console.println("attemptToTrade successfully called.");
     }
 }

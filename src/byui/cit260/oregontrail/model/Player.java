@@ -5,24 +5,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @SuppressWarnings("serial")
-public class Player implements Serializable{
+public class Player implements Serializable {
     
     private String playerName;
     private double bestTime;
-    private ArrayList<Game> games = new ArrayList<Game>();
     
     // Default constructor.
     public Player() {
     }
-    
-    // Get & set "games" array list.
-    public ArrayList<Game> getGames() {
-		return games;
-	}
-
-	public void setGames(ArrayList<Game> games) {
-		this.games = games;
-	}
 	
 	// Get & set playerName.    
     public String getPlayerName() {

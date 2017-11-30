@@ -3,6 +3,7 @@ package byui.cit260.oregontrail.view;
 import byui.cit260.oregontrail.control.MoneyControl;
 import byui.cit260.oregontrail.exceptions.MoneyControlException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -40,14 +41,14 @@ public class MoneyView extends View {
                 score = moneyControl.integrityTest(currentAmount);
             } 
             catch (MoneyControlException e) {
-                System.err.println(e.getMessage());
+                ErrorView.display(this.getClass().getName(), e.getMessage());
             }
             if (score == true) {
-                System.out.println("\nCongratulations. Not only do you actually have " + actualMoney + " silver, but you also get an extra 1000 silver for your honesty.");
+                this.console.println("\nCongratulations. Not only do you actually have " + actualMoney + " silver, but you also get an extra 1000 silver for your honesty.");
                 
                 newCurrencyTotal = GeneralStoreView.getMoney() + 1000;
                 GeneralStoreView.setMoney(newCurrencyTotal);
-                System.out.println("\nYour new monetary total is " + newCurrencyTotal + " silver.");
+                this.console.println("\nYour new monetary total is " + newCurrencyTotal + " silver.");
             }
         }
         
@@ -63,34 +64,37 @@ public class MoneyView extends View {
         double fundsInHand = moneyControl.calcFundsInHand(newCurrencyTotal, numberItemsSold, itemCost);
         double cost = moneyControl.getTotalPurchase();
         
-        System.out.println("\nThe total cost of your attempted purchase is: " + cost + " silver.\nYou'll have " + fundsInHand + " silver left after this purchase.");
+        this.console.println("\nThe total cost of your attempted purchase is: " + cost + " silver.\nYou'll have " + fundsInHand + " silver left after this purchase.");
     }
 
     public double parseCatchDouble(String prompt) {
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         double i = 0;
         
         do {
-           System.out.println(prompt);
-           value = keyboard.nextLine();
+           this.console.println(prompt);
+           try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
            value = value.trim();
 
            if (value.length() < 1) {
-              System.err.println("\nInvalid value: value can not be blank.");
+              ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
               continue;
            }
            try {
                i = Double.parseDouble(value);
            }
            catch (NumberFormatException nfe) {
-               System.err.println("\nYou must enter a number.");
+               ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
                i = parseCatchDouble(prompt);
                }
            catch (Throwable te) {
                i = parseCatchDouble(prompt);
-               System.err.println(te.getMessage());
+               ErrorView.display(this.getClass().getName(), te.getMessage());
                }
            break;
            } while (!valid);
@@ -98,30 +102,33 @@ public class MoneyView extends View {
     }
     
     public int parseCatchInt(String prompt) {
-        Scanner keyboard = new Scanner(System.in);
         String value = "";
         boolean valid = false;
         int i = 0;
         
         do {
-           System.out.println(prompt);
-           value = keyboard.nextLine();
+           this.console.println(prompt);
+           try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
            value = value.trim();
 
            if (value.length() < 1) {
-              System.err.println("\nInvalid value: value can not be blank.");
+              ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
               continue;
            }
            try {
                i = Integer.parseInt(value);
            }
            catch (NumberFormatException nfe) {
-               System.err.println("\nYou must enter a number.");
+               ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
                i = parseCatchInt(prompt);
                }
            catch (Throwable te) {
                i = parseCatchInt(prompt);
-               System.out.println(te.getMessage());
+               ErrorView.display(this.getClass().getName(), te.getMessage());
                }
            break;
            } while (!valid);

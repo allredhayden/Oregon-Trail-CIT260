@@ -1,8 +1,13 @@
 package byui.cit260.oregontrail.control;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import byui.cit260.oregontrail.view.*;
+import byui.cit260.oregontrail.exceptions.GameControlException;
 import byui.cit260.oregontrail.exceptions.MapControlException;
 import byui.cit260.oregontrail.model.*;
 import java.awt.Point;
@@ -13,37 +18,57 @@ public class GameControl implements Serializable
 {
     private static final long serialVersionUID = 1L; 
     private static Game game;
-    private static Map map;
+/*    private static Map map;
     private static InventoryItem[] gameItems;
     private static Location[][] gameLocations;
     private static Scene[] gameScenes;
     private static Question[] gameQuestions;
     private static Actor[] actors = new Actor[10];
+    private static SetupView setup;
+    private static GeneralStoreView storeView; */
+    
+    public GameControl() {
+        // Default constructor.
+    }
     
     MapControl mapControl = new MapControl();
 
-    public int createNewGame() throws MapControlException {
+    public Game createNewGame() throws MapControlException {
         
         // Create new game.
         game = new Game();
         
-        // Create player and store in Game class (model).       
-        game.setPlayer(createPlayer(StartProgramView.getPlayerName()));
+        // Get player name.
+        StartProgram program = new StartProgram();
+        String playerName = program.getPlayerName();
         
-        // Create player actors, request occupation & name.
+        // Create new player.
+        createPlayer(playerName);
+        
+        // Create player actors
         Occupations.createActors("Default1", "Default2", "Default3");
-        SetupView.requestOccupation();
-        SetupView.requestName();      
+        
+        game.setSetup(new SetupView());
+        SetupView setup = game.getSetup();
 
+        // Request & set player occupation.
+        String occupation = setup.requestOccupation();
+        game.setPlayerOccupation(occupation);
+
+        setup.requestNames();
+        
         // Store actor array in Game class (model).
-        game.setActors(Occupations.getActors());
+        // game.setActors(occ.getActors());
         
         // Create NPC actor array & item array, store in Game class (model).
-        gameItems = createItems();
-        game.setInventory(gameItems);
+        game.setGameItems(createItems());
+        InventoryItem[] gameItems = game.getGameItems();
+        
         game.setNPCActors(createActors());
         
         // Create new map and store in Game class (model).
+        MapControl controlMap = new MapControl();
+        Map map = controlMap.createMap(10, 10, gameItems);
         if (mapControl.createMap(10, 10, gameItems) == null) {
             throw new MapControlException("Failed to create new map.");
         }
@@ -51,30 +76,38 @@ public class GameControl implements Serializable
             game.setMap(map);             
         }
         
-        SetupView.requestMonth();
+        OregonTrail.setCurrentGame(game);
+        
+        setup.requestMonth();
         
         // Store new game in MainMenu (model).
         MainMenu.setGame(game);
         
         System.out.println("\nA new game has been created.\n");
         
-        return 0;
+        return game;
     }
     
      public static Player createPlayer(String name) {
-        if (name == null) {
+        
+         if (name == null) {
             return null;
         }
 
-        Player playerOne = new Player(); // Create player object.
-        playerOne.setPlayerName(name); // Set player name to 'name'.
+        Player playerOne = new Player();
+        playerOne.setPlayerName(name); // Assign name to player object.
+        
         game.setPlayer(playerOne);
+        game.getPlayer().setPlayerName(name); // Assign name to playerName variable in game class.
+        
         OregonTrail.setPlayer(playerOne);
         
         return playerOne; // Return player object.
     }
     
     public static Actor[] createActors() {
+
+        Actor[] actors = new Actor[10];
 
         // String occupation, String name, String description, Point coordinates, double money, double health
         actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100);
@@ -88,12 +121,13 @@ public class GameControl implements Serializable
         actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100);
         actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100);
         
+        game.setPcActors(actors);
         return actors;
     }
     
-    public static Actor[] getActors() {
+ /*   public static Actor[] getActors() {
         return actors;
-    }
+    } */
     
     public static void visitCalc() {
         
@@ -101,7 +135,7 @@ public class GameControl implements Serializable
         MinVisitor minVisitor = new MinVisitor();
         MaxVisitor maxVisitor = new MaxVisitor();
             
-        for (Actor person : getActors()) {
+        for (Actor person : game.getPcActors()) {
             sumVisitor.visitElement(person);
             minVisitor.visitElement(person);
             maxVisitor.visitElement(person);
@@ -136,7 +170,7 @@ public class GameControl implements Serializable
        InventoryItem saw = new InventoryItem("saw", 200);       
        InventoryItem nails = new InventoryItem("nails", 200);
        
-       lumber = items[ItemType.lumber.ordinal()];
+      /* lumber = items[ItemType.lumber.ordinal()];
        ore = items[ItemType.ore.ordinal()];
        grain = items[ItemType.grain.ordinal()];
        legume = items[ItemType.legume.ordinal()];
@@ -150,12 +184,28 @@ public class GameControl implements Serializable
        shovel = items[ItemType.shovel.ordinal()];
        sickle = items[ItemType.sickle.ordinal()];
        saw = items[ItemType.saw.ordinal()];
-       nails = items[ItemType.nails.ordinal()];
+       nails = items[ItemType.nails.ordinal()]; */
+       
+       items[ItemType.lumber.ordinal()] = lumber;
+       items[ItemType.ore.ordinal()] = ore;
+       items[ItemType.grain.ordinal()] = grain;
+       items[ItemType.legume.ordinal()] = legume;
+       items[ItemType.oil.ordinal()] = oil;
+       items[ItemType.water.ordinal()] = water;
+       items[ItemType.honey.ordinal()] = honey;
+       items[ItemType.salt.ordinal()] = salt;
+       items[ItemType.axe.ordinal()] = axe;
+       items[ItemType.hammer.ordinal()] = hammer;
+       items[ItemType.drill.ordinal()] = drill;
+       items[ItemType.shovel.ordinal()] = shovel;
+       items[ItemType.sickle.ordinal()] = sickle;
+       items[ItemType.saw.ordinal()] = saw;
+       items[ItemType.nails.ordinal()] = nails;
        
        return items;
     }
     
-    
+   
     public static Game getGame() {
         return game;
     }
@@ -164,6 +214,7 @@ public class GameControl implements Serializable
         game = gameSet;
     }
 
+    /* 
     public static Map getMap() {
         return map;
     }
@@ -194,6 +245,35 @@ public class GameControl implements Serializable
 
     public static void setGameQuestions(Question[] gameQuestionsSet) {
         gameQuestions = gameQuestionsSet;
+    } */
+
+    // Stub function
+    public static void saveGame(Game currentGame, String filePath) throws GameControlException {
+        
+        try (FileOutputStream fops = new FileOutputStream (filePath)) {
+            ObjectOutputStream output = new ObjectOutputStream(fops);
+            
+            output.writeObject(currentGame);
+        }
+        catch (Exception e) {
+            throw new GameControlException(e.getMessage());
+        }
     }
-    
+
+    public static void getSavedGame(String filePath) throws GameControlException {
+
+        Game game = null;
+        
+        try (FileInputStream fips = new FileInputStream(filePath)) {
+            ObjectInputStream input = new ObjectInputStream(fips);
+            
+            game = (Game) input.readObject();
+        }
+        catch (Exception e) {
+            throw new GameControlException(e.getMessage());
+        }
+        
+        // Close the output file.
+        OregonTrail.setCurrentGame(game);
+    }    
 }

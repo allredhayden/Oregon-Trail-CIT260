@@ -1,17 +1,24 @@
 package byui.cit260.oregontrail.view;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+
+import byui.cit260.oregontrail.model.OregonTrail;
 
 public abstract class View implements ViewInterface {
     
     protected String displayMessage;
+    protected final BufferedReader keyboard = OregonTrail.getInFile();
+    protected final PrintWriter console = OregonTrail.getOutFile();
     
     public View() {
     }
     
     public View(String message) {
         this.displayMessage = message;
-        System.out.println(message);
+        this.console.println(message);
     }
     
     @Override
@@ -29,23 +36,30 @@ public abstract class View implements ViewInterface {
         } while (!done);
     }
     
+    // Remove do try for Team Assignment (Week 12).
     @Override
     public String getInput() {
-       Scanner keyboard = new Scanner(System.in);
        String value = "";
        boolean valid = false;
        
-       do {
-          System.out.println("\nPlease choose one of the menu options:");
-          value = keyboard.nextLine();
-          value = value.trim();
-
-          if (value.length() < 1) {
-             System.out.println("\nInvalid value: value can not be blank.");
-             continue;
-          }
-          break;
-       } while (!valid);
+       this.console.println("\nHit enter to submit your response:");
+       
+       while (!valid) {
+           try {
+               value = keyboard.readLine();
+               value = value.trim();
+               
+               if (value.length() < 1) {
+                   ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank.");
+                   continue;
+               }
+               break;
+           }
+           catch (IOException e) {
+               // e.printStackTrace(); // Commented out for Team Assignment (Week 12)
+               ErrorView.display(this.getClass().getName(), "\nError reading input: " + e.getMessage());
+           }           
+       }
        return value;
     }
     

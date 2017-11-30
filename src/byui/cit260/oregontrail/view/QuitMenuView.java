@@ -26,12 +26,12 @@ public class QuitMenuView extends View {
         switch (choice)
         {
         case "1":
-            System.out.print("\nProgram is terminated!\n");
+            this.console.print("\nProgram is terminated!\n");
             break;
         case "2":
             MainMenuView mainMenuView = new MainMenuView();
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }

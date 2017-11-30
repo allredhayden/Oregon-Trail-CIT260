@@ -39,12 +39,12 @@ public class Occupations implements Serializable
         this.actorChoice = actorChoice;
     }
     
-    public static List<Actor> getActors()
+    public List<Actor> getActors()
     {
         return actors;
     }
     
-    public static List<String> getOccupationPrompt() {
+    public List<String> getOccupationPrompt() {
         return occupationPrompt;
     }
 }

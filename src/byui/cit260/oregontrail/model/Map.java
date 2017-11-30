@@ -17,7 +17,7 @@ public class Map implements Serializable {
     private int columnCount;
     private int currentRow;
     private int currentColumn;
-    private static Location[][] locations; 
+    private Location[][] locations; 
 
     public Map() {
     }
@@ -62,7 +62,7 @@ public class Map implements Serializable {
         this.currentColumn = currentColumn;
     }
 
-    public static Location[][] getLocations() {
+    public Location[][] getLocations() {
         return locations;
     }
 

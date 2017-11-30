@@ -66,7 +66,7 @@ public class BuildView extends View {
             MainMenuView mainMenuView = new MainMenuView();            
         }
         else {
-            System.err.println("Invalid option. Choose one of the listed options.");            
+            ErrorView.display(this.getClass().getName(), "Invalid option. Choose one of the listed options.");            
         }
         return success;
     }
@@ -74,19 +74,19 @@ public class BuildView extends View {
     
     protected void buildCrate(int woodCount) {
         buildObject("Crate", woodCount);
-        System.out.println("throwObject successfully called.");
+        this.console.println("throwObject successfully called.");
     }
     protected void buildWagon(int woodCount) {
         buildObject("Wagon", woodCount);
-        System.out.println("swingObject successfully called.");
+        this.console.println("swingObject successfully called.");
     }
     protected void buildWheel(int woodCount) {
         buildObject("Wheel", woodCount);
-        System.out.println("punchOpponent successfully called.");
+        this.console.println("punchOpponent successfully called.");
     }
     protected void buildFire(int woodCount) {
         buildObject("Fire", woodCount);
-        System.out.println("kickOpponent successfully called.");
+        this.console.println("kickOpponent successfully called.");
     }
     
     protected void buildObject(String buildChoice, int numWood) {
@@ -99,15 +99,15 @@ public class BuildView extends View {
                     woodCount-=1;
                     requiredWood-=1;
                     if (numWood%4 == 0) {
-                        System.out.println("You have " + numWood + " wood left.");
+                        this.console.println("You have " + numWood + " wood left.");
                         }
                     }
-                System.out.println(buildChoice + " is " + i + "% complete.");
+                this.console.println(buildChoice + " is " + i + "% complete.");
                 }
-            System.out.println("\nProject completed. You have now built a " + buildChoice);
+            this.console.println("\nProject completed. You have now built a " + buildChoice);
             }
         else {
-            System.err.println("Not enough wood. You have " + woodCount + " wood left. "
+            ErrorView.display(this.getClass().getName(), "Not enough wood. You have " + woodCount + " wood left. "
                     + "You need " + requiredWood + " to construct a " + buildChoice + ".");
         }
         this.display();

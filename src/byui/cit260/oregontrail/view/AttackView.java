@@ -66,21 +66,21 @@ public class AttackView extends View
         case "Z":
             MainMenuView mainMenuView = new MainMenuView();
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
     
-    private static void throwObject(String item, String opponent) {
-        System.out.println(item + " has successfully been thrown at " + opponent + ".");
+    private void throwObject(String item, String opponent) {
+        this.console.println(item + " has successfully been thrown at " + opponent + ".");
     }
-    private static void swingObject(String item, String opponent) {
-        System.out.println(item + " has successfully been swung at " + opponent + ".");
+    private void swingObject(String item, String opponent) {
+        this.console.println(item + " has successfully been swung at " + opponent + ".");
     }
-    private static void punchOpponent(String opponent) {
-        System.out.println(opponent + " has successfully been punched.");
+    private void punchOpponent(String opponent) {
+        this.console.println(opponent + " has successfully been punched.");
     }
-    private static void kickOpponent(String opponent) {
-        System.out.println(opponent + " has successfully been kicked.");
+    private void kickOpponent(String opponent) {
+        this.console.println(opponent + " has successfully been kicked.");
     }
 }

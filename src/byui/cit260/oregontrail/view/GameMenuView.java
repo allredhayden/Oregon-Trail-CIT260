@@ -2,10 +2,9 @@ package byui.cit260.oregontrail.view;
 
 import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.MainMenu;
+import byui.cit260.oregontrail.model.OregonTrail;
 import byui.cit260.oregontrail.model.Game;
 import byui.cit260.oregontrail.model.Location;
-import byui.cit260.oregontrail.model.Map;
-import byui.cit260.oregontrail.model.Scene;
 import byui.cit260.oregontrail.control.ControlYokes;
 import byui.cit260.oregontrail.control.DistanceControl;
 
@@ -51,96 +50,96 @@ public class GameMenuView extends View {
             displayMap();
             break;
         case "I":
-            System.out.print("\nView list of items option selected.\n");
+            this.console.print("\nView list of items option selected.\n");
             break;
         case "A":
-            System.out.print("\nView list of actors option selected.\n");
+            this.console.print("\nView list of actors option selected.\n");
             break;
         case "S":
-            System.out.print("\nView ship status option selected.\n");
+            this.console.print("\nView ship status option selected.\n");
             break;
         case "L":
-            System.out.print("\nView contents of location selected.\n");
+            this.console.print("\nView contents of location selected.\n");
             break;
         case "M":
-            System.out.print("\nMove person to new location option selected.\n");
+            this.console.print("\nMove person to new location option selected.\n");
             break;
         case "E":
-            System.out.print("\nEstimate the resource needed option selected.\n");
+            this.console.print("\nEstimate the resource needed option selected.\n");
             break;
         case "B":
-            System.out.print("\nDesign barrels option selected.\n");
+            this.console.print("\nDesign barrels option selected.\n");
             break;
         case "C":
-            System.out.print("\nConstruct tools option selected.\n");
+            this.console.print("\nConstruct tools option selected.\n");
             break;
         case "R":
-            System.out.print("\nHarvest resource option selected.\n");
+            this.console.print("\nHarvest resource option selected.\n");
             break;
         case "D":
-            System.out.print("\nDeliver resource option selected.\n");
+            this.console.print("\nDeliver resource option selected.\n");
             break;
         case "W":
-            System.out.print("\nWork on ship option selected.\n");
+            this.console.print("\nWork on ship option selected.\n");
             break;
         case "P":
-            System.out.print("\nPack ship option selected.\n");
+            this.console.print("\nPack ship option selected.\n");
             break;
         case "J":
-            System.out.print("\nLaunch ship option selected.\n");
+            this.console.print("\nLaunch ship option selected.\n");
             break;
         case "H":
-            System.out.print("\nHelp option selected.\n");
+            this.console.print("\nHelp option selected.\n");
             break;
         case "T":
-            TempMenu temp = new TempMenu();
+            new TempMenu();
             break;
         case "X":
             GameControl.visitCalc();
             break;
         case "1":
-            ControlYokes yoke = new ControlYokes();
+            new ControlYokes();
             break;
         case "2":
             DistanceControl distance = new DistanceControl();
             distance.distanceTraveled();
             break;            
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
             break;
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }
     
     public void displayMap() {
-        Game game = MainMenu.getGame();
-        Location[][] location = Map.getLocations();
+        Game game = OregonTrail.getCurrentGame();
+        Location[][] location = Game.map.getLocations();
         
-        System.out.println("              Land of the Bountiful               ");
+        this.console.println("              Land of the Bountiful               ");
         
         // Rows
         for (int i = 0; i < location.length + 1; i++) {
             
             if (i == 0) {
-                System.out.print("    ");
+                this.console.print("    ");
             }
             for (int x = 0; x <= 9; x++) {
-                System.out.print(x + 1 + "    ");
+                this.console.print(x + 1 + "    ");
             }
-            System.out.println("");
+            this.console.println("");
             
             if (i != 0) {
-                System.out.print(i);
+                this.console.print(i);
                 
                 for (int x = 0; x <= 9; x++) {
-                    System.out.println(i + " : " + x);
-                    System.out.println(location[i-1][x]);                   
-                    System.out.print(location[i-1][x].getScene().getSymbol() + "|    ");
+                    this.console.println(i + " : " + x);
+                    this.console.println(location[i-1][x]);                   
+                    this.console.print(location[i-1][x].getScene().getSymbol() + "|    ");
                 }
             }
         }
-        System.out.println("\n--------------------------------------------------");
+        this.console.println("\n--------------------------------------------------");
     }
 }

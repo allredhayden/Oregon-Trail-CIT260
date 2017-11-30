@@ -29,26 +29,26 @@ public class HelpMenuView extends View
         
         switch (choice) {
         case "G":
-            System.out.print("\nThe goal of the game is to make it to Oregon.\n");
+            this.console.print("\nThe goal of the game is to make it to Oregon.\n");
             break;
         case "M":
-            System.out.println("To move, go to the map and select desired coordinates for your character.");
+            this.console.println("To move, go to the map and select desired coordinates for your character.");
             break;
         case "E":
-            System.out.println("Your estimated amount of resources is: ______"); 
+            this.console.println("Your estimated amount of resources is: ______"); 
             break;
         case "H":
-            System.out.println("The way to harvest resources is: ______");
+            this.console.println("The way to harvest resources is: ______");
             break;
         case "D":
-            System.out.println("The way to deliver resources to a warehouse is: ______");
+            this.console.println("The way to deliver resources to a warehouse is: ______");
             break;
         case "Z":
-            System.out.println("Help menu has been called.");
+            this.console.println("Help menu has been called.");
             MainMenuView menu = new MainMenuView();
             break;
         default:
-            System.out.println("\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
         }
         return false;
     }

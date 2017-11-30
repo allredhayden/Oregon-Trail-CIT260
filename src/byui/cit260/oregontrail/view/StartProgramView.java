@@ -17,17 +17,12 @@ public class StartProgramView extends View
     static InputReader reader = new InputReader();
     
     public StartProgramView() {
-        displayWelcome();
-        displayBanner();
-        
-        String name = requestPlayerName();
-        doAction(name);
     }
     
     @Override
     public boolean doAction(String name) {
         if (name.length() < 2) {
-            System.out.println("\nInvalid players name: "
+            ErrorView.display(this.getClass().getName(), "\nInvalid players name: "
                     + "The name must be greater than one character in length");
             return false;
         }
@@ -37,7 +32,7 @@ public class StartProgramView extends View
     }
     
     private void displayNextView() {
-        System.out.println("\n======================================"
+        this.console.println("\n======================================"
                           + "\n Welcome to the game " + playerName
                           + "\n We hope you have a lot of fun!"
                           + "\n======================================"
@@ -45,20 +40,24 @@ public class StartProgramView extends View
        MainMenuView mainMenuView = new MainMenuView();
     }
     
-    public static String requestPlayerName() {
-        Scanner keyboard = new Scanner(System.in);
+    public String requestPlayerName() {
         String value = "";
         boolean valid = false;
         
         while (!valid) {
-            System.out.println("\n");
+            this.console.println("\n");
             promptMessage();
         
-        value = keyboard.nextLine();
+        try {
+            value = keyboard.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         value = value.trim();
         
         if (value.length() < 1) {
-            System.out.println("\nInvalid value: value can not be blank");
+            ErrorView.display(this.getClass().getName(), "\nInvalid value: value can not be blank");
             continue;
             }
         
@@ -72,16 +71,16 @@ public class StartProgramView extends View
         return playerName;
     }
     
-    public static void promptMessage() {
-        System.out.println("Please enter your name:");
+    public void promptMessage() {
+        this.console.println("Please enter your name:");
     }
     
-    public static void displayWelcome() {
-        System.out.println("Welcome to the Oregon Trail.");
+    public void displayWelcome() {
+        this.console.println("Welcome to the Oregon Trail.");
     }
     
-    public static void displayBanner() {
-        System.out.println(
+    public void displayBanner() {
+        this.console.println(
                   "\n********************************************************"
                 + "\n                                                        "
                 + "\n This is the game of Curious Workmanship                "
