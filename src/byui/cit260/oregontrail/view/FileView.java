@@ -36,7 +36,7 @@ public class FileView extends View {
             writeItemReport(requestFileLocation());
             break;
         case "2":
-            // writeMapDescription(requestFileLocation());
+            writeMapDescription(requestFileLocation());
             break;
         case "3":
              writePartyNames(requestFileLocation());
@@ -95,8 +95,30 @@ public class FileView extends View {
             ErrorView.display(this.getClass().getName(), ex.getMessage());
         }
         
+        this.console.println("\nReport successfully written to: " + path);
+    }
+        
+         public void writeMapDescription(String path) {
+        Game game = OregonTrail.getCurrentGame();
+        Scene[] scene = game.getGameScenes();
+        
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("\n\n       Item List       ");
+            out.printf("%n%-14s%-20s", "Index", "Description");
+            out.printf("%n%-14s%-20s", "------", "---------------");
+            for (int i = 0; i < scene.length - 1; i++) {
+                String description = scene[i].getDescription();
+                out.printf("%n%-14s%-40s", "Scene #" + (i+1) + ": ", description);
+                out.println("\n");
+            }
+        } catch (IOException ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
+        
         this.console.println("\nReport successfully written to: " + path); 
+    } 
     }
 
-}
+
+
 
