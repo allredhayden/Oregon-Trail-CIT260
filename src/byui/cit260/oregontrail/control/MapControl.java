@@ -61,7 +61,7 @@ public class MapControl {
         return locations;
     }
     
-    private static Scene[] createScenes() {
+    public Scene[] createScenes() {
         
         Scene[] regScene = new Scene[] { new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene() };
         
@@ -145,50 +145,50 @@ public class MapControl {
         return regScene;
     }
     
-    private static Question[] createQuestions() {
+    public Question[] createQuestions() {
         Question[] questions = new Question[7];
         
         Question question1 = new Question();
         question1.setQuestion("Find ore question.");
         question1.setAnswer("Find ore answer.");
         question1.setPoints(10);
-        question1 = questions[QuestionType.findOre.ordinal()];
+        questions[QuestionType.findOre.ordinal()] = question1;
         
         Question question2 = new Question();
         question2.setQuestion("Build ship question.");
         question2.setAnswer("Build ship answer.");
         question2.setPoints(10);
-        question2 = questions[QuestionType.buildShip.ordinal()];
+        questions[QuestionType.buildShip.ordinal()] = question2;
 
         Question question3 = new Question();
         question3.setQuestion("Find water question.");
         question3.setAnswer("Find water answer.");
         question3.setPoints(10);
-        question3 = questions[QuestionType.findWater.ordinal()];
+        questions[QuestionType.findWater.ordinal()] = question3;
 
         Question question4 = new Question();
         question4.setQuestion("Faithful question.");
         question4.setAnswer("Faithful answer.");
         question4.setPoints(10);
-        question4 = questions[QuestionType.faithful.ordinal()];
+        questions[QuestionType.faithful.ordinal()] = question4;
 
         Question question5 = new Question();
         question5.setQuestion("Number of travelers question.");
         question5.setAnswer("Number of travelers answer.");
         question5.setPoints(10);
-        question5 = questions[QuestionType.numOfTravelers.ordinal()];
+        questions[QuestionType.numOfTravelers.ordinal()] = question5;
 
         Question question6 = new Question();
         question6.setQuestion("Ship done question.");
         question6.setAnswer("Ship done answer.");
         question6.setPoints(10);
-        question6 = questions[QuestionType.shipDone.ordinal()];
+        questions[QuestionType.shipDone.ordinal()] = question6;
 
         Question question7 = new Question();
         question7.setQuestion("Find honey question.");
         question7.setAnswer("Find honey answer.");
         question7.setPoints(10);
-        question7 = questions[QuestionType.findHoney.ordinal()];     
+        questions[QuestionType.findHoney.ordinal()] = question7;     
         
         
         System.out.println("\ncreateQuestions function called successfully.");

@@ -5,37 +5,44 @@ import java.io.IOException;
 
 public class StartMonthView extends View {
     
-    private static String currentMonth = null;
+   private static String currentMonth = null;
+   private static String prompt =
+           "\n************** The Oregon Trail ***************"
+                   +"\n     Choose a month to begin your journey:    *"
+                   +"\n     1. January                               *"
+                   +"\n     2. February                              *"
+                   +"\n     3. March                                 *"
+                   +"\n     4. April                                 *"
+                   +"\n     5. May                                   *"
+                   +"\n     6. June                                  *"
+                   +"\n     7. July                                  *"
+                   +"\n     8. August                                *"
+                   +"\n     9. September                             *"
+                   +"\n     10. October                              *"
+                   +"\n     11. November                             *"
+                   +"\n     12. December                             *"               
+                   +"\n     13. When should I leave?                 *"
+                   +"\n     What is your choice?                     *"
+                   +"\n***********************************************";
 
-    public static String getCurrentMonth() {
-        return currentMonth;
-    }
-
-    public static void setCurrentMonth(String currentMonth) {
-        StartMonthView.currentMonth = currentMonth;
-    }
-    
    public StartMonthView() {
-       super(
-       "\n************** The Oregon Trail ***************"
-        +"\n     Choose a month to begin your journey:    *"
-        +"\n     1. January                               *"
-        +"\n     2. February                              *"
-        +"\n     3. March                                 *"
-        +"\n     4. April                                 *"
-        +"\n     5. May                                   *"
-        +"\n     6. June                                  *"
-        +"\n     7. July                                  *"
-        +"\n     8. August                                *"
-        +"\n     9. September                             *"
-        +"\n     10. October                              *"
-        +"\n     11. November                             *"
-        +"\n     12. December                             *"               
-        +"\n     13. When should I leave?                 *"
-        +"\n     What is your choice?                     *"
-        +"\n***********************************************");
-       super.display();
+       super();
     }
+   
+   @Override
+   public void display() {
+       System.out.println(prompt);
+       boolean done = false;
+       do {
+           // prompt for and get players name
+           String value = this.getInput();
+           if (value.toUpperCase().equals("Q")) {
+               return;
+           }
+           
+           done = this.doAction(value);
+       } while (!done);
+   }
     
     @Override
     // Handle various input options
@@ -45,45 +52,45 @@ public class StartMonthView extends View {
         switch (choice) {
         case "1": // create and start a new game
             selectMonth("January");
-            break;
+            return true;
         case "2":
             selectMonth("February");
-            break;
+            return true;
         case "3":
             selectMonth("March");
-            break;
+            return true;
         case "4":
             selectMonth("April");
-            break;
+            return true;
         case "5":
             selectMonth("May");
-            break;
+            return true;
         case "6":
             selectMonth("June");
-            break;
+            return true;
         case "7":
             selectMonth("July");
-            break;
+            return true;
         case "8":
             selectMonth("August");
-            break;
+            return true;
         case "9":
             selectMonth("September");
-            break;
+            return true;
         case "10":
             selectMonth("October");
-            break;
+            return true;
         case "11":
             selectMonth("November");
-            break;
+            return true;
         case "12":
             selectMonth("December");
-            break;            
+            return true;
         case "13":
             displayChoice();
             break;
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }
@@ -123,11 +130,7 @@ public class StartMonthView extends View {
     // Selects current month, goes to next view (GeneralStoreView)
     protected void selectMonth(String month) {
         currentMonth = month;
-        
         this.console.println("You've selected " + month + " as your current month.");
-        /* Creates instance of GeneralStoreView
-         * which displays both next view & menu */
-        GeneralStoreView storeView = new GeneralStoreView();
     }
     
     // Displays advantages / disadvantages of each month
@@ -146,4 +149,12 @@ public class StartMonthView extends View {
                 + "\nIf you choose November, you get this disadvantage."                
                 + "\nIf you choose December, you get this disadvantage.");
     }
+    
+    public String getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(String currentMonth) {
+        StartMonthView.currentMonth = currentMonth;
+    }    
 }

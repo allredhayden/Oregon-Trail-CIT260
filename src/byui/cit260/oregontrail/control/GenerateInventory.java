@@ -6,6 +6,9 @@
 package byui.cit260.oregontrail.control;
 
 import byui.cit260.oregontrail.model.CreatureInventory;
+import byui.cit260.oregontrail.model.Game;
+import byui.cit260.oregontrail.model.OregonTrail;
+
 import java.util.Random;
 
 public class GenerateInventory {
@@ -15,7 +18,7 @@ public class GenerateInventory {
     String creatureItem3;
     String creatureItem4; 
     String creatureItem5;
-    
+
     public GenerateInventory() {
        createInventory();
     }
@@ -77,6 +80,9 @@ public class GenerateInventory {
         creatureItem3 = inventory.getFinalItem3();        
         creatureItem4 = inventory.getFinalItem4();    
         creatureItem5 = inventory.getFinalItem5();
+        
+        Game game = OregonTrail.getCurrentGame();
+        game.setItems(itemList);
     }
     
     // Get items.

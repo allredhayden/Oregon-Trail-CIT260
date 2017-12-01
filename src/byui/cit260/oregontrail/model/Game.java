@@ -21,7 +21,9 @@ public class Game implements Serializable
     private Question[] gameQuestions;
     private SetupView setup;
     private GeneralStoreView storeView;
-    private String playerOccupation;
+    private String playerOccupationName;
+    private Occupations occupation;
+    private String[] items;
     
     public Game() {
         // Default constructor
@@ -140,12 +142,38 @@ public class Game implements Serializable
     public  void setPcActors(Actor[] pcActors) {
         this.pcActors = pcActors;
     }
-
-    public  String getPlayerOccupation() {
-        return playerOccupation;
+    
+    public String[] getItems() {
+        return items;
     }
 
-    public  void setPlayerOccupation(String playerOccupation) {
-        this.playerOccupation = playerOccupation;
-    }    
+    public void setItems(String[] items) {
+        this.items = items;
+    }
+
+    public String getPlayerOccupationName() {
+        return playerOccupationName;
+    }
+
+    public void setPlayerOccupationName(String playerOccupationName) {
+        this.playerOccupationName = playerOccupationName;
+    }
+
+    public Occupations getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(Occupations occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(String currentMonth) {
+        this.currentMonth = currentMonth;
+    }
+
+    private String currentMonth;    
 }

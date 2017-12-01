@@ -18,14 +18,6 @@ public class GameControl implements Serializable
 {
     private static final long serialVersionUID = 1L; 
     private static Game game;
-/*    private static Map map;
-    private static InventoryItem[] gameItems;
-    private static Location[][] gameLocations;
-    private static Scene[] gameScenes;
-    private static Question[] gameQuestions;
-    private static Actor[] actors = new Actor[10];
-    private static SetupView setup;
-    private static GeneralStoreView storeView; */
     
     public GameControl() {
         // Default constructor.
@@ -52,13 +44,15 @@ public class GameControl implements Serializable
         SetupView setup = game.getSetup();
 
         // Request & set player occupation.
-        String occupation = setup.requestOccupation();
-        game.setPlayerOccupation(occupation);
+        String occupationName = setup.requestOccupation();
+        game.setPlayerOccupationName(occupationName);
 
+        // Request party member names.
         setup.requestNames();
         
-        // Store actor array in Game class (model).
-        // game.setActors(occ.getActors());
+        // Assign player occupation object to current game.
+        Occupations occupations = setup.getPlayerOccupation();
+        game.setOccupation(occupations);
         
         // Create NPC actor array & item array, store in Game class (model).
         game.setGameItems(createItems());
@@ -76,14 +70,29 @@ public class GameControl implements Serializable
             game.setMap(map);             
         }
         
-        OregonTrail.setCurrentGame(game);
+        // Create scenes, assign to current game.
+        game.setGameScenes(mapControl.createScenes());
         
-        setup.requestMonth();
+        // Create questions, assign to current game.
+        Question[] question = controlMap.createQuestions();
+        game.setGameQuestions(question);
+        
+        // Request month, assign to current game.
+        StartMonthView months = new StartMonthView();
+        months.display();
+        
+        String currentMonth = months.getCurrentMonth();
+        game.setCurrentMonth(currentMonth);
         
         // Store new game in MainMenu (model).
         MainMenu.setGame(game);
         
+        // Update current game.
+        OregonTrail.setCurrentGame(game);
+        
         System.out.println("\nA new game has been created.\n");
+
+        new GeneralStoreView();
         
         return game;
     }
@@ -124,10 +133,6 @@ public class GameControl implements Serializable
         game.setPcActors(actors);
         return actors;
     }
-    
- /*   public static Actor[] getActors() {
-        return actors;
-    } */
     
     public static void visitCalc() {
         
@@ -204,7 +209,6 @@ public class GameControl implements Serializable
        
        return items;
     }
-    
    
     public static Game getGame() {
         return game;
@@ -213,39 +217,6 @@ public class GameControl implements Serializable
     public static void setGame(Game gameSet) {
         game = gameSet;
     }
-
-    /* 
-    public static Map getMap() {
-        return map;
-    }
-
-    public static void setMap(Map mapSet) {
-        map = mapSet;
-    }
-
-    public static InventoryItem[] getGameItems() {
-        return gameItems;
-    }
-
-    public static void setGameItems(InventoryItem[] gameItemsSet) {
-        gameItems = gameItemsSet;
-    }
-
-    public static Scene[] getGameScenes() {
-        return gameScenes;
-    }
-
-    public static void setGameScenes(Scene[] gameScenesSet) {
-        gameScenes = gameScenesSet;
-    }
-
-    public static Question[] getGameQuestions() {
-        return gameQuestions;
-    }
-
-    public static void setGameQuestions(Question[] gameQuestionsSet) {
-        gameQuestions = gameQuestionsSet;
-    } */
 
     // Stub function
     public static void saveGame(Game currentGame, String filePath) throws GameControlException {

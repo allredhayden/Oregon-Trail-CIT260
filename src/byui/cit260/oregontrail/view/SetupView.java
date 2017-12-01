@@ -10,7 +10,7 @@ import byui.cit260.oregontrail.model.*;
 public class SetupView extends View implements Serializable
 {   
     static Occupations playerOccupation = new Occupations();
-    Months monthList = new Months();
+    // Months monthList = new Months();
 
     public SetupView() {
 
@@ -70,23 +70,6 @@ public class SetupView extends View implements Serializable
          * to change the name of corresponding actor.
          */
     }
-
-    public void requestMonth() {
-        StartMonthView months = new StartMonthView();
-        
-        String value = null;
-        try {
-            value = keyboard.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        value.trim();
-        
-        months.setCurrentMonth(value);
-        this.console.println("The current month is: " + months.getCurrentMonth());
-//        String name = InputReader.readString();
-//        months.setCurrentMonth(name);
-    }
     
     private String getHelpMenuOption() {
         
@@ -114,7 +97,7 @@ public class SetupView extends View implements Serializable
         return value;
     }
     
-    public static Occupations getPlayerOccupation() {
+    public Occupations getPlayerOccupation() {
         return playerOccupation;
     }
 }
