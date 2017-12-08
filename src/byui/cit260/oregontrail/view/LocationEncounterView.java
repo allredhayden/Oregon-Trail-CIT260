@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package byui.cit260.oregontrail.view;
-
-import java.util.Scanner;
 
 public class LocationEncounterView extends View {
     
@@ -73,9 +66,9 @@ public class LocationEncounterView extends View {
             attemptToTrade();
             break;
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }

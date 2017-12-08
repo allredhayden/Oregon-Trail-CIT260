@@ -7,14 +7,14 @@ public class GeneralStoreView extends View {
 
 public GeneralStoreView() {
        super(
-               "\n**** The Oregon Trail - Matt's General Store****"
+                 "\n**** The Oregon Trail - Matt's General Store****"
                 +"\n     Choose an item to add to you order:       *"
                 +"\n     1. Oxen                           $200    *"
                 +"\n     2. Food                           $50     *"
                 +"\n     3. Clothing                       $15     *"
                 +"\n     4. Ammunition                     $100    *"
                 +"\n     5. Spare Parts                    $80     *"
-                +"\n     6. Done (Continue)                        *"            
+                +"\n     6. Done (Continue)                        *"         
                 +"\n     7. Quit                                   *"
                 +"\n               Total Funds      $" + money + " *"
                 +"\n What is you choice? (space bar to continue)   *"
@@ -72,7 +72,7 @@ public GeneralStoreView() {
             new MainMenuView();
             break;            
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
             break;            
         }
         return false;

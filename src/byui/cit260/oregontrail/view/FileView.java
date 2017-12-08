@@ -5,10 +5,7 @@ import java.io.PrintWriter;
 
 import byui.cit260.oregontrail.control.GenerateInventory;
 import byui.cit260.oregontrail.model.Game;
-import byui.cit260.oregontrail.model.Occupations;
 import byui.cit260.oregontrail.model.OregonTrail;
-import byui.cit260.oregontrail.model.Question;
-import byui.cit260.oregontrail.model.Scene;
 
 public class FileView extends View {
     public FileView() {

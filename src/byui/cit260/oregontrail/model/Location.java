@@ -3,6 +3,7 @@ package byui.cit260.oregontrail.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 public class Location implements Serializable {
     
     private int row;
@@ -13,7 +14,6 @@ public class Location implements Serializable {
     private Scene scene;
     
     public Location() {
-        // Default constructor.
     }
     
     public void displayCurrentGeography(String particularLocation) {

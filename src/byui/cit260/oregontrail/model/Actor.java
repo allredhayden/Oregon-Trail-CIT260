@@ -2,6 +2,7 @@ package byui.cit260.oregontrail.model;
 
 import java.awt.Point;
 import java.io.Serializable;
+@SuppressWarnings("serial")
 public class Actor implements Serializable {
     
     private String occupation;

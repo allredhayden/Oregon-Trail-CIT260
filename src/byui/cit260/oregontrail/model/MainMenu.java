@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class MainMenu implements Serializable
 {
     private static Game game;

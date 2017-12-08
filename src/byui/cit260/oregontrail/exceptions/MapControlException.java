@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.exceptions;
 
+@SuppressWarnings("serial")
 public class MapControlException extends Throwable {
     
     public MapControlException() {

@@ -1,12 +1,11 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
+import byui.cit260.oregontrail.model.Game;
+import byui.cit260.oregontrail.model.OregonTrail;
 
 public class BuildView extends View {
-    // private static int woodCount = getWoodCount();
-    private static int woodCount = 20;
+    Game game = OregonTrail.getCurrentGame();
+    private int woodCount = game.getWood();
     
         
     public BuildView() {
@@ -17,6 +16,7 @@ public class BuildView extends View {
               + "\nN - Build a wagon"            
               + "\nW - Build a wheel"
               + "\nF - Build a fire"
+              + "\nT - Return to travel menu"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         this.display();
@@ -62,8 +62,11 @@ public class BuildView extends View {
         else if ("F".equals(choice)) {
             buildFire(woodCount);            
         }
+        else if ("T".equals(choice)) {
+            new TravelView();            
+        }
         else if("Z".equals(choice)) {
-            MainMenuView mainMenuView = new MainMenuView();            
+            new MainMenuView();            
         }
         else {
             ErrorView.display(this.getClass().getName(), "Invalid option. Choose one of the listed options.");            
@@ -96,7 +99,7 @@ public class BuildView extends View {
             for (int i=0; i <= 100; i+=20) {
                 while (requiredWood > 0) {
                     numWood-=1;
-                    woodCount-=1;
+                    game.setWood(woodCount-=1);
                     requiredWood-=1;
                     if (numWood%4 == 0) {
                         this.console.println("You have " + numWood + " wood left.");
@@ -107,7 +110,7 @@ public class BuildView extends View {
             this.console.println("\nProject completed. You have now built a " + buildChoice);
             }
         else {
-            ErrorView.display(this.getClass().getName(), "Not enough wood. You have " + woodCount + " wood left. "
+            ErrorView.display(this.getClass().getName(), "Not enough wood. You have " + game.getWood() + " wood left. "
                     + "You need " + requiredWood + " to construct a " + buildChoice + ".");
         }
         this.display();

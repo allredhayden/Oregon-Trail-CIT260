@@ -1,10 +1,5 @@
 package byui.cit260.oregontrail.view;
 
-import java.util.Scanner;
-
-import byui.cit260.oregontrail.control.GameControl;
-import byui.cit260.oregontrail.model.OregonTrail;
-
 public class HelpMenuView extends View
 {
     public HelpMenuView() {
@@ -13,11 +8,8 @@ public class HelpMenuView extends View
                   + "\n-----------------------------------------"
                   + "\n | Help Menu                            |"
                   + "\n-----------------------------------------"
-                  + "\nG - What is the goal of the game?"
-                  + "\nM - How to move"
-                  + "\nE - Estimating the amount of resources"
-                  + "\nH - Harvesting resources"
-                  + "\nD - Deivering resources to warehouse"
+                  + "\n1 - What is the goal of the game?"
+                  + "\n2 - How do begin the trail?"
                   + "\nZ - Quit"
                   + "\n-----------------------------------------");
         super.display();
@@ -28,27 +20,17 @@ public class HelpMenuView extends View
         choice = choice.toUpperCase();
         
         switch (choice) {
-        case "G":
+        case "1":
             this.console.print("\nThe goal of the game is to make it to Oregon.\n");
             break;
-        case "M":
-            this.console.println("To move, go to the map and select desired coordinates for your character.");
-            break;
-        case "E":
-            this.console.println("Your estimated amount of resources is: ______"); 
-            break;
-        case "H":
-            this.console.println("The way to harvest resources is: ______");
-            break;
-        case "D":
-            this.console.println("The way to deliver resources to a warehouse is: ______");
+        case "2":
+            this.console.println("\nTo move, go from the game menu to the travel menu, and start the trail.");
             break;
         case "Z":
-            this.console.println("Help menu has been called.");
-            MainMenuView menu = new MainMenuView();
+            new MainMenuView();
             break;
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }

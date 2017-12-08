@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
@@ -11,6 +6,7 @@ import java.io.Serializable;
  *
  * @author Allen
  */
+@SuppressWarnings("serial")
 public class InventoryItem implements Serializable {
     private String inventoryType;
     private String inventoryName;
@@ -18,7 +14,7 @@ public class InventoryItem implements Serializable {
     private int requiredAmount;
     
     public InventoryItem(String name, int quantity) {
-        inventoryName = name;
+        setInventoryName(name);
         quantityInStock = quantity;
     }
     
@@ -82,4 +78,12 @@ public class InventoryItem implements Serializable {
 		return "InventoryItem [inventoryType=" + inventoryType + ", quantityInStock=" + quantityInStock
 				+ ", requiredAmount=" + requiredAmount + "]";
 	}
+
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
+    }
 }

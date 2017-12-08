@@ -1,16 +1,22 @@
 package byui.cit260.oregontrail.control;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import byui.cit260.oregontrail.model.InventoryItem;
 import byui.cit260.oregontrail.model.Location;
 import byui.cit260.oregontrail.model.Map;
 import byui.cit260.oregontrail.model.Question;
-import byui.cit260.oregontrail.model.Scene;
-import byui.cit260.oregontrail.model.SceneType;
-import byui.cit260.oregontrail.model.QuestionType;
 import byui.cit260.oregontrail.model.QuestionScene;
 
-public class MapControl {
-        
+@SuppressWarnings("serial")
+public class MapControl implements Serializable {
+    
+    List<QuestionScene> questionScenes;
+
     public Map createMap(int numOfRows, int numOfColumns, InventoryItem[] items) {
         
         if (numOfRows < 0 || numOfColumns < 0) {
@@ -29,12 +35,9 @@ public class MapControl {
         Location[][] locations = createLocations(10,10);
         map.setLocations(locations);
         
-        Scene[] scenes = createScenes();
-        Question[] questions = createQuestions();
+        questionScenes = createQuestionScenes();
         
-        assignQuestionsToScenes(questions, scenes);
-        assignItemsToScenes(items, scenes);
-        assignScenesToLocations(map, scenes);
+        assignScenesToLocations(map, questionScenes);
         
         return map;
     }
@@ -56,210 +59,97 @@ public class MapControl {
                 locations[rowCount][colCount] = area;
             }
         }
-        
-        System.out.println("\ncreateLocations stub function called.");
         return locations;
     }
     
-    public Scene[] createScenes() {
+    public List<QuestionScene> createQuestionScenes() {
+        List<QuestionScene> questionScenes = new ArrayList<QuestionScene>();
+        questionScenes.add(new QuestionScene(new Question("Find ore question.", "Find ore answer.", 10), "\nStarting scene in Oregon trail.", true, "ST"));
+        questionScenes.add(new QuestionScene(new Question("Build ship question.", "Build ship answer.", 10), "\nAngel scene in Oregon trail.", true, "AN"));
+        questionScenes.add(new QuestionScene(new Question("Find water question.", "Find water answer.", 10), "\nLumber scene in Oregon trail.", true, "LU"));
+        questionScenes.add(new QuestionScene(new Question("Faithful question.", "Faithful answer.", 10), "\nIron scene in Oregon trail.", true, "IR"));
+        questionScenes.add(new QuestionScene(new Question("Number of travelers question.", "Number of travelers answer.", 10), "\nRye scene in Oregon trail.", true, "RY"));
+        questionScenes.add(new QuestionScene(new Question("Ship done question.", "Ship done answer.", 10), "\nCamp scene in Oregon trail.", true, "CP"));
+        questionScenes.add(new QuestionScene(new Question("Find honey question.", "Find honey answer.", 10), "\nInstructions scene in Oregon trail.", true, "IN"));
+        questionScenes.add(new QuestionScene(new Question("What is a dog.", "Find a K9 answer.", 10), "\nEnding scene in Oregon Trail.", true, "EN"));
         
-        Scene[] regScene = new Scene[] { new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene(), new Scene() };
+        return questionScenes;
+    }
         
+    private void assignScenesToLocations(Map map, List<QuestionScene> questionScenes) {
         
-        Scene scene1 = regScene[0];
-        scene1.setDescription("\nStarting scene in Oregon trail.");
-        scene1.setBlocked(true);
-        scene1.setSymbol("ST");
+        for (QuestionScene questionScene : questionScenes) {
+            Pair pair = Pair.addPair();
+            map.getLocation(pair.getX(),pair.getY()).setScene(questionScene);
+        }
+    }
 
-        Scene scene2 = regScene[1];
-        scene2.setDescription("\nAngel scene in Oregon trail.");
-        scene2.setBlocked(true);
-        scene2.setSymbol("AN");
-
-        Scene scene3 = regScene[SceneType.lumber.ordinal()];
-        scene3.setDescription("\nLumber scene in Oregon trail.");
-        scene3.setBlocked(true);
-        scene3.setSymbol("LU");
-
-        Scene scene4 = regScene[SceneType.iron.ordinal()];
-        scene4.setDescription("\nIron scene in Oregon trail.");
-        scene4.setBlocked(true);
-        scene4.setSymbol("IR");
-
-        Scene scene5 = regScene[SceneType.rye.ordinal()];
-        scene5.setDescription("\nRye scene in Oregon trail.");
-        scene5.setBlocked(true);
-        scene5.setSymbol("RY");
-
-        Scene scene6 = regScene[SceneType.camp.ordinal()];
-        scene6.setDescription("\nCamp scene in Oregon trail.");
-        scene6.setBlocked(true);
-        scene6.setSymbol("CP");
-
-        Scene scene7 = regScene[SceneType.instructions.ordinal()];
-        scene7.setDescription("\nInstructions scene in Oregon trail.");
-        scene7.setBlocked(true);
-        scene7.setSymbol("IN");
+    public static class Randomizer {
+        private static Random rand = new Random();
+        private static int max = 10;
         
-        Scene scene8 = regScene[SceneType.forest.ordinal()];
-        scene8.setDescription("\nThe area before you is a vast, dense forest that is suspiciously silent."
-                + " There seems to be no clear way of going around it. It would seem as if you must go through it.");
-        scene8.setBlocked(true);
-        scene8.setSymbol("FR");
-        
-        Scene scene9 = regScene[SceneType.lake.ordinal()];
-        scene9.setDescription("\nA large, calm lake is between you and your destination."
-                + " Fortunately, it looks safe to cross - and better yet, there's a healthy population of fish inhabiting it.");
-        scene9.setBlocked(false);
-        scene9.setSymbol("LK");
-        
-        Scene scene10 = regScene[SceneType.river.ordinal()];
-        scene10.setDescription("\nTo what is likely your disappointment, a deadly looking river seems to be obstructing your path."
-                + " For the moment, luck does not seem to be on your side, as there is no visible alternative to crossing it.");
-        scene10.setBlocked(true);
-        scene10.setSymbol("RI");
-        
-        Scene scene11 = regScene[SceneType.mountain.ordinal()];
-        scene11.setDescription("\nJagged, towering mountains cover the majority of the surrounding area."
-                + " There unfortunately seems to be no option except to travel through them."
-                + " This will undoubtedly be a very physically demanding trek. Wagons don't tend to fair too well in a path uphill.");
-        scene11.setBlocked(true);
-        scene11.setSymbol("MT");
-        
-        Scene scene12 = regScene[SceneType.village.ordinal()];
-        scene12.setDescription("\nHome sweet home: At least for a while."
-                + " You've encountered a village, one that for the moment seems to have no visible name."
-                + " Fortunately, it looks comfy enough. The town is bustling with activity, and there is a large"
-                + " quantity of villagers traveling throughout a rather plentiful market in the main square."
-                + " Surely, this is a safe place to stop and rest, and perhaps even shop.");
-        scene12.setBlocked(false);
-        scene12.setSymbol("VL");
-
-        Scene scene13 = regScene[SceneType.finish.ordinal()];
-        scene13.setDescription("\nEnding scene in Oregon Trail.");
-        scene13.setBlocked(true);
-        scene13.setSymbol("EN");    
-        
-        System.out.println("\ncreateScenes function called successfully.");
-        
-        return regScene;
+        private static int getNextRandom() {
+            return rand.nextInt(max);
+        }
     }
     
-    public Question[] createQuestions() {
-        Question[] questions = new Question[7];
-        
-        Question question1 = new Question();
-        question1.setQuestion("Find ore question.");
-        question1.setAnswer("Find ore answer.");
-        question1.setPoints(10);
-        questions[QuestionType.findOre.ordinal()] = question1;
-        
-        Question question2 = new Question();
-        question2.setQuestion("Build ship question.");
-        question2.setAnswer("Build ship answer.");
-        question2.setPoints(10);
-        questions[QuestionType.buildShip.ordinal()] = question2;
+    static List<Pair> pairs = new ArrayList<Pair>();
 
-        Question question3 = new Question();
-        question3.setQuestion("Find water question.");
-        question3.setAnswer("Find water answer.");
-        question3.setPoints(10);
-        questions[QuestionType.findWater.ordinal()] = question3;
-
-        Question question4 = new Question();
-        question4.setQuestion("Faithful question.");
-        question4.setAnswer("Faithful answer.");
-        question4.setPoints(10);
-        questions[QuestionType.faithful.ordinal()] = question4;
-
-        Question question5 = new Question();
-        question5.setQuestion("Number of travelers question.");
-        question5.setAnswer("Number of travelers answer.");
-        question5.setPoints(10);
-        questions[QuestionType.numOfTravelers.ordinal()] = question5;
-
-        Question question6 = new Question();
-        question6.setQuestion("Ship done question.");
-        question6.setAnswer("Ship done answer.");
-        question6.setPoints(10);
-        questions[QuestionType.shipDone.ordinal()] = question6;
-
-        Question question7 = new Question();
-        question7.setQuestion("Find honey question.");
-        question7.setAnswer("Find honey answer.");
-        question7.setPoints(10);
-        questions[QuestionType.findHoney.ordinal()] = question7;     
+    public static class Pair implements Serializable {
+        private int x;
+        private int y;
         
         
-        System.out.println("\ncreateQuestions function called successfully.");
-        return questions;
+        public static Pair addPair() {
+            Pair pair = new Pair();
+            do {
+                pair.x = Randomizer.getNextRandom();
+                pair.y = Randomizer.getNextRandom();
+            } while (pairs.contains(pair));
+            pairs.add(pair);
+            return pair;
+        }
+        
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (this != obj) {
+                Pair pairObj = (Pair)obj;
+                if (!(x == pairObj.x && y == pairObj.y)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+        
+        public List<Pair> getPairList() {
+            return Collections.unmodifiableList(pairs);
+        }
+        
+        public Pair getIndex(int index) {
+            return pairs.get(index);
+        }
+
+        public static void clear() {
+            pairs.clear();
+        }
     }
     
-    private static void assignQuestionsToScenes(Question[] questions, Scene[] scenes) {
-        
-     /* QuestionScene startScene = (QuestionScene) scenes[SceneType.start.ordinal()];
-        QuestionScene angelScene = (QuestionScene) scenes[SceneType.angel.ordinal()];
-        QuestionScene lumberScene = (QuestionScene) scenes[SceneType.lumber.ordinal()];
-        QuestionScene ironScene = (QuestionScene) scenes[SceneType.iron.ordinal()];
-        QuestionScene ryeScene = (QuestionScene) scenes[SceneType.rye.ordinal()];
-        QuestionScene campScene = (QuestionScene) scenes[SceneType.camp.ordinal()];
-        QuestionScene instructionsScene = (QuestionScene) scenes[SceneType.instructions.ordinal()];
-        QuestionScene forestScene = (QuestionScene) scenes[SceneType.forest.ordinal()];
-        QuestionScene lakeScene = (QuestionScene) scenes[SceneType.lake.ordinal()];
-        QuestionScene riverScene = (QuestionScene) scenes[SceneType.river.ordinal()];
-        QuestionScene mountainScene = (QuestionScene) scenes[SceneType.mountain.ordinal()];
-        QuestionScene villageScene = (QuestionScene) scenes[SceneType.village.ordinal()];
-        QuestionScene finishScene = (QuestionScene) scenes[SceneType.finish.ordinal()];
-        
-        Question[] questionsInScene = new Question[7];
-        
-        questionsInScene[0] = questions[0];
-        questionsInScene[1] = questions[1];
-        questionsInScene[2] = questions[2];
-        questionsInScene[3] = questions[3];
-        questionsInScene[4] = questions[4];
-        questionsInScene[5] = questions[5];
-        questionsInScene[6] = questions[6];
-        
-        startScene.setQuestion(questionsInScene[0]);
-        angelScene.setQuestion(questionsInScene[1]);
-        lumberScene.setQuestion(questionsInScene[2]);
-        ironScene.setQuestion(questionsInScene[3]);
-        ryeScene.setQuestion(questionsInScene[4]);
-        campScene.setQuestion(questionsInScene[5]);
-        instructionsScene.setQuestion(questionsInScene[6]);
-        forestScene.setQuestion(questionsInScene[0]);
-        lakeScene.setQuestion(questionsInScene[1]);
-        riverScene.setQuestion(questionsInScene[2]);
-        mountainScene.setQuestion(questionsInScene[3]);
-        villageScene.setQuestion(questionsInScene[4]);
-        finishScene.setQuestion(questionsInScene[5]); */
-     
-        System.out.println("\nassignQuestionsToScenes function called successfully.");
+    public List<Pair> getPairs() {
+        return pairs;
     }
     
-    private static void assignItemsToScenes(InventoryItem[] questions, Scene[] scenes) {
-        System.out.println("\nassignItemsToScenes function called successfully.");
-    }
-    
-    private void assignScenesToLocations(Map map, Scene[] scenes) {
-        
-        Location[][] sceneLocations = map.getLocations();
-        
-        sceneLocations[0][0].setScene(scenes[SceneType.start.ordinal()]);
-        sceneLocations[0][1].setScene(scenes[SceneType.angel.ordinal()]);
-        sceneLocations[0][2].setScene(scenes[SceneType.lumber.ordinal()]);
-        sceneLocations[0][3].setScene(scenes[SceneType.iron.ordinal()]);
-        sceneLocations[0][4].setScene(scenes[SceneType.rye.ordinal()]);
-        sceneLocations[0][5].setScene(scenes[SceneType.camp.ordinal()]);
-        sceneLocations[0][6].setScene(scenes[SceneType.instructions.ordinal()]);
-        sceneLocations[0][7].setScene(scenes[SceneType.forest.ordinal()]);
-        sceneLocations[0][8].setScene(scenes[SceneType.lake.ordinal()]);
-        sceneLocations[0][9].setScene(scenes[SceneType.river.ordinal()]);
-        sceneLocations[1][0].setScene(scenes[SceneType.mountain.ordinal()]);
-        sceneLocations[2][0].setScene(scenes[SceneType.village.ordinal()]);
-        sceneLocations[3][0].setScene(scenes[SceneType.finish.ordinal()]);
-        
-        System.out.println("\nassignScenesToLocations function called successfully.");
+    public List<QuestionScene> getQuestionScenes() {
+        return questionScenes;
     }
 }

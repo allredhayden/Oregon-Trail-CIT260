@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
@@ -11,6 +6,7 @@ import java.util.Objects;
  *
  * @author Allen
  */
+@SuppressWarnings("serial")
 public class Map implements Serializable {
     private String description;
     private int rowCount;
@@ -20,6 +16,10 @@ public class Map implements Serializable {
     private Location[][] locations; 
 
     public Map() {
+    }
+    
+    public Location getLocation(int x, int y) {
+        return locations[x][y];
     }
     
     public String getDescription() {
@@ -67,7 +67,6 @@ public class Map implements Serializable {
     }
 
     public void setLocations(Location[][] locations) {
-        System.out.println("\nNew location created for this game.");
         this.locations = locations;
     }   
 

@@ -3,10 +3,12 @@ package byui.cit260.oregontrail.view;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Scanner;
 
-import byui.cit260.oregontrail.model.*;
+import byui.cit260.oregontrail.model.Actor;
+import byui.cit260.oregontrail.model.InputReader;
+import byui.cit260.oregontrail.model.Occupations;
 
+@SuppressWarnings("serial")
 public class SetupView extends View implements Serializable
 {   
     static Occupations playerOccupation = new Occupations();
@@ -22,8 +24,7 @@ public class SetupView extends View implements Serializable
         String actorChoice = playerOccupation.getActors().get(occupation-1).getOccupation();
         
         if (occupation == 4) {
-            this.console.println("The banker starts with $1,600.\nThe carpenter starts with $800.\n"
-                    + "The farmer starts with $400.\n");
+            this.console.println("\nYour occupation won't effect your ability to win the game whatsoever. Pick whichever role you want!");
             requestOccupation();
         }
         return actorChoice;
@@ -62,15 +63,8 @@ public class SetupView extends View implements Serializable
             actor.getName();
         }
     }
-
-    public void changeName() {
-        /*
-         * Request a number, if they enter space bar, exit the loop.
-         * If they enter a number, call requestName with that number 
-         * to change the name of corresponding actor.
-         */
-    }
     
+    @SuppressWarnings("unused")
     private String getHelpMenuOption() {
         
         String value = "";

@@ -33,7 +33,8 @@ public class LootView extends View {
               + "\n3 - Pick up " + item3 + ".               "
               + "\n4 - Pick up " + item4 + ".               "
               + "\n5 - Pick up " + item5 + ".               "                      
-              + "\n6 - Quit                                 "
+              + "\n6 - Return to travel menu                "
+              + "\n7 - Quit"
               + "\n-----------------------------------------");
         super.display();
     }
@@ -59,12 +60,15 @@ public class LootView extends View {
             break;
         case "5":
             addToInventory(item5);
-            break;            
+            break;
         case "6":
-            MainMenuView mainMenuView = new MainMenuView();
+            new TravelView();
+            break;
+        case "7":
+            new MainMenuView();
             break;
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }

@@ -3,9 +3,12 @@ package byui.cit260.oregontrail.model;
 import java.io.Serializable;
 import java.util.List;
 
+import byui.cit260.oregontrail.control.MapControl.Pair;
 import byui.cit260.oregontrail.view.GeneralStoreView;
 import byui.cit260.oregontrail.view.SetupView;
+import byui.cit260.oregontrail.view.TravelView;
 
+@SuppressWarnings("serial")
 public class Game implements Serializable
 {
     private double totalTime;
@@ -14,19 +17,20 @@ public class Game implements Serializable
     private List<Actor> actors;
     private Actor[] npcActors;
     private Actor[] pcActors;
-    public static Map map;
+    public Map map;
     private InventoryItem[] gameItems;
     private Location[][] gameLocations;
-    private Scene[] gameScenes;
-    private Question[] gameQuestions;
+    private List<QuestionScene> questionScenes;
     private SetupView setup;
+    private String currentMonth;
     private GeneralStoreView storeView;
     private String playerOccupationName;
     private Occupations occupation;
     private String[] items;
-    
+    private List<Pair> coordinatePairs;
+    private int wood = 60;
+
     public Game() {
-        // Default constructor
     }
     
     public double getTotalTime() {
@@ -59,7 +63,6 @@ public class Game implements Serializable
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
-        System.out.println("\nNew actors created for this this.");
     }
   
     public Actor[] getNPCActors() {
@@ -68,17 +71,7 @@ public class Game implements Serializable
 
     public void setNPCActors(Actor[] npcActors) {
         this.npcActors = npcActors;
-        System.out.println("\nNew NPC actors created for this this.");        
     }
-    
-/*    public InventoryItem[] getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(InventoryItem[] inventory) {
-        this.inventory = inventory;
-        System.out.println("\nNew items created for this this.");        
-    } */
 
     public Map getMap() {
         return map;
@@ -86,7 +79,6 @@ public class Game implements Serializable
 
     public void setMap(Map map) {
         this.map = map;
-        System.out.println("\nNew map created for this this this.");        
     }
     public InventoryItem[] getGameItems() {
         return gameItems;
@@ -104,20 +96,12 @@ public class Game implements Serializable
         this.gameLocations = gameLocations;
     }
 
-    public Scene[] getGameScenes() {
-        return gameScenes;
+    public List<QuestionScene> getQuestionScenes() {
+        return questionScenes;
     }
 
-    public void setGameScenes(Scene[] gameScenes) {
-        this.gameScenes = gameScenes;
-    }
-
-    public Question[] getGameQuestions() {
-        return gameQuestions;
-    }
-
-    public void setGameQuestions(Question[] gameQuestions) {
-        this.gameQuestions = gameQuestions;
+    public void setQuestionScenes(List<QuestionScene> questionScene) {
+        this.questionScenes = questionScene;
     }
 
     public SetupView getSetup() {
@@ -174,6 +158,43 @@ public class Game implements Serializable
     public void setCurrentMonth(String currentMonth) {
         this.currentMonth = currentMonth;
     }
+    
+    public List<Pair> getCoordinatePairs() {
+        return coordinatePairs;
+    }
 
-    private String currentMonth;    
+    public void setCoordinatePairs(List<Pair> coordinatePairs) {
+        this.coordinatePairs = coordinatePairs;
+    }
+
+    public int getWood() {
+        return wood;
+    }
+
+    public void setWood(int wood) {
+        this.wood = wood;
+    }
+
+    public void clear() {
+        setActors(null);
+        setCoordinatePairs(null);
+        setCurrentMonth(null);
+        setGameItems(null);
+        setGameLocations(null);
+        setItems(null);
+        setMap(null);
+        setNoPeople(false);
+        setNPCActors(null);
+        setOccupation(null);
+        setPcActors(null);
+        setPlayer(null);
+        setPlayerOccupationName(null);
+        setQuestionScenes(null);
+        setSetup(null);
+        setStoreView(null);
+        setTotalTime(0.0);
+        setWood(60);
+        Pair.clear();
+        TravelView.setSceneIndex(0);
+    }
 }

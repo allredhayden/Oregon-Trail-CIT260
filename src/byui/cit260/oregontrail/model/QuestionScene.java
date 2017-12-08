@@ -1,10 +1,15 @@
 package byui.cit260.oregontrail.model;
 
+@SuppressWarnings("serial")
 public class QuestionScene extends Scene {
     
     private boolean noToAnswer;
     private boolean bonus;
-
+    
+    public QuestionScene(Question question, String description, boolean blocked, String symbol) {
+        super(description, blocked, symbol);
+        this.question = question;
+    }
     // Get & set noToAnswer.
     public boolean getNoToAnswer() {
         return noToAnswer;

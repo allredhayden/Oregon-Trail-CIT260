@@ -1,9 +1,5 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
-
 public class RiverEncounterView extends View {
         
     public RiverEncounterView() {
@@ -34,7 +30,7 @@ public class RiverEncounterView extends View {
             useFerry();
         }
         else if ("Z".equals(choice)) {
-            MainMenuView menu = new MainMenuView();
+            new MainMenuView();
         }
         else {
             ErrorView.display(this.getClass().getName(), "Invalid option. Choose one of the listed options.");

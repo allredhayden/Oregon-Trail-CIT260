@@ -2,6 +2,7 @@ package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Dialogue implements Serializable {
 	
 	public static String[] questions = new String[] 

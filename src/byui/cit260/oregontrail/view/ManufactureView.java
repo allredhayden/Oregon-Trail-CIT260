@@ -1,7 +1,6 @@
 package byui.cit260.oregontrail.view;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import byui.cit260.oregontrail.control.ManufactureControl;
 import byui.cit260.oregontrail.exceptions.ManufactureControlException;

@@ -29,6 +29,7 @@ public class GameControl implements Serializable
         
         // Create new game.
         game = new Game();
+        game.clear(); // Reset values of all game attributes to default / null.
         
         // Get player name.
         StartProgram program = new StartProgram();
@@ -63,19 +64,19 @@ public class GameControl implements Serializable
         // Create new map and store in Game class (model).
         MapControl controlMap = new MapControl();
         Map map = controlMap.createMap(10, 10, gameItems);
-        if (mapControl.createMap(10, 10, gameItems) == null) {
+        if (map == null) {
             throw new MapControlException("Failed to create new map.");
         }
         else {
-            game.setMap(map);             
+            game.setMap(map);           
         }
         
-        // Create scenes, assign to current game.
-        game.setGameScenes(mapControl.createScenes());
-        
         // Create questions, assign to current game.
-        Question[] question = controlMap.createQuestions();
-        game.setGameQuestions(question);
+        game.setQuestionScenes(controlMap.getQuestionScenes());
+        
+        // Assign scene coordinates to current game.
+        game.setCoordinatePairs(controlMap.getPairs());
+        
         
         // Request month, assign to current game.
         StartMonthView months = new StartMonthView();
@@ -175,22 +176,6 @@ public class GameControl implements Serializable
        InventoryItem saw = new InventoryItem("saw", 200);       
        InventoryItem nails = new InventoryItem("nails", 200);
        
-      /* lumber = items[ItemType.lumber.ordinal()];
-       ore = items[ItemType.ore.ordinal()];
-       grain = items[ItemType.grain.ordinal()];
-       legume = items[ItemType.legume.ordinal()];
-       oil = items[ItemType.oil.ordinal()];
-       water = items[ItemType.water.ordinal()];
-       honey = items[ItemType.honey.ordinal()];
-       salt = items[ItemType.salt.ordinal()];
-       axe = items[ItemType.axe.ordinal()];
-       hammer = items[ItemType.hammer.ordinal()];
-       drill = items[ItemType.drill.ordinal()];
-       shovel = items[ItemType.shovel.ordinal()];
-       sickle = items[ItemType.sickle.ordinal()];
-       saw = items[ItemType.saw.ordinal()];
-       nails = items[ItemType.nails.ordinal()]; */
-       
        items[ItemType.lumber.ordinal()] = lumber;
        items[ItemType.ore.ordinal()] = ore;
        items[ItemType.grain.ordinal()] = grain;
@@ -218,7 +203,6 @@ public class GameControl implements Serializable
         game = gameSet;
     }
 
-    // Stub function
     public static void saveGame(Game currentGame, String filePath) throws GameControlException {
         
         try (FileOutputStream fops = new FileOutputStream (filePath)) {
@@ -227,7 +211,7 @@ public class GameControl implements Serializable
             output.writeObject(currentGame);
         }
         catch (Exception e) {
-            throw new GameControlException(e.getMessage());
+            throw new GameControlException(e);
         }
     }
 
@@ -241,10 +225,9 @@ public class GameControl implements Serializable
             game = (Game) input.readObject();
         }
         catch (Exception e) {
-            throw new GameControlException(e.getMessage());
+            throw new GameControlException(e);
         }
         
-        // Close the output file.
         OregonTrail.setCurrentGame(game);
-    }    
+    }
 }

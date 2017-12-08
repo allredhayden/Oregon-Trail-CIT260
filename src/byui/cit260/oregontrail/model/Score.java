@@ -3,6 +3,7 @@ package byui.cit260.oregontrail.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+@SuppressWarnings("serial")
 public class Score implements Serializable{
     
     private int currentScore;

@@ -1,20 +1,20 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
-
 public class AboutAuthorsView extends View {
     
+    static enum authors {
+        Jeremy_Alkire, Blair_Furner, Hayden_Allred, Allen_Relthford
+    }
+
     public AboutAuthorsView() {
         super("\n"
               + "\n-----------------------------------------"
               + "\n|              About Us                |"
               + "\n-----------------------------------------"
-              + "\nJ - Jeremy Alkire"
-              + "\nB - Blair Furner"
-              + "\nH - Hayden Alred"
-              + "\nA - Allen Relthford"
+              + "\nJ - " + authors.Jeremy_Alkire
+              + "\nB - " + authors.Blair_Furner
+              + "\nH - " + authors.Hayden_Allred
+              + "\nA - " + authors.Allen_Relthford
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         super.display();
@@ -40,10 +40,10 @@ public class AboutAuthorsView extends View {
             this.console.println("\nHello everybody! I'm Allen Relthford and I like to color outside the lines. I love gaming and movies.");
             break;
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
             break;
         default:
-            this.console.println("\n*** Invalid selection *** Try again");
+            this.console.println("\nInvalid selection. Please try again");
         }
         return false;
     }

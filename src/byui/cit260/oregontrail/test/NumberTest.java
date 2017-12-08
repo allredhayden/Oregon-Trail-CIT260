@@ -8,7 +8,8 @@ public class NumberTest
 {
     
     public String getInput() {
-       Scanner keyboard = new Scanner(System.in);
+       @SuppressWarnings("resource")
+    Scanner keyboard = new Scanner(System.in);
        String value = "";
        boolean valid = false;
        

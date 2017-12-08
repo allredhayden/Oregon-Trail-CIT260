@@ -3,14 +3,10 @@ package byui.cit260.oregontrail.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-
-import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.*;
 
 public class StartProgramView extends View
 {
-    @SuppressWarnings("unused")
     MainMenuView mainMenu = null;
     
     protected static String playerName = null;
@@ -37,7 +33,7 @@ public class StartProgramView extends View
                           + "\n We hope you have a lot of fun!"
                           + "\n======================================"
                           );
-       MainMenuView mainMenuView = new MainMenuView();
+       new MainMenuView();
     }
     
     public String requestPlayerName() {
@@ -51,7 +47,6 @@ public class StartProgramView extends View
         try {
             value = keyboard.readLine();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         value = value.trim();
@@ -61,7 +56,7 @@ public class StartProgramView extends View
             continue;
             }
         
-            break; // end the loop
+            break;
         }
         
         return value;
@@ -83,24 +78,18 @@ public class StartProgramView extends View
         this.console.println(
                   "\n********************************************************"
                 + "\n                                                        "
-                + "\n This is the game of Curious Workmanship                "
-                + "\n In this game you will help Nephi build a               "
-                + "\n ship of curious workmanship to travel to               "
-                + "\n the promised land.                                     "
+                + "\n Hello, user. This is a short, but demonstrative game.  "
                 + "\n                                                        "
-                + "\n You and your family will need to first                 "
-                + "\n plan for your trip determining and                     "
-                + "\n estimating the amount of resources                     "
-                + "\n needed for the trip. Then you will have                "
-                + "\n to go out and search for and harvest                   "
-                + "\n the needed resources and deliver them                  "
-                + "\n to the warehouse where you will store                  "
-                + "\n then until the ship is completed. Then                 "
-                + "\n You will also need to build the ship,                  "
-                + "\n load the ship and then set sail for                    "
-                + "\n the promised land. You will first need                 "
-                + "\n to find the resources and manufacture the              "
-                + "\n tools needed to build the ship.                        "
+                + "\n After entering your name, you can begin a new game.    "
+                + "\n From there, proceed through the prompts to pick        "
+                + "\n an occupation, a month, and names for your party.      "
+                + "\n                                                        "
+                + "\n After completing the above steps, you can buy a few    "
+                + "\n starting items from the store, and from there you may  "
+                + "\n continue on to the game menu.                          "
+                + "\n                                                        "
+                + "\n Upon reaching the game menu, you will be able to view  "
+                + "\n the map, and begin traveling the trail.                "
                 + "\n                                                        "
                 + "\n Good luck and have fun in this adventure.              "
                 + "\n                                                        "

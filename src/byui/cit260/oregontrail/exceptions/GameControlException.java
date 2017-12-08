@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.exceptions;
 
+@SuppressWarnings("serial")
 public class GameControlException extends Exception {
     
     public GameControlException() {
@@ -16,5 +17,6 @@ public class GameControlException extends Exception {
     
     public GameControlException(Throwable cause) {
         super(cause);
+        cause.printStackTrace();
     }
 }
