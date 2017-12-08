@@ -33,10 +33,10 @@ public class FileView extends View {
             writeItemReport(requestFileLocation());
             break;
         case "2":
-            // writeMapDescription(requestFileLocation());
+            writeMapDescription(requestFileLocation());
             break;
         case "3":
-            // writePartyNames(requestFileLocation());
+             writePartyNames(requestFileLocation());
         case "4":
             // writeQuestions(requestFileLocation());
             break;
@@ -76,4 +76,46 @@ public class FileView extends View {
         
         this.console.println("\nReport successfully written to: " + path);
     }
-}
+    public void writePartyNames(String path) {
+        Game game = OregonTrail.getCurrentGame();
+        Occupations occupation = game.getOccupation();
+        
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("\n\n      Name List       ");
+            out.printf("%n%-14s%-20s", "Index", "Name");
+            out.printf("%n%-14s%-20s", "------", "---------------");
+            for (int i = 0; i <= 2; i++) {
+                String name = occupation.getActors().get(i).getName();
+                out.printf("%n%-14s%-10s", "Name #" + (i+1) + ": ", name);
+            }
+        } catch (IOException ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
+        
+        this.console.println("\nReport successfully written to: " + path);
+    }
+        
+         public void writeMapDescription(String path) {
+        Game game = OregonTrail.getCurrentGame();
+        Scene[] scene = game.getGameScenes();
+        
+        try (PrintWriter out = new PrintWriter(path)) {
+            out.println("\n\n       Item List       ");
+            out.printf("%n%-14s%-20s", "Index", "Description");
+            out.printf("%n%-14s%-20s", "------", "---------------");
+            for (int i = 0; i < scene.length - 1; i++) {
+                String description = scene[i].getDescription();
+                out.printf("%n%-14s%-40s", "Scene #" + (i+1) + ": ", description);
+                out.println("\n");
+            }
+        } catch (IOException ex) {
+            ErrorView.display(this.getClass().getName(), ex.getMessage());
+        }
+        
+        this.console.println("\nReport successfully written to: " + path); 
+    } 
+    }
+
+
+
+
