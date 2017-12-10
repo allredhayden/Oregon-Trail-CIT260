@@ -30,7 +30,7 @@ public class OregonTrail implements Serializable
             String filePath = "C:\\tmp\\log.txt";
             OregonTrail.logFile = new PrintWriter(filePath);
             
-            // playSong();
+            playSong();
             StartProgram program = new StartProgram();
             program.displayStartProgramView();
         }
