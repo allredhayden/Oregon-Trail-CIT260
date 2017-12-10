@@ -29,6 +29,11 @@ public class Game implements Serializable
     private String[] items;
     private List<Pair> coordinatePairs;
     private int wood = 60;
+    private Actor partyMember1 = null;
+    private Actor partyMember2 = null;
+    private Actor partyMember3 = null;
+    private Inventory inventory = null;
+    private int sceneIndex = 0;
 
     public Game() {
     }
@@ -174,6 +179,46 @@ public class Game implements Serializable
     public void setWood(int wood) {
         this.wood = wood;
     }
+    
+    public Actor getPartyMember1() {
+        return partyMember1;
+    }
+
+    public void setPartyMember1(Actor partyMember1) {
+        this.partyMember1 = partyMember1;
+    }
+
+    public Actor getPartyMember2() {
+        return partyMember2;
+    }
+
+    public void setPartyMember2(Actor partyMember2) {
+        this.partyMember2 = partyMember2;
+    }
+
+    public Actor getPartyMember3() {
+        return partyMember3;
+    }
+
+    public void setPartyMember3(Actor partyMember3) {
+        this.partyMember3 = partyMember3;
+    }
+    
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+    
+    public int getSceneIndex() {
+        return sceneIndex;
+    }
+
+    public void setSceneIndex(int sceneIndex) {
+        this.sceneIndex = sceneIndex;
+    }
 
     public void clear() {
         setActors(null);
@@ -196,5 +241,6 @@ public class Game implements Serializable
         setWood(60);
         Pair.clear();
         TravelView.setSceneIndex(0);
+        setInventory(null);
     }
 }

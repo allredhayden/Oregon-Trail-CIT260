@@ -50,10 +50,16 @@ public class GameControl implements Serializable
 
         // Request party member names.
         setup.requestNames();
+        game.setPartyMember1(setup.getMember1());
+        game.setPartyMember2(setup.getMember2());
+        game.setPartyMember3(setup.getMember3());
         
         // Assign player occupation object to current game.
         Occupations occupations = setup.getPlayerOccupation();
         game.setOccupation(occupations);
+        
+        // Create inventory & assign to current game.
+        game.setInventory(new Inventory());
         
         // Create NPC actor array & item array, store in Game class (model).
         game.setGameItems(createItems());
@@ -120,16 +126,16 @@ public class GameControl implements Serializable
         Actor[] actors = new Actor[10];
 
         // String occupation, String name, String description, Point coordinates, double money, double health
-        actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100);
-        actors[ActorType.Sariah.ordinal()] = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100);
-        actors[ActorType.Nephi.ordinal()] = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100);
-        actors[ActorType.Jacob.ordinal()] = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100);
-        actors[ActorType.Sam.ordinal()] = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100);
-        actors[ActorType.Laman.ordinal()] = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100);
-        actors[ActorType.Lemuel.ordinal()] = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100);
-        actors[ActorType.Zoram.ordinal()] = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100);
-        actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100);
-        actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100);
+        actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Sariah.ordinal()] = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Nephi.ordinal()] = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Jacob.ordinal()] = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Sam.ordinal()] = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Laman.ordinal()] = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Lemuel.ordinal()] = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Zoram.ordinal()] = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100, false);
         
         game.setPcActors(actors);
         return actors;
@@ -229,5 +235,7 @@ public class GameControl implements Serializable
         }
         
         OregonTrail.setCurrentGame(game);
+        Game loadedGame = OregonTrail.getCurrentGame();
+        TravelView.setSceneIndex(loadedGame.getSceneIndex());
     }
 }

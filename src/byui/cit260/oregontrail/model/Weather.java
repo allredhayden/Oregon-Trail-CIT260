@@ -47,7 +47,4 @@ public class Weather implements Serializable {
         return "Weather{" + "weatherType=" + weatherType + '}';
     }
 
-    
-
-    
 }

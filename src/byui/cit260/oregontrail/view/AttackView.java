@@ -1,10 +1,14 @@
 package byui.cit260.oregontrail.view;
 
+import byui.cit260.oregontrail.model.CreatureDeathAudio;
+
 public class AttackView extends View
 {
     protected String item = "Rock";
     protected String opponent = "default";
-        
+    private CreatureDeathAudio audio = null;
+    private static String path = "http://faintdev.net/rzx/sounds/splatter.wav";
+
     public AttackView(String enemy) {
         super("\n"
               + "\n-----------------------------------------"
@@ -69,21 +73,35 @@ public class AttackView extends View
     private void throwObject(String item, String opponent) {
         this.console.println(item + " has successfully been thrown at " + opponent + ".");
         this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
         new LootView();
     }
     private void swingObject(String item, String opponent) {
         this.console.println(item + " has successfully been swung at " + opponent + ".");
         this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
         new LootView();
     }
     private void punchOpponent(String opponent) {
         this.console.println(opponent + " has successfully been punched.");
         this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
         new LootView();
     }
     private void kickOpponent(String opponent) {
         this.console.println(opponent + " has successfully been kicked.");
         this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
         new LootView();
+    }
+    
+    public void playDeathSound() {
+        if (audio == null) {
+            audio = new CreatureDeathAudio();
+        }
+    }
+    
+    public static String getPath() {
+        return path;
     }
 }

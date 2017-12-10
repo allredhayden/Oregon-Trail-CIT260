@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.exceptions;
 
+@SuppressWarnings("serial")
 public class MoneyControlException extends Exception {
     
     public MoneyControlException() {

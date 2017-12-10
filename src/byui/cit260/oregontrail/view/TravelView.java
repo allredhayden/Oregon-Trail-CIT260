@@ -11,6 +11,8 @@ public class TravelView extends View {
     private Map map = game.getMap();
     private List<Pair> coordinates = game.getCoordinatePairs();
     private static int sceneIndex = 0;
+    private static VictoryAudio audio = null;
+    private static String path = "http://faintdev.net/rzx/sounds/victory.wav";
     
     public TravelView() {
         super("\n"
@@ -38,6 +40,7 @@ public class TravelView extends View {
                     this.console.println("\nCongratulations. You've started a new game.");
                     map.getLocation(coordinates.get(sceneIndex).getX(),coordinates.get(sceneIndex++).getY()).getScene().setVisited(true);
                     enterScene(map.getLocation(coordinates.get(sceneIndex).getX(),coordinates.get(sceneIndex).getY()).getScene());
+                    game.setSceneIndex(sceneIndex);
                 }
                 else {
                     this.console.println("\nYou can't start twice, silly.");
@@ -50,9 +53,10 @@ public class TravelView extends View {
                 else {
                     if (sceneIndex < coordinates.size() - 1) {
                         map.getLocation(coordinates.get(sceneIndex).getX(),coordinates.get(sceneIndex++).getY()).getScene().setVisited(true);
+                        game.setSceneIndex(sceneIndex);
                         
                         if (sceneIndex == coordinates.size() - 1) {
-                            this.console.println("Congratulations! You've made it to Oregon."); 
+                            displayVictoryScreen();
                         } else {
                             enterScene(map.getLocation(coordinates.get(sceneIndex).getX(),coordinates.get(sceneIndex).getY()).getScene());
                         }
@@ -76,13 +80,15 @@ public class TravelView extends View {
         }
         return false;
     }
-    
+
     public void enterScene(Scene scene) {
         this.console.println(scene.getDescription());
         this.console.println("\n"
                 + "\nH - Hunt"
-                + "\nL - Loot"
+                + "\nP - Check status of party members"
+                + "\nD - Loot Deceased Companion"
                 + "\nB - Build"
+                + "\nG - Play a guessing game"
                 + "\nT - Return to travel menu"
                 + "\nZ - Go to main menu");
         
@@ -106,14 +112,20 @@ public class TravelView extends View {
         case "H":
             new ChooseTargetView();
             break;
-        case "L":
-            new LootView();
+        case "D":
+            new LootDeceased();
             break;
         case "B":
             new BuildView();
             break;
         case "T":
             new TravelView();
+            break;
+        case "G":
+            new GuessView();
+            break;
+        case "P":
+            new PartyView();
             break;
         case "Z":
             new MainMenuView();
@@ -125,5 +137,16 @@ public class TravelView extends View {
     
     public static void setSceneIndex(int sceneIndex) {
         TravelView.sceneIndex = sceneIndex;
+    }
+    
+    public static void displayVictoryScreen() {
+        if (audio == null) {
+            audio = new VictoryAudio();
+        }      
+        System.err.println("Congratulations! You've made it to Oregon.");
+    }
+    
+    public static String getPath() {
+        return path;
     }
 }

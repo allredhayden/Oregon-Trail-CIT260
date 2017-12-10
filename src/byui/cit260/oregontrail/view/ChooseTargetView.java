@@ -2,11 +2,11 @@ package byui.cit260.oregontrail.view;
 
 public class ChooseTargetView extends View {
     
-    String enemy1 = "Buffalo";
-    String enemy2 = "Rabbit";
-    String enemy3 = "Bobcat";
-    String enemy4 = "Elk";
-    String enemy5 = "Bear";
+    private String enemy1 = "Buffalo";
+    private String enemy2 = "Rabbit";
+    private String enemy3 = "Bobcat";
+    private String enemy4 = "Elk";
+    private String enemy5 = "Bear";
     
     public ChooseTargetView() {
         super("\n"

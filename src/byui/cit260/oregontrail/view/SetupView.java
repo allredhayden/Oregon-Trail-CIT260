@@ -1,5 +1,6 @@
 package byui.cit260.oregontrail.view;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +13,9 @@ import byui.cit260.oregontrail.model.Occupations;
 public class SetupView extends View implements Serializable
 {   
     static Occupations playerOccupation = new Occupations();
-    // Months monthList = new Months();
+    private Actor member1 = null;
+    private Actor member2 = null;
+    private Actor member3 = null;
 
     public SetupView() {
 
@@ -45,17 +48,25 @@ public class SetupView extends View implements Serializable
         this.console.println("\n********** The Oregon Trail ********************");
         this.console.println("Enter the names of those in your wagon party:");
         this.console.println("1.\n2.\n3.");
-        enterName(1);
-        enterName(2);
-        enterName(3);
+
+        String name1 = enterName(1);
+        String name2 = enterName(2);
+        String name3 = enterName(3);
+        
+        member1 = new Actor("Commoner", name1, "A simple farmer, here to assist you in your travels.", new Point(0,0), 2000, 100, false);
+        member2 = new Actor("Commoner", name2, "A simple farmer, here to assist you in your travels.", new Point(0,0), 2000, 100, false);
+        member3 = new Actor("Commoner", name3, "A simple farmer, here to assist you in your travels.", new Point(0,0), 2000, 100, false);
+        
         displayActors();
         // TODO - If number selected, prompt to change name.
     }
     
-    private void enterName(int nameNumber) {
+    private String enterName(int nameNumber) {
         this.console.println(String.format("Enter name %d:",nameNumber));
         String name = InputReader.readString();
         playerOccupation.getActors().get(nameNumber-1).setName(name);
+        
+        return name;
     }
     
     public void displayActors() {
@@ -93,6 +104,30 @@ public class SetupView extends View implements Serializable
     
     public Occupations getPlayerOccupation() {
         return playerOccupation;
+    }
+    
+    public Actor getMember1() {
+        return member1;
+    }
+
+    public void setMember1(Actor member1) {
+        this.member1 = member1;
+    }
+
+    public Actor getMember2() {
+        return member2;
+    }
+
+    public void setMember2(Actor member2) {
+        this.member2 = member2;
+    }
+
+    public Actor getMember3() {
+        return member3;
+    }
+
+    public void setMember3(Actor member3) {
+        this.member3 = member3;
     }
 }
 
