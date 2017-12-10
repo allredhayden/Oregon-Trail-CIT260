@@ -1,10 +1,5 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
-
-
 public class QuitMenuView extends View {
     
     public QuitMenuView() {
@@ -29,9 +24,9 @@ public class QuitMenuView extends View {
             this.console.print("\nProgram is terminated!\n");
             break;
         case "2":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }

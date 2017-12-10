@@ -7,6 +7,7 @@ package byui.cit260.oregontrail.control;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ControlScore implements Serializable {
     double currentScore;
     double peopleLiving;

@@ -1,7 +1,6 @@
 package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 @SuppressWarnings("serial")

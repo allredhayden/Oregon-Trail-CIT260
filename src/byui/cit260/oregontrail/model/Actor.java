@@ -2,6 +2,7 @@ package byui.cit260.oregontrail.model;
 
 import java.awt.Point;
 import java.io.Serializable;
+@SuppressWarnings("serial")
 public class Actor implements Serializable {
     
     private String occupation;
@@ -10,15 +11,17 @@ public class Actor implements Serializable {
 	private Point coordinates;
 	private double money;
 	private double health;
-	
-	// Default constructor.
-	public Actor (String occupation, String name, String description, Point coordinates, double money, double health) {
+	private boolean dead;
+
+    // Default constructor.
+	public Actor (String occupation, String name, String description, Point coordinates, double money, double health, boolean dead) {
 		this.occupation = occupation;
 		this.name = name;
 		this.description = description;
 		this.coordinates = coordinates;
 		this.money = money;
 		this.health = health;
+		this.dead = dead;
 	}
 	
 	public void setName(String name)
@@ -113,6 +116,14 @@ public class Actor implements Serializable {
         } else if (!occupation.equals(other.occupation))
             return false;
         return true;
+    }
+    
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 
     @Override

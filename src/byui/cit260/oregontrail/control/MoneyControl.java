@@ -8,13 +8,13 @@ package byui.cit260.oregontrail.control;
 import java.io.Serializable;
 
 import byui.cit260.oregontrail.exceptions.MoneyControlException;
-import byui.cit260.oregontrail.model.*;
 import byui.cit260.oregontrail.view.GeneralStoreView;
 
 /**
  *
  * @author Allen
  */
+@SuppressWarnings("serial")
 public class MoneyControl implements Serializable
 {
     private double amountCurrent = 0.0;

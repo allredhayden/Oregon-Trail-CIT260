@@ -6,7 +6,6 @@
 package byui.cit260.oregontrail.control;
 
 import byui.cit260.oregontrail.model.Creature;
-import byui.cit260.oregontrail.model.CreatureInventory;
 
 public class BuildCreature {
     

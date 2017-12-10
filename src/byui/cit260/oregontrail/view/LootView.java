@@ -1,12 +1,17 @@
 package byui.cit260.oregontrail.view;
 
 import byui.cit260.oregontrail.control.BuildCreature;
+import byui.cit260.oregontrail.model.Game;
 import byui.cit260.oregontrail.model.Inventory;
+import byui.cit260.oregontrail.model.LootAudio;
+import byui.cit260.oregontrail.model.OregonTrail;
 
 public class LootView extends View {
     
-    Inventory inventory = new Inventory();
+    Game game = OregonTrail.getCurrentGame();
+    Inventory inventory = game.getInventory();
     BuildCreature creature = new BuildCreature();
+    private static String path = "http://faintdev.net/rzx/sounds/loot.wav";
 
     String item1 = creature.getCreatureItem1();
     String item2 = creature.getCreatureItem2();
@@ -16,6 +21,7 @@ public class LootView extends View {
     
     int capacity = inventory.getCapacity();
     int carried = inventory.getCurrentCarried();
+    
     boolean pickedUp1 = false;
     boolean pickedUp2 = false;
     boolean pickedUp3 = false;
@@ -33,11 +39,13 @@ public class LootView extends View {
               + "\n3 - Pick up " + item3 + ".               "
               + "\n4 - Pick up " + item4 + ".               "
               + "\n5 - Pick up " + item5 + ".               "                      
-              + "\n6 - Quit                                 "
+              + "\n6 - Return to travel menu                "
+              + "\n7 - Quit"
               + "\n-----------------------------------------");
         super.display();
     }
     
+    @SuppressWarnings("unused")
     @Override
     public boolean doAction(String choice)
     {
@@ -46,25 +54,33 @@ public class LootView extends View {
         switch (choice)
         {
         case "1":
+            LootAudio audio = new LootAudio();
             addToInventory(item1);
             break;
         case "2":
+            LootAudio audio2 = new LootAudio();
             addToInventory(item2);
             break;
         case "3":
+            LootAudio audio3 = new LootAudio();
             addToInventory(item3);
             break;
         case "4":
+            LootAudio audio4 = new LootAudio();
             addToInventory(item4);
             break;
         case "5":
+            LootAudio audio5 = new LootAudio();
             addToInventory(item5);
-            break;            
+            break;
         case "6":
-            MainMenuView mainMenuView = new MainMenuView();
+            new TravelView();
+            break;
+        case "7":
+            new MainMenuView();
             break;
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again.");
         }
         return false;
     }
@@ -131,6 +147,8 @@ public class LootView extends View {
         else {
             ErrorView.display(this.getClass().getName(), "You cannot carry any more items.");
         }
+        
+        game.setInventory(inventory);
     }
     
     // Set pickedUp values.
@@ -152,5 +170,13 @@ public class LootView extends View {
 
     public void setPickedUp5(boolean pickedUp5) {
         this.pickedUp5 = pickedUp5;
+    }
+    
+    public void lootSound() {
+
+    }
+    
+    public static String getPath() {
+        return path;
     }
 }

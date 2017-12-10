@@ -1,12 +1,7 @@
 package byui.cit260.oregontrail.view;
-import byui.cit260.oregontrail.control.*;
+import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.exceptions.MapControlException;
-import byui.cit260.oregontrail.model.MainMenu;
 import byui.cit260.oregontrail.model.OregonTrail;
-import byui.cit260.oregontrail.model.StartProgram;
-
-import java.util.List;
-import java.util.Scanner;
 
 public class MainMenuView extends View {
     public MainMenuView() {
@@ -15,11 +10,12 @@ public class MainMenuView extends View {
                     + "\n-----------------------------------------"
                     + "\n|              Main Menu                |"
                     + "\n-----------------------------------------"
-                    + "\nN - Start new game"
-                    + "\nG - Get and start saved game"
-                    + "\nH - Get help on how to play the game"
-                    + "\nS - Save game"
-                    + "\nT - Go to the temporary menu"            
+                    + "\nN - Start a new game"
+                    + "\nS - Save your game"
+                    + "\nL - Load a saved game"
+                    + "\nH - Help"
+                    + "\nT - Temporary Menu (Create a new game before using this option)"      
+                    + "\nM - Game Menu      (Create a new game before using this option)" 
                     + "\nQ - Quit"
                     + "\n-----------------------------------------");
         display();
@@ -33,26 +29,29 @@ public class MainMenuView extends View {
         case "N": // create and start a new game
             startNewGame();
             break;
-        case "G":
+        case "L":
             startExistingGame();
             break;
         case "H":
             displayHelpMenu();
             break;
         case "T":
-            TempMenu temp = new TempMenu();
+            new TempMenu();
             break;            
         case "S":
             saveGame();
             break;
+        case "M":
+            new GameMenuView();
+            break;
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\n Invalid selection. Please try again");
         }
         return false;
     }
     
     private void startNewGame() {
-        // create a new game
+        // Create a new game.
         GameControl controlGame = new GameControl();
         try {
             OregonTrail.setCurrentGame(controlGame.createNewGame());
@@ -62,7 +61,6 @@ public class MainMenuView extends View {
         }
     }
     
-    // Stub functions
     private void startExistingGame() {
         this.console.println("\n\nEnter the file path for where your game is saved.");
         
@@ -77,7 +75,7 @@ public class MainMenuView extends View {
         }
         
         // Display the game menu.
-        GameMenuView gameMenu = new GameMenuView();
+        new GameMenuView();
     }
     
     private void saveGame() {
@@ -93,6 +91,6 @@ public class MainMenuView extends View {
     }
     
     private void displayHelpMenu() {
-        HelpMenuView help = new HelpMenuView();
+        new HelpMenuView();
     }
 }

@@ -2,19 +2,29 @@ package byui.cit260.oregontrail.model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Scene implements Serializable {
 
     @Override
     public String toString() {
-        return "Scene{" + "description=" + description + ", blocked=" + blocked + ", symbol=" + symbol + ", question=" + question + '}';
+        return "Scene{" + "description=" + description + ", blocked=" + blocked + ", symbol=" + symbol + ", question=" + question + "visited=" + visited + '}';
     }
 	
 	protected String description;
 	protected boolean blocked;
 	protected String symbol;
-	protected Question question;
+	protected boolean visited = false;
+
+    public Scene(String description, boolean blocked, String symbol) {
+        super();
+        this.description = description;
+        this.blocked = blocked;
+        this.symbol = symbol;
+    }
+
+    protected Question question;
         
-	// Get & set description.
+    // Get & set description.
 	public String getDescription() {
 		return description;
 	}
@@ -34,7 +44,7 @@ public class Scene implements Serializable {
 	
 	// Get & set symbol.
 	public String getSymbol() {
-		return symbol;
+       return (visited == false) ? "??" : symbol;
 	}
 	
 	public void setSymbol(String symbol) {
@@ -60,27 +70,36 @@ public class Scene implements Serializable {
 		return result;
 		}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Scene other = (Scene) obj;
-		if (blocked != other.blocked)
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (symbol == null) {
-			if (other.symbol != null)
-				return false;
-		} else if (!symbol.equals(other.symbol))
-			return false;
-		return true;
-		}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Scene other = (Scene) obj;
+        if (blocked != other.blocked)
+            return false;
+        if (description == null) {
+            if (other.description != null)
+                return false;
+        } else if (!description.equals(other.description))
+            return false;
+        if (symbol == null) {
+            if (other.symbol != null)
+                return false;
+        } else if (!symbol.equals(other.symbol))
+            return false;
+        return true;
+    }
+    
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }	
+	
 }

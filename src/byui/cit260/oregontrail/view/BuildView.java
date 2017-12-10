@@ -1,14 +1,15 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
+import byui.cit260.oregontrail.model.ConstructionAudio;
+import byui.cit260.oregontrail.model.Game;
+import byui.cit260.oregontrail.model.OregonTrail;
 
 public class BuildView extends View {
-    // private static int woodCount = getWoodCount();
-    private static int woodCount = 20;
-    
-        
+    Game game = OregonTrail.getCurrentGame();
+    private int woodCount = game.getWood();
+    private ConstructionAudio buildAudio = null;
+    private static String path = "http://faintdev.net/rzx/sounds/hammer.wav";
+
     public BuildView() {
         super("\n-----------------------------------------"
               + "\n|              Build                    |"
@@ -17,6 +18,7 @@ public class BuildView extends View {
               + "\nN - Build a wagon"            
               + "\nW - Build a wheel"
               + "\nF - Build a fire"
+              + "\nT - Return to travel menu"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         this.display();
@@ -62,8 +64,11 @@ public class BuildView extends View {
         else if ("F".equals(choice)) {
             buildFire(woodCount);            
         }
+        else if ("T".equals(choice)) {
+            new TravelView();            
+        }
         else if("Z".equals(choice)) {
-            MainMenuView mainMenuView = new MainMenuView();            
+            new MainMenuView();            
         }
         else {
             ErrorView.display(this.getClass().getName(), "Invalid option. Choose one of the listed options.");            
@@ -73,43 +78,51 @@ public class BuildView extends View {
     
     
     protected void buildCrate(int woodCount) {
+        playBuildSound();
         buildObject("Crate", woodCount);
-        this.console.println("throwObject successfully called.");
     }
     protected void buildWagon(int woodCount) {
+        playBuildSound();
         buildObject("Wagon", woodCount);
-        this.console.println("swingObject successfully called.");
     }
     protected void buildWheel(int woodCount) {
+        playBuildSound();
         buildObject("Wheel", woodCount);
-        this.console.println("punchOpponent successfully called.");
     }
     protected void buildFire(int woodCount) {
+        playBuildSound();
         buildObject("Fire", woodCount);
-        this.console.println("kickOpponent successfully called.");
     }
     
     protected void buildObject(String buildChoice, int numWood) {
         int requiredWood = 20;
-        
+
         if (numWood >= requiredWood) {
-            for (int i=0; i <= 100; i+=20) {
+            for (int i = 0; i <= 100; i += 20) {
                 while (requiredWood > 0) {
-                    numWood-=1;
-                    woodCount-=1;
-                    requiredWood-=1;
-                    if (numWood%4 == 0) {
+                    numWood -= 1;
+                    game.setWood(woodCount -= 1);
+                    requiredWood -= 1;
+                    if (numWood % 4 == 0) {
                         this.console.println("You have " + numWood + " wood left.");
-                        }
                     }
-                this.console.println(buildChoice + " is " + i + "% complete.");
                 }
-            this.console.println("\nProject completed. You have now built a " + buildChoice);
+                this.console.println(buildChoice + " is " + i + "% complete.");
             }
-        else {
-            ErrorView.display(this.getClass().getName(), "Not enough wood. You have " + woodCount + " wood left. "
-                    + "You need " + requiredWood + " to construct a " + buildChoice + ".");
+            this.console.println("\nProject completed. You have now built a " + buildChoice);
+        } else {
+            ErrorView.display(this.getClass().getName(), "Not enough wood. You have " + game.getWood() + " wood left. " + "You need " + requiredWood + " to construct a " + buildChoice + ".");
         }
         this.display();
+    }
+    
+    public void playBuildSound() {
+        if (buildAudio == null) {
+            buildAudio = new ConstructionAudio();
         }
     }
+    
+    public static String getPath() {
+        return path;
+    }
+}

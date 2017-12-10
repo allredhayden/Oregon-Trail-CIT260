@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class OregonTrail implements Serializable
 {
 
@@ -16,6 +17,8 @@ public class OregonTrail implements Serializable
     private static BufferedReader inFile = null;
     
     private static PrintWriter logFile = null;
+    private static BackgroundAudio audio = null;
+    private static String path = "http://faintdev.net/rzx/music/christmas.wav";
     
     // Main method.
     public static void main(String args[]) throws Throwable {
@@ -27,6 +30,7 @@ public class OregonTrail implements Serializable
             String filePath = "C:\\tmp\\log.txt";
             OregonTrail.logFile = new PrintWriter(filePath);
             
+            // playSong();
             StartProgram program = new StartProgram();
             program.displayStartProgramView();
         }
@@ -98,5 +102,15 @@ public class OregonTrail implements Serializable
 
     public static void setLogFile(PrintWriter logFile) {
         OregonTrail.logFile = logFile;
-    }   
+    }
+    
+    public static String getPath() {
+        return path;
+    }
+    
+    public static void playSong() {
+        if (audio == null) {
+            audio = new BackgroundAudio();
+        }
+    }
 }

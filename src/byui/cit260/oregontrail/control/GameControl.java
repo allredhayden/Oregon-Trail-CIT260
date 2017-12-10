@@ -29,6 +29,7 @@ public class GameControl implements Serializable
         
         // Create new game.
         game = new Game();
+        game.clear(); // Reset values of all game attributes to default / null.
         
         // Get player name.
         StartProgram program = new StartProgram();
@@ -49,10 +50,16 @@ public class GameControl implements Serializable
 
         // Request party member names.
         setup.requestNames();
+        game.setPartyMember1(setup.getMember1());
+        game.setPartyMember2(setup.getMember2());
+        game.setPartyMember3(setup.getMember3());
         
         // Assign player occupation object to current game.
         Occupations occupations = setup.getPlayerOccupation();
         game.setOccupation(occupations);
+        
+        // Create inventory & assign to current game.
+        game.setInventory(new Inventory());
         
         // Create NPC actor array & item array, store in Game class (model).
         game.setGameItems(createItems());
@@ -63,19 +70,19 @@ public class GameControl implements Serializable
         // Create new map and store in Game class (model).
         MapControl controlMap = new MapControl();
         Map map = controlMap.createMap(10, 10, gameItems);
-        if (mapControl.createMap(10, 10, gameItems) == null) {
+        if (map == null) {
             throw new MapControlException("Failed to create new map.");
         }
         else {
-            game.setMap(map);             
+            game.setMap(map);           
         }
         
-        // Create scenes, assign to current game.
-        game.setGameScenes(mapControl.createScenes());
-        
         // Create questions, assign to current game.
-        Question[] question = controlMap.createQuestions();
-        game.setGameQuestions(question);
+        game.setQuestionScenes(controlMap.getQuestionScenes());
+        
+        // Assign scene coordinates to current game.
+        game.setCoordinatePairs(controlMap.getPairs());
+        
         
         // Request month, assign to current game.
         StartMonthView months = new StartMonthView();
@@ -119,16 +126,16 @@ public class GameControl implements Serializable
         Actor[] actors = new Actor[10];
 
         // String occupation, String name, String description, Point coordinates, double money, double health
-        actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100);
-        actors[ActorType.Sariah.ordinal()] = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100);
-        actors[ActorType.Nephi.ordinal()] = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100);
-        actors[ActorType.Jacob.ordinal()] = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100);
-        actors[ActorType.Sam.ordinal()] = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100);
-        actors[ActorType.Laman.ordinal()] = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100);
-        actors[ActorType.Lemuel.ordinal()] = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100);
-        actors[ActorType.Zoram.ordinal()] = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100);
-        actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100);
-        actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100);
+        actors[ActorType.Lehi.ordinal()] = new Actor("Pioneer", "Lehi", "Lehi", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Sariah.ordinal()] = new Actor("Pioneer", "Sariah", "Sariah", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Nephi.ordinal()] = new Actor("Pioneer", "Nephi", "Leader of Nephites", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Jacob.ordinal()] = new Actor("Pioneer", "Jacob", "Jacob", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Sam.ordinal()] = new Actor("Pioneer", "Sam", "Sam", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Laman.ordinal()] = new Actor("Pioneer", "Laman", "Laman", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Lemuel.ordinal()] = new Actor("Pioneer", "Lemuel", "Lemuel", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Zoram.ordinal()] = new Actor("Pioneer", "Zoram", "Zoram", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Angel.ordinal()] = new Actor("Pioneer", "Angel", "Angel", new Point(1,2), 1000, 100, false);
+        actors[ActorType.Lord.ordinal()] = new Actor("Pioneer", "Lord", "Lord", new Point(1,2), 1000, 100, false);
         
         game.setPcActors(actors);
         return actors;
@@ -175,22 +182,6 @@ public class GameControl implements Serializable
        InventoryItem saw = new InventoryItem("saw", 200);       
        InventoryItem nails = new InventoryItem("nails", 200);
        
-      /* lumber = items[ItemType.lumber.ordinal()];
-       ore = items[ItemType.ore.ordinal()];
-       grain = items[ItemType.grain.ordinal()];
-       legume = items[ItemType.legume.ordinal()];
-       oil = items[ItemType.oil.ordinal()];
-       water = items[ItemType.water.ordinal()];
-       honey = items[ItemType.honey.ordinal()];
-       salt = items[ItemType.salt.ordinal()];
-       axe = items[ItemType.axe.ordinal()];
-       hammer = items[ItemType.hammer.ordinal()];
-       drill = items[ItemType.drill.ordinal()];
-       shovel = items[ItemType.shovel.ordinal()];
-       sickle = items[ItemType.sickle.ordinal()];
-       saw = items[ItemType.saw.ordinal()];
-       nails = items[ItemType.nails.ordinal()]; */
-       
        items[ItemType.lumber.ordinal()] = lumber;
        items[ItemType.ore.ordinal()] = ore;
        items[ItemType.grain.ordinal()] = grain;
@@ -218,7 +209,6 @@ public class GameControl implements Serializable
         game = gameSet;
     }
 
-    // Stub function
     public static void saveGame(Game currentGame, String filePath) throws GameControlException {
         
         try (FileOutputStream fops = new FileOutputStream (filePath)) {
@@ -227,7 +217,7 @@ public class GameControl implements Serializable
             output.writeObject(currentGame);
         }
         catch (Exception e) {
-            throw new GameControlException(e.getMessage());
+            throw new GameControlException(e);
         }
     }
 
@@ -241,10 +231,11 @@ public class GameControl implements Serializable
             game = (Game) input.readObject();
         }
         catch (Exception e) {
-            throw new GameControlException(e.getMessage());
+            throw new GameControlException(e);
         }
         
-        // Close the output file.
         OregonTrail.setCurrentGame(game);
-    }    
+        Game loadedGame = OregonTrail.getCurrentGame();
+        TravelView.setSceneIndex(loadedGame.getSceneIndex());
+    }
 }

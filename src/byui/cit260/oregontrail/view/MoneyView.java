@@ -1,10 +1,9 @@
 package byui.cit260.oregontrail.view;
 
+import java.io.IOException;
+
 import byui.cit260.oregontrail.control.MoneyControl;
 import byui.cit260.oregontrail.exceptions.MoneyControlException;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * <h2><font face="verdana">Prompts user to enter:</font></h2><br>

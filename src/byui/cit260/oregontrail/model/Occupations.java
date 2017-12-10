@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Occupations implements Serializable
 {   
     private String actorChoice;
@@ -14,9 +15,10 @@ public class Occupations implements Serializable
     
     // Function to add actors to empty actor list.
     public static void createActors(String carpenterName, String farmerName, String bankerName) {
-        actors.add(new Actor("Carpenter", carpenterName, "A carpenter with skilled hands, capable of building any number of objects with his surroundings.", new Point(0,1), 6000, 100));
-        actors.add(new Actor("Farmer", farmerName, "A simple farmer, capable of growing food in any area that is sufficient for healthy crop growth.", new Point(1,1), 5000, 100));
-        actors.add(new Actor("Banker", bankerName, "A sophisticated banker that is good with numbers and has a sharp wit.", new Point(1,2), 7000, 100));        
+        actors.add(new Actor("Carpenter", carpenterName, "A carpenter with skilled hands, capable of building any number of objects with his surroundings.", new Point(0,1), 6000, 100, false));
+        actors.add(new Actor("Farmer", farmerName, "A simple farmer, capable of growing food in any area that is sufficient for healthy crop growth.", new Point(1,1), 5000, 100, false));
+        actors.add(new Actor("Banker", bankerName, "A sophisticated banker that is good with numbers and has a sharp wit.", new Point(1,2), 7000, 100, false));
+        actors.add(new Actor("Hold", "hold", "Placeholder.", new Point(1,2), 7000, 100, false));      
     }
     
     // Create occupation prompt.

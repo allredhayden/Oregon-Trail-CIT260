@@ -3,7 +3,6 @@ package byui.cit260.oregontrail.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 import byui.cit260.oregontrail.model.OregonTrail;
 
@@ -26,7 +25,6 @@ public abstract class View implements ViewInterface {
         
         boolean done = false;
         do {
-            // prompt for and get players name
             String value = this.getInput();
             if (value.toUpperCase().equals("Q")) {
                 return;
@@ -36,7 +34,7 @@ public abstract class View implements ViewInterface {
         } while (!done);
     }
     
-    // Remove do try for Team Assignment (Week 12).
+    // Removed do try for Team Assignment (Week 12).
     @Override
     public String getInput() {
        String value = "";

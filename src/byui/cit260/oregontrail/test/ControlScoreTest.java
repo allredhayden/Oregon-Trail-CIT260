@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import byui.cit260.oregontrail.control.ControlScore;
 
+@SuppressWarnings("serial")
 public class ControlScoreTest implements Serializable {
     
     double expectedResult;

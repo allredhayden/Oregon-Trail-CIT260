@@ -34,7 +34,6 @@ public class StartMonthView extends View {
        System.out.println(prompt);
        boolean done = false;
        do {
-           // prompt for and get players name
            String value = this.getInput();
            if (value.toUpperCase().equals("Q")) {
                return;
@@ -45,12 +44,11 @@ public class StartMonthView extends View {
    }
     
     @Override
-    // Handle various input options
     public boolean doAction(String choice) {
         choice = choice.toUpperCase();
         
         switch (choice) {
-        case "1": // create and start a new game
+        case "1":
             selectMonth("January");
             return true;
         case "2":
@@ -114,7 +112,7 @@ public class StartMonthView extends View {
               continue;
            }
            try {
-               int i = Integer.parseInt(value);
+               Integer.parseInt(value);
            }
            catch (NumberFormatException nfe) {
                ErrorView.display(this.getClass().getName(), "\nYou must enter a number.");
@@ -127,13 +125,11 @@ public class StartMonthView extends View {
         return value;
     }
     
-    // Selects current month, goes to next view (GeneralStoreView)
     protected void selectMonth(String month) {
         currentMonth = month;
         this.console.println("You've selected " + month + " as your current month.");
     }
     
-    // Displays advantages / disadvantages of each month
     protected void displayChoice() {
         this.console.println("\n"
                 + "If you choose January, you get this disadvantage."

@@ -7,8 +7,6 @@ import byui.cit260.oregontrail.control.GenerateInventory;
 import byui.cit260.oregontrail.model.Game;
 import byui.cit260.oregontrail.model.Occupations;
 import byui.cit260.oregontrail.model.OregonTrail;
-import byui.cit260.oregontrail.model.Question;
-import byui.cit260.oregontrail.model.Scene;
 
 public class FileView extends View {
     public FileView() {
@@ -36,12 +34,12 @@ public class FileView extends View {
             writeItemReport(requestFileLocation());
             break;
         case "2":
-            // writeMapDescription(requestFileLocation());
+            writeMapDescription(requestFileLocation());
             break;
         case "3":
              writePartyNames(requestFileLocation());
         case "4":
-            // writeQuestions(requestFileLocation());
+            writeQuestions(requestFileLocation());
             break;
         case "Z":
             new MainMenuView();
@@ -95,8 +93,50 @@ public class FileView extends View {
             ErrorView.display(this.getClass().getName(), ex.getMessage());
         }
         
-        this.console.println("\nReport successfully written to: " + path); 
+        this.console.println("\nReport successfully written to: " + path);
     }
+        
+    public void writeMapDescription(String path) {
+//        Game game = OregonTrail.getCurrentGame();
+//        Scene[] scene = game.getGameScenes();
+//
+//        try (PrintWriter out = new PrintWriter(path)) {
+//            out.println("\n\n       Item List       ");
+//            out.printf("%n%-14s%-20s", "Index", "Description");
+//            out.printf("%n%-14s%-20s", "------", "---------------");
+//            for (int i = 0; i < scene.length - 1; i++) {
+//                String description = scene[i].getDescription();
+//                out.printf("%n%-14s%-40s", "Scene #" + (i + 1) + ": ", description);
+//                out.println("\n");
+//            }
+//        } catch (IOException ex) {
+//            ErrorView.display(this.getClass().getName(), ex.getMessage());
+//        }
 
+        this.console.println("\nReport successfully written to: " + path);
+    }
+    
+    public void writeQuestions(String path) {
+//        Game game = OregonTrail.getCurrentGame();
+//        Question[] questions = game.getGameQuestions();
+//        
+//        try (PrintWriter out = new PrintWriter(path)) {
+//            out.println("\n\n        Question List       ");
+//            out.printf("%n%-16s%-20s", "Index", "Question");
+//            out.printf("%n%-16s%-20s", "------", "---------------");
+//            for (int i = 0; i < questions.length - 1; i++) {
+//                String questionValue = questions[i].getQuestion();
+//                out.printf("%n%-16s%-40s", "Question #" + (i+1) + ": ", questionValue);
+//                out.println("\n");
+//            }
+//        } catch (IOException ex) {
+//            ErrorView.display(this.getClass().getName(), ex.getMessage());
+//        }
+        
+        this.console.println("\nReport successfully written to: " + path); 
+    } 
 }
+
+
+
 

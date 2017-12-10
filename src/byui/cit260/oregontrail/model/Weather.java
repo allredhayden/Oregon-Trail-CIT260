@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
+@SuppressWarnings("serial")
 public class Weather implements Serializable {
     
     private String weatherType;
@@ -46,7 +47,4 @@ public class Weather implements Serializable {
         return "Weather{" + "weatherType=" + weatherType + '}';
     }
 
-    
-
-    
 }

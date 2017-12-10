@@ -1,16 +1,14 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.*;
-import byui.cit260.oregontrail.model.*;
-import java.util.Scanner;
+import byui.cit260.oregontrail.model.CreatureDeathAudio;
 
 public class AttackView extends View
 {
-    // protected String item = getItem();
     protected String item = "Rock";
-    // protected String opponent = getOpponent();
     protected String opponent = "default";
-        
+    private CreatureDeathAudio audio = null;
+    private static String path = "http://faintdev.net/rzx/sounds/splatter.wav";
+
     public AttackView(String enemy) {
         super("\n"
               + "\n-----------------------------------------"
@@ -20,6 +18,7 @@ public class AttackView extends View
               + "\nS - Swing object at your opponent"            
               + "\nP - Punch your opponent"
               + "\nK - Kick your opponent"
+              + "\nR - Return to travel menu"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         opponent = enemy;        
@@ -30,12 +29,9 @@ public class AttackView extends View
     public void display() {
         boolean done = false;
         do {
-            // prompt for and get players name
             String choice = getInput();
             if (choice.toUpperCase().equals("Q"))
                 return;
-            
-            // do the requested action and display the next view
             done = doAction(choice, item, opponent);
         } while (!done);
     }
@@ -63,24 +59,49 @@ public class AttackView extends View
         case "K":
             kickOpponent(opponent);
             break;
+        case "R":
+            new TravelView();
+            break;
         case "Z":
-            MainMenuView mainMenuView = new MainMenuView();
+            new MainMenuView();
         default:
-            ErrorView.display(this.getClass().getName(), "\n*** Invalid selection *** Try again");
+            ErrorView.display(this.getClass().getName(), "\nInvalid selection. Please try again");
         }
         return false;
     }
     
     private void throwObject(String item, String opponent) {
         this.console.println(item + " has successfully been thrown at " + opponent + ".");
+        this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
+        new LootView();
     }
     private void swingObject(String item, String opponent) {
         this.console.println(item + " has successfully been swung at " + opponent + ".");
+        this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
+        new LootView();
     }
     private void punchOpponent(String opponent) {
         this.console.println(opponent + " has successfully been punched.");
+        this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
+        new LootView();
     }
     private void kickOpponent(String opponent) {
         this.console.println(opponent + " has successfully been kicked.");
+        this.console.println("\nCongratulations. Your foe is now dead.\n");
+        playDeathSound();
+        new LootView();
+    }
+    
+    public void playDeathSound() {
+        if (audio == null) {
+            audio = new CreatureDeathAudio();
+        }
+    }
+    
+    public static String getPath() {
+        return path;
     }
 }
