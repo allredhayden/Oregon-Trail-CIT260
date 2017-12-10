@@ -1,20 +1,5 @@
-<<<<<<< HEAD
 package byui.cit260.oregontrail.view;
 
-=======
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package byui.cit260.oregontrail.view;
-
-/**
- *
- * @author Allen
- */
-
->>>>>>> d239ca8306595330f0602cab14ac3ff77d0d51c6
 import java.util.Random;
 import java.util.Scanner;
 
@@ -56,8 +41,4 @@ public class GuessView {
             guess();
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d239ca8306595330f0602cab14ac3ff77d0d51c6
