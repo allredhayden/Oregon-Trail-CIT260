@@ -33,6 +33,12 @@ public class DeathControl {
         deathList[10] = "Asphyxiation";
     }
     
+    public void iterate() {
+        for (int i = 0; i < deathList.length; i++) {
+            System.out.println("Item number: " + i + " = " + deathList[i]);
+        }
+    }
+    
     public void randomizeDeath(int memberID) {
 
         boolean flag = false;

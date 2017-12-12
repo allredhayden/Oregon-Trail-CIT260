@@ -16,6 +16,8 @@ public class YokesView extends View {
 
         controlYokes = new ControlYokes();
         
+        catchYokesException();
+        
         while (!controlYokes.isValid()) {
             if (!controlYokes.isValid()) {
                 ErrorView.display(this.getClass().getName(), "\nEach value has to be greater than zero.");

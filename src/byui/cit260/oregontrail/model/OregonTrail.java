@@ -18,7 +18,7 @@ public class OregonTrail implements Serializable
     
     private static PrintWriter logFile = null;
     private static BackgroundAudio audio = null;
-    private static String path = "http://faintdev.net/rzx/music/christmas.wav";
+    private static String path = "http://faintdev.net/rzx/music/soul.wav";
     
     // Main method.
     public static void main(String args[]) throws Throwable {
@@ -26,7 +26,7 @@ public class OregonTrail implements Serializable
         try {
             OregonTrail.inFile = new BufferedReader(new InputStreamReader(System.in));
             OregonTrail.outFile = new PrintWriter(System.out, true);
-
+            
             String filePath = "C:\\tmp\\log.txt";
             OregonTrail.logFile = new PrintWriter(filePath);
             

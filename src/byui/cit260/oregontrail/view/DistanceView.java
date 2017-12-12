@@ -16,6 +16,8 @@ public class DistanceView extends View {
 
         distanceControl = new DistanceControl();
         
+        catchDexception();
+        
         while (!distanceControl.isValid()) {
             if (!distanceControl.isValid()) {
                 ErrorView.display(this.getClass().getName(), "\nEach value has to be greater than zero.");

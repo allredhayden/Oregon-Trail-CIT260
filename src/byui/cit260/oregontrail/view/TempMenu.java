@@ -1,6 +1,6 @@
 package byui.cit260.oregontrail.view;
 
-import byui.cit260.oregontrail.control.ControlYokes;
+import byui.cit260.oregontrail.control.DeathControl;
 import byui.cit260.oregontrail.control.DistanceControl;
 import byui.cit260.oregontrail.control.GameControl;
 import byui.cit260.oregontrail.model.Game;
@@ -34,6 +34,7 @@ public class TempMenu extends View
               + "\n1 - Go to VisitCalc"
               + "\n2 - Go to YokesControl"
               + "\n3 - Go to DistanceControl"
+              + "\n4 - View deathList array"
               + "\nZ - Quit"
               + "\n-----------------------------------------");
         display();
@@ -100,12 +101,16 @@ public class TempMenu extends View
             GameControl.visitCalc();
             break;
         case "2":
-            new ControlYokes();
+            new YokesView();
             break;
         case "3":
             DistanceControl distance = new DistanceControl();
             distance.distanceTraveled();
-            break;            
+            break;     
+        case "4":
+            DeathControl deathControl = new DeathControl();
+            deathControl.iterate();
+            break; 
         case "Z":
             new MainMenuView();
         default:
